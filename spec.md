@@ -9846,9 +9846,725 @@ Post-Migration:
 **🎯 Bottom Line:**
 The local deployment gives you a **production-ready algorithmic trading system** that you can use immediately for real trading (paper or live) with all the advanced features including AI/ML, comprehensive risk management, and full monitoring capabilities.
 
-## 25. Maintenance and Support
+## 25. Comprehensive Performance Analytics and Metrics System
 
-### 25.1 System Maintenance Procedures
+### 25.1 Performance Analytics Architecture
+
+#### 25.1.1 Multi-Dimensional Performance Tracking
+
+The system provides comprehensive performance analytics across multiple dimensions:
+
+```python
+class PerformanceAnalyticsEngine:
+    def __init__(self):
+        self.metrics_calculator = MetricsCalculator()
+        self.performance_aggregator = PerformanceAggregator()
+        self.analytics_dashboard = AnalyticsDashboard()
+        self.report_generator = ReportGenerator()
+    
+    def calculate_comprehensive_metrics(self, user_id: int, timeframe: str = 'all'):
+        """Calculate comprehensive performance metrics across all dimensions"""
+        return {
+            'price_range_metrics': self.calculate_price_range_metrics(user_id, timeframe),
+            'stock_metrics': self.calculate_stock_performance_metrics(user_id, timeframe),
+            'algorithm_metrics': self.calculate_algorithm_performance_metrics(user_id, timeframe),
+            'combination_metrics': self.calculate_combination_metrics(user_id, timeframe),
+            'criteria_metrics': self.calculate_criteria_based_metrics(user_id, timeframe),
+            'temporal_metrics': self.calculate_temporal_metrics(user_id, timeframe)
+        }
+```
+
+#### 25.1.2 Price Range Performance Metrics
+
+```python
+class PriceRangePerformanceAnalyzer:
+    def __init__(self):
+        self.price_ranges = [
+            (0, 10), (10, 25), (25, 50), (50, 100), (100, 200), (200, 500), (500, 1000), (1000, float('inf'))
+        ]
+    
+    def calculate_price_range_metrics(self, user_id: int, timeframe: str) -> Dict:
+        """Calculate performance metrics by price range"""
+        metrics = {}
+        
+        for min_price, max_price in self.price_ranges:
+            trades = self.get_trades_in_price_range(user_id, min_price, max_price, timeframe)
+            
+            metrics[f"${min_price}-${max_price}"] = {
+                'total_trades': len(trades),
+                'winning_trades': len([t for t in trades if t['pnl'] > 0]),
+                'losing_trades': len([t for t in trades if t['pnl'] < 0]),
+                'win_rate': self.calculate_win_rate(trades),
+                'total_return': sum(t['pnl'] for t in trades),
+                'avg_return_per_trade': np.mean([t['pnl'] for t in trades]) if trades else 0,
+                'max_profit': max([t['pnl'] for t in trades]) if trades else 0,
+                'max_loss': min([t['pnl'] for t in trades]) if trades else 0,
+                'sharpe_ratio': self.calculate_sharpe_ratio(trades),
+                'max_drawdown': self.calculate_max_drawdown(trades),
+                'profit_factor': self.calculate_profit_factor(trades),
+                'avg_hold_time': np.mean([t['hold_time'] for t in trades]) if trades else 0,
+                'volatility': np.std([t['pnl'] for t in trades]) if trades else 0
+            }
+        
+        return metrics
+    
+    def get_trades_in_price_range(self, user_id: int, min_price: float, max_price: float, timeframe: str) -> List:
+        """Get trades for stocks in specific price range"""
+        return self.db.query("""
+            SELECT t.*, s.current_price
+            FROM transactions t
+            JOIN stocks s ON t.symbol = s.symbol
+            WHERE t.user_id = %s 
+            AND s.current_price BETWEEN %s AND %s
+            AND t.date >= %s
+        """, (user_id, min_price, max_price, self.get_timeframe_start(timeframe)))
+```
+
+#### 25.1.3 Stock Performance Metrics
+
+```python
+class StockPerformanceAnalyzer:
+    def calculate_stock_performance_metrics(self, user_id: int, timeframe: str) -> Dict:
+        """Calculate performance metrics by individual stock"""
+        stocks = self.get_traded_stocks(user_id, timeframe)
+        metrics = {}
+        
+        for stock in stocks:
+            trades = self.get_stock_trades(user_id, stock['symbol'], timeframe)
+            
+            metrics[stock['symbol']] = {
+                'total_trades': len(trades),
+                'total_shares_traded': sum(abs(t['quantity']) for t in trades),
+                'total_volume_traded': sum(abs(t['quantity'] * t['price']) for t in trades),
+                'win_rate': self.calculate_win_rate(trades),
+                'total_return': sum(t['pnl'] for t in trades),
+                'total_return_pct': self.calculate_total_return_pct(trades),
+                'avg_return_per_trade': np.mean([t['pnl'] for t in trades]) if trades else 0,
+                'best_trade': max([t['pnl'] for t in trades]) if trades else 0,
+                'worst_trade': min([t['pnl'] for t in trades]) if trades else 0,
+                'sharpe_ratio': self.calculate_sharpe_ratio(trades),
+                'max_drawdown': self.calculate_max_drawdown(trades),
+                'profit_factor': self.calculate_profit_factor(trades),
+                'avg_hold_time': np.mean([t['hold_time'] for t in trades]) if trades else 0,
+                'current_position': self.get_current_position(user_id, stock['symbol']),
+                'unrealized_pnl': self.calculate_unrealized_pnl(user_id, stock['symbol']),
+                'sector': stock.get('sector', 'Unknown'),
+                'market_cap': stock.get('market_cap', 0),
+                'beta': stock.get('beta', 1.0),
+                'volatility': np.std([t['pnl'] for t in trades]) if trades else 0,
+                'correlation_with_market': self.calculate_market_correlation(trades),
+                'alpha': self.calculate_alpha(trades, stock.get('beta', 1.0))
+            }
+        
+        return metrics
+```
+
+#### 25.1.4 Algorithm Performance Metrics
+
+```python
+class AlgorithmPerformanceAnalyzer:
+    def calculate_algorithm_performance_metrics(self, user_id: int, timeframe: str) -> Dict:
+        """Calculate performance metrics by trading algorithm"""
+        algorithms = self.get_used_algorithms(user_id, timeframe)
+        metrics = {}
+        
+        for algorithm in algorithms:
+            trades = self.get_algorithm_trades(user_id, algorithm['name'], timeframe)
+            
+            metrics[algorithm['name']] = {
+                'total_trades': len(trades),
+                'win_rate': self.calculate_win_rate(trades),
+                'total_return': sum(t['pnl'] for t in trades),
+                'total_return_pct': self.calculate_total_return_pct(trades),
+                'avg_return_per_trade': np.mean([t['pnl'] for t in trades]) if trades else 0,
+                'sharpe_ratio': self.calculate_sharpe_ratio(trades),
+                'sortino_ratio': self.calculate_sortino_ratio(trades),
+                'calmar_ratio': self.calculate_calmar_ratio(trades),
+                'max_drawdown': self.calculate_max_drawdown(trades),
+                'profit_factor': self.calculate_profit_factor(trades),
+                'avg_win': np.mean([t['pnl'] for t in trades if t['pnl'] > 0]) if any(t['pnl'] > 0 for t in trades) else 0,
+                'avg_loss': np.mean([t['pnl'] for t in trades if t['pnl'] < 0]) if any(t['pnl'] < 0 for t in trades) else 0,
+                'win_loss_ratio': self.calculate_win_loss_ratio(trades),
+                'avg_hold_time': np.mean([t['hold_time'] for t in trades]) if trades else 0,
+                'volatility': np.std([t['pnl'] for t in trades]) if trades else 0,
+                'var_95': self.calculate_var(trades, 0.95),
+                'cvar_95': self.calculate_cvar(trades, 0.95),
+                'success_rate': self.calculate_success_rate(trades),
+                'avg_trades_per_day': self.calculate_avg_trades_per_day(trades),
+                'best_day': self.calculate_best_day(trades),
+                'worst_day': self.calculate_worst_day(trades),
+                'consecutive_wins': self.calculate_consecutive_wins(trades),
+                'consecutive_losses': self.calculate_consecutive_losses(trades),
+                'algorithm_parameters': algorithm.get('parameters', {}),
+                'market_conditions': self.analyze_market_conditions(trades)
+            }
+        
+        return metrics
+```
+
+#### 25.1.5 Combination Performance Metrics
+
+```python
+class CombinationPerformanceAnalyzer:
+    def calculate_combination_metrics(self, user_id: int, timeframe: str) -> Dict:
+        """Calculate performance metrics for various combinations"""
+        return {
+            'price_stock_combinations': self.calculate_price_stock_combinations(user_id, timeframe),
+            'price_algorithm_combinations': self.calculate_price_algorithm_combinations(user_id, timeframe),
+            'stock_algorithm_combinations': self.calculate_stock_algorithm_combinations(user_id, timeframe),
+            'sector_algorithm_combinations': self.calculate_sector_algorithm_combinations(user_id, timeframe),
+            'market_cap_algorithm_combinations': self.calculate_market_cap_algorithm_combinations(user_id, timeframe),
+            'volatility_algorithm_combinations': self.calculate_volatility_algorithm_combinations(user_id, timeframe),
+            'time_of_day_combinations': self.calculate_time_of_day_combinations(user_id, timeframe),
+            'day_of_week_combinations': self.calculate_day_of_week_combinations(user_id, timeframe),
+            'market_regime_combinations': self.calculate_market_regime_combinations(user_id, timeframe)
+        }
+    
+    def calculate_price_stock_combinations(self, user_id: int, timeframe: str) -> Dict:
+        """Calculate performance for price range + stock combinations"""
+        combinations = {}
+        
+        price_ranges = [(0, 25), (25, 100), (100, 500), (500, float('inf'))]
+        top_stocks = self.get_top_traded_stocks(user_id, timeframe, limit=20)
+        
+        for min_price, max_price in price_ranges:
+            for stock in top_stocks:
+                trades = self.get_trades_in_price_stock_combination(
+                    user_id, stock['symbol'], min_price, max_price, timeframe
+                )
+                
+                if trades:
+                    key = f"{stock['symbol']}_${min_price}-${max_price}"
+                    combinations[key] = self.calculate_trade_metrics(trades)
+        
+        return combinations
+    
+    def calculate_stock_algorithm_combinations(self, user_id: int, timeframe: str) -> Dict:
+        """Calculate performance for stock + algorithm combinations"""
+        combinations = {}
+        
+        stocks = self.get_traded_stocks(user_id, timeframe)
+        algorithms = self.get_used_algorithms(user_id, timeframe)
+        
+        for stock in stocks:
+            for algorithm in algorithms:
+                trades = self.get_trades_in_stock_algorithm_combination(
+                    user_id, stock['symbol'], algorithm['name'], timeframe
+                )
+                
+                if trades:
+                    key = f"{stock['symbol']}_{algorithm['name']}"
+                    combinations[key] = self.calculate_trade_metrics(trades)
+        
+        return combinations
+```
+
+#### 25.1.6 Criteria-Based Performance Metrics
+
+```python
+class CriteriaBasedPerformanceAnalyzer:
+    def calculate_criteria_based_metrics(self, user_id: int, timeframe: str) -> Dict:
+        """Calculate performance metrics based on various criteria"""
+        return {
+            'risk_based_metrics': self.calculate_risk_based_metrics(user_id, timeframe),
+            'volatility_based_metrics': self.calculate_volatility_based_metrics(user_id, timeframe),
+            'market_cap_based_metrics': self.calculate_market_cap_based_metrics(user_id, timeframe),
+            'sector_based_metrics': self.calculate_sector_based_metrics(user_id, timeframe),
+            'liquidity_based_metrics': self.calculate_liquidity_based_metrics(user_id, timeframe),
+            'momentum_based_metrics': self.calculate_momentum_based_metrics(user_id, timeframe),
+            'value_based_metrics': self.calculate_value_based_metrics(user_id, timeframe),
+            'growth_based_metrics': self.calculate_growth_based_metrics(user_id, timeframe),
+            'quality_based_metrics': self.calculate_quality_based_metrics(user_id, timeframe),
+            'size_based_metrics': self.calculate_size_based_metrics(user_id, timeframe)
+        }
+    
+    def calculate_risk_based_metrics(self, user_id: int, timeframe: str) -> Dict:
+        """Calculate performance by risk level"""
+        risk_levels = ['low', 'medium', 'high']
+        metrics = {}
+        
+        for risk_level in risk_levels:
+            trades = self.get_trades_by_risk_level(user_id, risk_level, timeframe)
+            metrics[risk_level] = self.calculate_trade_metrics(trades)
+        
+        return metrics
+    
+    def calculate_volatility_based_metrics(self, user_id: int, timeframe: str) -> Dict:
+        """Calculate performance by volatility level"""
+        volatility_ranges = [
+            (0, 0.15, 'low'),
+            (0.15, 0.30, 'medium'),
+            (0.30, 0.50, 'high'),
+            (0.50, float('inf'), 'extreme')
+        ]
+        metrics = {}
+        
+        for min_vol, max_vol, label in volatility_ranges:
+            trades = self.get_trades_by_volatility_range(user_id, min_vol, max_vol, timeframe)
+            metrics[label] = self.calculate_trade_metrics(trades)
+        
+        return metrics
+    
+    def calculate_market_cap_based_metrics(self, user_id: int, timeframe: str) -> Dict:
+        """Calculate performance by market cap size"""
+        market_cap_ranges = [
+            (0, 1e9, 'small_cap'),
+            (1e9, 10e9, 'mid_cap'),
+            (10e9, 100e9, 'large_cap'),
+            (100e9, float('inf'), 'mega_cap')
+        ]
+        metrics = {}
+        
+        for min_cap, max_cap, label in market_cap_ranges:
+            trades = self.get_trades_by_market_cap_range(user_id, min_cap, max_cap, timeframe)
+            metrics[label] = self.calculate_trade_metrics(trades)
+        
+        return metrics
+```
+
+#### 25.1.7 Temporal Performance Metrics
+
+```python
+class TemporalPerformanceAnalyzer:
+    def calculate_temporal_metrics(self, user_id: int, timeframe: str) -> Dict:
+        """Calculate performance metrics across different time periods"""
+        return {
+            'daily_metrics': self.calculate_daily_metrics(user_id, timeframe),
+            'weekly_metrics': self.calculate_weekly_metrics(user_id, timeframe),
+            'monthly_metrics': self.calculate_monthly_metrics(user_id, timeframe),
+            'quarterly_metrics': self.calculate_quarterly_metrics(user_id, timeframe),
+            'yearly_metrics': self.calculate_yearly_metrics(user_id, timeframe),
+            'time_of_day_metrics': self.calculate_time_of_day_metrics(user_id, timeframe),
+            'day_of_week_metrics': self.calculate_day_of_week_metrics(user_id, timeframe),
+            'month_of_year_metrics': self.calculate_month_of_year_metrics(user_id, timeframe),
+            'seasonal_metrics': self.calculate_seasonal_metrics(user_id, timeframe)
+        }
+    
+    def calculate_daily_metrics(self, user_id: int, timeframe: str) -> Dict:
+        """Calculate daily performance metrics"""
+        daily_trades = self.get_daily_trades(user_id, timeframe)
+        metrics = {}
+        
+        for date, trades in daily_trades.items():
+            metrics[date] = {
+                'total_trades': len(trades),
+                'total_pnl': sum(t['pnl'] for t in trades),
+                'win_rate': self.calculate_win_rate(trades),
+                'best_trade': max([t['pnl'] for t in trades]) if trades else 0,
+                'worst_trade': min([t['pnl'] for t in trades]) if trades else 0,
+                'avg_trade_size': np.mean([abs(t['quantity'] * t['price']) for t in trades]) if trades else 0,
+                'total_volume': sum([abs(t['quantity'] * t['price']) for t in trades]),
+                'volatility': np.std([t['pnl'] for t in trades]) if trades else 0,
+                'sharpe_ratio': self.calculate_sharpe_ratio(trades),
+                'max_drawdown': self.calculate_max_drawdown(trades),
+                'profit_factor': self.calculate_profit_factor(trades)
+            }
+        
+        return metrics
+    
+    def calculate_weekly_metrics(self, user_id: int, timeframe: str) -> Dict:
+        """Calculate weekly performance metrics"""
+        weekly_trades = self.get_weekly_trades(user_id, timeframe)
+        metrics = {}
+        
+        for week, trades in weekly_trades.items():
+            metrics[week] = {
+                'total_trades': len(trades),
+                'total_pnl': sum(t['pnl'] for t in trades),
+                'win_rate': self.calculate_win_rate(trades),
+                'total_return_pct': self.calculate_total_return_pct(trades),
+                'sharpe_ratio': self.calculate_sharpe_ratio(trades),
+                'max_drawdown': self.calculate_max_drawdown(trades),
+                'profit_factor': self.calculate_profit_factor(trades),
+                'avg_daily_pnl': np.mean([t['pnl'] for t in trades]) if trades else 0,
+                'best_day': self.calculate_best_day(trades),
+                'worst_day': self.calculate_worst_day(trades),
+                'volatility': np.std([t['pnl'] for t in trades]) if trades else 0
+            }
+        
+        return metrics
+    
+    def calculate_monthly_metrics(self, user_id: int, timeframe: str) -> Dict:
+        """Calculate monthly performance metrics"""
+        monthly_trades = self.get_monthly_trades(user_id, timeframe)
+        metrics = {}
+        
+        for month, trades in monthly_trades.items():
+            metrics[month] = {
+                'total_trades': len(trades),
+                'total_pnl': sum(t['pnl'] for t in trades),
+                'win_rate': self.calculate_win_rate(trades),
+                'total_return_pct': self.calculate_total_return_pct(trades),
+                'sharpe_ratio': self.calculate_sharpe_ratio(trades),
+                'sortino_ratio': self.calculate_sortino_ratio(trades),
+                'calmar_ratio': self.calculate_calmar_ratio(trades),
+                'max_drawdown': self.calculate_max_drawdown(trades),
+                'profit_factor': self.calculate_profit_factor(trades),
+                'avg_daily_pnl': np.mean([t['pnl'] for t in trades]) if trades else 0,
+                'best_week': self.calculate_best_week(trades),
+                'worst_week': self.calculate_worst_week(trades),
+                'volatility': np.std([t['pnl'] for t in trades]) if trades else 0,
+                'var_95': self.calculate_var(trades, 0.95),
+                'cvar_95': self.calculate_cvar(trades, 0.95)
+            }
+        
+        return metrics
+    
+    def calculate_yearly_metrics(self, user_id: int, timeframe: str) -> Dict:
+        """Calculate yearly performance metrics"""
+        yearly_trades = self.get_yearly_trades(user_id, timeframe)
+        metrics = {}
+        
+        for year, trades in yearly_trades.items():
+            metrics[year] = {
+                'total_trades': len(trades),
+                'total_pnl': sum(t['pnl'] for t in trades),
+                'win_rate': self.calculate_win_rate(trades),
+                'total_return_pct': self.calculate_total_return_pct(trades),
+                'sharpe_ratio': self.calculate_sharpe_ratio(trades),
+                'sortino_ratio': self.calculate_sortino_ratio(trades),
+                'calmar_ratio': self.calculate_calmar_ratio(trades),
+                'max_drawdown': self.calculate_max_drawdown(trades),
+                'profit_factor': self.calculate_profit_factor(trades),
+                'avg_monthly_pnl': np.mean([t['pnl'] for t in trades]) if trades else 0,
+                'best_month': self.calculate_best_month(trades),
+                'worst_month': self.calculate_worst_month(trades),
+                'volatility': np.std([t['pnl'] for t in trades]) if trades else 0,
+                'var_95': self.calculate_var(trades, 0.95),
+                'cvar_95': self.calculate_cvar(trades, 0.95),
+                'annualized_return': self.calculate_annualized_return(trades),
+                'annualized_volatility': self.calculate_annualized_volatility(trades)
+            }
+        
+        return metrics
+```
+
+### 25.2 Advanced Performance Metrics
+
+#### 25.2.1 Risk-Adjusted Performance Metrics
+
+```python
+class RiskAdjustedMetricsCalculator:
+    def calculate_risk_adjusted_metrics(self, trades: List[Dict]) -> Dict:
+        """Calculate comprehensive risk-adjusted performance metrics"""
+        returns = [t['pnl'] for t in trades]
+        
+        if not returns:
+            return {}
+        
+        return {
+            'sharpe_ratio': self.calculate_sharpe_ratio(returns),
+            'sortino_ratio': self.calculate_sortino_ratio(returns),
+            'calmar_ratio': self.calculate_calmar_ratio(returns),
+            'information_ratio': self.calculate_information_ratio(returns),
+            'treynor_ratio': self.calculate_treynor_ratio(returns),
+            'jensen_alpha': self.calculate_jensen_alpha(returns),
+            'var_95': self.calculate_var(returns, 0.95),
+            'var_99': self.calculate_var(returns, 0.99),
+            'cvar_95': self.calculate_cvar(returns, 0.95),
+            'cvar_99': self.calculate_cvar(returns, 0.99),
+            'max_drawdown': self.calculate_max_drawdown(returns),
+            'ulcer_index': self.calculate_ulcer_index(returns),
+            'pain_ratio': self.calculate_pain_ratio(returns),
+            'gain_to_pain_ratio': self.calculate_gain_to_pain_ratio(returns),
+            'profit_factor': self.calculate_profit_factor(returns),
+            'recovery_factor': self.calculate_recovery_factor(returns),
+            'risk_of_ruin': self.calculate_risk_of_ruin(returns),
+            'kelly_criterion': self.calculate_kelly_criterion(returns)
+        }
+    
+    def calculate_sharpe_ratio(self, returns: List[float], risk_free_rate: float = 0.02) -> float:
+        """Calculate Sharpe ratio"""
+        if not returns:
+            return 0.0
+        
+        excess_returns = [r - risk_free_rate/252 for r in returns]  # Daily risk-free rate
+        return np.mean(excess_returns) / np.std(excess_returns) if np.std(excess_returns) > 0 else 0.0
+    
+    def calculate_sortino_ratio(self, returns: List[float], risk_free_rate: float = 0.02) -> float:
+        """Calculate Sortino ratio"""
+        if not returns:
+            return 0.0
+        
+        excess_returns = [r - risk_free_rate/252 for r in returns]
+        negative_returns = [r for r in excess_returns if r < 0]
+        
+        if not negative_returns:
+            return float('inf') if np.mean(excess_returns) > 0 else 0.0
+        
+        downside_deviation = np.sqrt(np.mean([r**2 for r in negative_returns]))
+        return np.mean(excess_returns) / downside_deviation if downside_deviation > 0 else 0.0
+    
+    def calculate_calmar_ratio(self, returns: List[float]) -> float:
+        """Calculate Calmar ratio"""
+        if not returns:
+            return 0.0
+        
+        total_return = sum(returns)
+        max_dd = self.calculate_max_drawdown(returns)
+        
+        return total_return / abs(max_dd) if max_dd != 0 else 0.0
+    
+    def calculate_var(self, returns: List[float], confidence_level: float) -> float:
+        """Calculate Value at Risk"""
+        if not returns:
+            return 0.0
+        
+        return np.percentile(returns, (1 - confidence_level) * 100)
+    
+    def calculate_cvar(self, returns: List[float], confidence_level: float) -> float:
+        """Calculate Conditional Value at Risk (Expected Shortfall)"""
+        if not returns:
+            return 0.0
+        
+        var = self.calculate_var(returns, confidence_level)
+        tail_returns = [r for r in returns if r <= var]
+        
+        return np.mean(tail_returns) if tail_returns else 0.0
+```
+
+#### 25.2.2 Market Comparison Metrics
+
+```python
+class MarketComparisonAnalyzer:
+    def calculate_market_comparison_metrics(self, user_id: int, timeframe: str) -> Dict:
+        """Calculate performance relative to market benchmarks"""
+        user_returns = self.get_user_returns(user_id, timeframe)
+        market_returns = self.get_market_returns(timeframe)
+        
+        return {
+            'alpha': self.calculate_alpha(user_returns, market_returns),
+            'beta': self.calculate_beta(user_returns, market_returns),
+            'correlation': self.calculate_correlation(user_returns, market_returns),
+            'r_squared': self.calculate_r_squared(user_returns, market_returns),
+            'information_ratio': self.calculate_information_ratio(user_returns, market_returns),
+            'tracking_error': self.calculate_tracking_error(user_returns, market_returns),
+            'up_capture_ratio': self.calculate_up_capture_ratio(user_returns, market_returns),
+            'down_capture_ratio': self.calculate_down_capture_ratio(user_returns, market_returns),
+            'up_down_ratio': self.calculate_up_down_ratio(user_returns, market_returns),
+            'relative_strength': self.calculate_relative_strength(user_returns, market_returns),
+            'outperformance': self.calculate_outperformance(user_returns, market_returns)
+        }
+    
+    def calculate_alpha(self, user_returns: List[float], market_returns: List[float]) -> float:
+        """Calculate Jensen's Alpha"""
+        if len(user_returns) != len(market_returns) or not user_returns:
+            return 0.0
+        
+        beta = self.calculate_beta(user_returns, market_returns)
+        user_mean = np.mean(user_returns)
+        market_mean = np.mean(market_returns)
+        risk_free_rate = 0.02 / 252  # Daily risk-free rate
+        
+        return user_mean - (risk_free_rate + beta * (market_mean - risk_free_rate))
+    
+    def calculate_beta(self, user_returns: List[float], market_returns: List[float]) -> float:
+        """Calculate Beta"""
+        if len(user_returns) != len(market_returns) or not user_returns:
+            return 1.0
+        
+        covariance = np.cov(user_returns, market_returns)[0, 1]
+        market_variance = np.var(market_returns)
+        
+        return covariance / market_variance if market_variance > 0 else 1.0
+```
+
+### 25.3 Performance Analytics Dashboard
+
+#### 25.3.1 Real-Time Performance Monitoring
+
+```python
+class PerformanceDashboard:
+    def __init__(self):
+        self.metrics_engine = PerformanceAnalyticsEngine()
+        self.real_time_updater = RealTimeUpdater()
+        self.alert_manager = AlertManager()
+    
+    def get_comprehensive_dashboard(self, user_id: int) -> Dict:
+        """Get comprehensive performance dashboard"""
+        return {
+            'overview': self.get_performance_overview(user_id),
+            'price_range_analysis': self.get_price_range_analysis(user_id),
+            'stock_analysis': self.get_stock_analysis(user_id),
+            'algorithm_analysis': self.get_algorithm_analysis(user_id),
+            'combination_analysis': self.get_combination_analysis(user_id),
+            'temporal_analysis': self.get_temporal_analysis(user_id),
+            'risk_analysis': self.get_risk_analysis(user_id),
+            'market_comparison': self.get_market_comparison(user_id),
+            'alerts': self.get_performance_alerts(user_id)
+        }
+    
+    def get_performance_overview(self, user_id: int) -> Dict:
+        """Get high-level performance overview"""
+        return {
+            'total_pnl': self.calculate_total_pnl(user_id),
+            'total_return_pct': self.calculate_total_return_pct(user_id),
+            'win_rate': self.calculate_overall_win_rate(user_id),
+            'sharpe_ratio': self.calculate_overall_sharpe_ratio(user_id),
+            'max_drawdown': self.calculate_overall_max_drawdown(user_id),
+            'profit_factor': self.calculate_overall_profit_factor(user_id),
+            'total_trades': self.get_total_trades(user_id),
+            'active_positions': self.get_active_positions(user_id),
+            'portfolio_value': self.get_portfolio_value(user_id),
+            'daily_pnl': self.get_daily_pnl(user_id),
+            'weekly_pnl': self.get_weekly_pnl(user_id),
+            'monthly_pnl': self.get_monthly_pnl(user_id)
+        }
+```
+
+#### 25.3.2 Interactive Performance Charts
+
+```typescript
+// React components for performance visualization
+interface PerformanceChartsProps {
+  userId: number;
+  timeframe: string;
+}
+
+const PerformanceCharts: React.FC<PerformanceChartsProps> = ({ userId, timeframe }) => {
+  const [metrics, setMetrics] = useState(null);
+  
+  useEffect(() => {
+    loadPerformanceMetrics(userId, timeframe);
+  }, [userId, timeframe]);
+  
+  return (
+    <div className="performance-charts">
+      <div className="chart-grid">
+        {/* Price Range Performance */}
+        <PriceRangeChart data={metrics?.price_range_metrics} />
+        
+        {/* Stock Performance */}
+        <StockPerformanceChart data={metrics?.stock_metrics} />
+        
+        {/* Algorithm Performance */}
+        <AlgorithmPerformanceChart data={metrics?.algorithm_metrics} />
+        
+        {/* Temporal Performance */}
+        <TemporalPerformanceChart data={metrics?.temporal_metrics} />
+        
+        {/* Risk Metrics */}
+        <RiskMetricsChart data={metrics?.risk_metrics} />
+        
+        {/* Market Comparison */}
+        <MarketComparisonChart data={metrics?.market_comparison} />
+      </div>
+    </div>
+  );
+};
+
+// Price Range Performance Chart
+const PriceRangeChart: React.FC<{ data: any }> = ({ data }) => {
+  return (
+    <div className="chart-container">
+      <h3>Performance by Price Range</h3>
+      <ResponsiveContainer width="100%" height={300}>
+        <BarChart data={data}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="price_range" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="total_return" fill="#8884d8" />
+          <Bar dataKey="win_rate" fill="#82ca9d" />
+          <Bar dataKey="sharpe_ratio" fill="#ffc658" />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+  );
+};
+
+// Stock Performance Chart
+const StockPerformanceChart: React.FC<{ data: any }> = ({ data }) => {
+  return (
+    <div className="chart-container">
+      <h3>Stock Performance Analysis</h3>
+      <ResponsiveContainer width="100%" height={400}>
+        <ScatterChart data={data}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="total_return" />
+          <YAxis dataKey="sharpe_ratio" />
+          <Tooltip />
+          <Legend />
+          <Scatter dataKey="stocks" fill="#8884d8" />
+        </ScatterChart>
+      </ResponsiveContainer>
+    </div>
+  );
+};
+
+// Temporal Performance Chart
+const TemporalPerformanceChart: React.FC<{ data: any }> = ({ data }) => {
+  return (
+    <div className="chart-container">
+      <h3>Performance Over Time</h3>
+      <ResponsiveContainer width="100%" height={300}>
+        <LineChart data={data?.daily_metrics}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="date" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Line type="monotone" dataKey="total_pnl" stroke="#8884d8" />
+          <Line type="monotone" dataKey="cumulative_return" stroke="#82ca9d" />
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
+  );
+};
+```
+
+### 25.4 Performance Reporting System
+
+#### 25.4.1 Automated Performance Reports
+
+```python
+class PerformanceReportGenerator:
+    def generate_comprehensive_report(self, user_id: int, timeframe: str = 'all') -> Dict:
+        """Generate comprehensive performance report"""
+        return {
+            'executive_summary': self.generate_executive_summary(user_id, timeframe),
+            'detailed_analysis': self.generate_detailed_analysis(user_id, timeframe),
+            'risk_analysis': self.generate_risk_analysis(user_id, timeframe),
+            'performance_attribution': self.generate_performance_attribution(user_id, timeframe),
+            'recommendations': self.generate_recommendations(user_id, timeframe),
+            'charts_and_graphs': self.generate_charts(user_id, timeframe)
+        }
+    
+    def generate_executive_summary(self, user_id: int, timeframe: str) -> Dict:
+        """Generate executive summary of performance"""
+        metrics = self.get_overall_metrics(user_id, timeframe)
+        
+        return {
+            'total_return': metrics['total_return'],
+            'total_return_pct': metrics['total_return_pct'],
+            'sharpe_ratio': metrics['sharpe_ratio'],
+            'max_drawdown': metrics['max_drawdown'],
+            'win_rate': metrics['win_rate'],
+            'profit_factor': metrics['profit_factor'],
+            'best_performing_stock': metrics['best_stock'],
+            'best_performing_algorithm': metrics['best_algorithm'],
+            'worst_performing_stock': metrics['worst_stock'],
+            'worst_performing_algorithm': metrics['worst_algorithm'],
+            'key_insights': self.generate_key_insights(metrics),
+            'risk_assessment': self.assess_risk_level(metrics)
+        }
+    
+    def generate_detailed_analysis(self, user_id: int, timeframe: str) -> Dict:
+        """Generate detailed performance analysis"""
+        return {
+            'price_range_analysis': self.analyze_price_range_performance(user_id, timeframe),
+            'stock_analysis': self.analyze_stock_performance(user_id, timeframe),
+            'algorithm_analysis': self.analyze_algorithm_performance(user_id, timeframe),
+            'temporal_analysis': self.analyze_temporal_performance(user_id, timeframe),
+            'risk_analysis': self.analyze_risk_metrics(user_id, timeframe),
+            'market_comparison': self.analyze_market_comparison(user_id, timeframe)
+        }
+```
+
+## 26. Maintenance and Support
+
+### 26.1 System Maintenance Procedures
 
 #### Regular Maintenance Tasks
 ```python
