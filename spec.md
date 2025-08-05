@@ -1,0 +1,7616 @@
+# Algorithmic Trading System Specification
+
+## 1. System Overview
+
+### 1.1 Purpose
+This system is an automated algorithmic trading platform that executes trades on various asset classes (stocks, ETFs, crypto) using the Alpaca trading API. The system supports multiple trading strategies, time intervals, and sophisticated multi-condition decision making.
+
+### 1.2 Key Features
+- Multi-algorithm trading strategies
+- Multiple time interval support (intraday, daily, weekly)
+- Real-time market data processing
+- Risk management and position sizing
+- Portfolio tracking and performance analytics
+- No options trading (stocks, ETFs, crypto only)
+
+### 1.3 Detailed Feature Listing
+
+#### 1.3.1 Core Trading Features
+- **Multi-Strategy Trading Engine**
+  - Support for 10+ built-in trading strategies (EMA-MACD, RSI, Bollinger Bands, Moving Average Crossover, etc.)
+  - Custom strategy development framework
+  - Strategy combination and weighting system
+  - Real-time strategy performance monitoring
+
+- **Multi-Interval Analysis**
+  - Support for 1min, 5min, 15min, 30min, 1hour, 1day, 1week, 1month intervals
+  - Custom interval definition
+  - Cross-interval signal confirmation
+  - Interval-specific strategy optimization
+
+- **Real-Time Market Data Processing**
+  - Live market data streaming via Alpaca API
+  - Historical data retrieval and storage
+  - Technical indicator calculation (50+ indicators)
+  - Market data caching and optimization
+
+- **Advanced Order Management**
+  - Market, limit, stop, and stop-limit orders
+  - Order execution tracking and management
+  - Partial fill handling
+  - Order cancellation and modification
+
+#### 1.3.2 Risk Management & Loss Control
+- **Comprehensive Loss Management System**
+  - Transaction-level loss limits (configurable percentage)
+  - Daily loss limits (configurable percentage)
+  - Lifetime loss limits (configurable percentage)
+  - Portfolio loss limits (configurable percentage)
+  - Automatic trading stops when limits are exceeded
+
+- **Risk-Adjusted Position Sizing**
+  - Kelly Criterion-based position sizing
+  - Volatility-adjusted position sizing
+  - Confidence score integration
+  - Portfolio concentration limits (max 5% per position)
+
+- **Dynamic Risk Controls**
+  - Dynamic stop loss calculation based on volatility
+  - Dynamic take profit calculation based on risk/reward ratios
+  - Trailing stop loss functionality
+  - Real-time risk monitoring and alerts
+
+- **Risk Profiles**
+  - Conservative profile (1% transaction, 2% daily, 8% lifetime)
+  - Moderate profile (2% transaction, 5% daily, 15% lifetime)
+  - Aggressive profile (3% transaction, 8% daily, 25% lifetime)
+  - Custom profile configuration
+
+#### 1.3.3 AI & Machine Learning Features
+- **AI-Driven Algorithm Discovery**
+  - Automatic algorithm discovery based on market conditions
+  - Market profile analysis and classification
+  - Algorithm candidate generation and backtesting
+  - Best algorithm selection based on performance and market fit
+
+- **Machine Learning Engine**
+  - Price prediction models (Random Forest, LSTM)
+  - Pattern recognition and classification
+  - Feature engineering and selection
+  - Model performance monitoring and retraining
+
+- **Natural Language Interface**
+  - LLM-powered natural language queries
+  - Strategy explanation and analysis
+  - Trading recommendations and insights
+  - RAG-enhanced context retrieval
+
+- **Autonomous Trading System**
+  - Fully autonomous trading cycles
+  - AI-driven decision making
+  - Automatic market analysis and classification
+  - Continuous learning and optimization
+
+#### 1.3.4 Backtesting & Performance Analysis
+- **Comprehensive Backtesting Engine**
+  - Historical strategy validation
+  - Multi-strategy backtesting
+  - Performance metrics calculation (Sharpe ratio, max drawdown, win rate, etc.)
+  - Strategy comparison and optimization
+
+- **Performance Analytics**
+  - Real-time portfolio tracking
+  - Performance dashboard and reporting
+  - Risk-adjusted return analysis
+  - Attribution analysis and reporting
+
+- **Strategy Optimization**
+  - Parameter optimization using genetic algorithms
+  - Walk-forward analysis
+  - Out-of-sample testing
+  - Strategy robustness validation
+
+#### 1.3.5 Data Management & Storage
+- **PostgreSQL Database**
+  - Transaction history storage
+  - Market data storage and retrieval
+  - Strategy configuration storage
+  - Performance metrics storage
+  - User preferences and settings
+
+- **Redis Caching**
+  - Market data caching
+  - Strategy signal caching
+  - Session management
+  - Real-time data access optimization
+
+- **Vector Database (Chroma)**
+  - RAG context storage
+  - Knowledge base management
+  - Similarity search and retrieval
+  - AI-enhanced analysis storage
+
+#### 1.3.6 Web Interface & User Experience
+- **Modern Web UI (React/Next.js)**
+  - Real-time dashboard with live data
+  - Portfolio overview and management
+  - Strategy configuration and monitoring
+  - Performance analytics and reporting
+
+- **Interactive Charts and Visualizations**
+  - Price charts with technical indicators
+  - Performance charts and metrics
+  - Risk analysis visualizations
+  - Strategy comparison charts
+
+- **User Management**
+  - User authentication and authorization
+  - Role-based access control
+  - User preferences and settings
+  - API key management
+
+#### 1.3.7 Monitoring & Logging
+- **Structured Logging System**
+  - Trade execution logging
+  - Strategy performance logging
+  - System health monitoring
+  - Error tracking and alerting
+
+- **ELK Stack Integration**
+  - Elasticsearch for log storage and search
+  - Logstash for log processing
+  - Kibana for log visualization and analysis
+  - Real-time log monitoring
+
+- **Performance Monitoring**
+  - Prometheus metrics collection
+  - Grafana dashboards and visualization
+  - System performance monitoring
+  - Alert management and notification
+
+#### 1.3.8 Deployment & Operations
+- **Docker-Based Deployment**
+  - Containerized application deployment
+  - Docker Compose for multi-service orchestration
+  - Environment-specific configurations
+  - Easy scaling and management
+
+- **Development Environment**
+  - Hot reloading for development
+  - Local development setup
+  - Testing environment configuration
+  - CI/CD pipeline integration
+
+- **Production Environment**
+  - Production-ready deployment
+  - Load balancing and scaling
+  - High availability configuration
+  - Backup and recovery procedures
+
+#### 1.3.9 Testing & Quality Assurance
+- **Comprehensive Testing Strategy**
+  - Unit testing for all components
+  - Integration testing for system components
+  - API testing for web endpoints
+  - Frontend testing with React Testing Library
+
+- **Performance Testing**
+  - Load testing for system performance
+  - Stress testing for system limits
+  - Scalability testing
+  - Performance benchmarking
+
+- **Security Testing**
+  - API security testing
+  - Authentication and authorization testing
+  - Data security validation
+  - Penetration testing
+
+#### 1.3.10 Integration & APIs
+- **Alpaca Trading API Integration**
+  - Real-time market data access
+  - Order execution and management
+  - Account information and portfolio data
+  - Paper trading and live trading support
+
+- **External Data Sources**
+  - Market data providers integration
+  - News and sentiment data
+  - Economic indicators
+  - Alternative data sources
+
+- **Third-Party Integrations**
+  - Notification services (email, SMS)
+  - Cloud storage integration
+  - Monitoring and alerting services
+  - Analytics and reporting tools
+
+#### 1.3.11 Configuration & Customization
+- **Flexible Configuration System**
+  - YAML/JSON configuration files
+  - Environment-specific configurations
+  - Runtime configuration updates
+  - Configuration validation and testing
+
+- **Strategy Customization**
+  - Custom strategy development
+  - Strategy parameter optimization
+  - Strategy combination and weighting
+  - Strategy performance tracking
+
+- **Risk Management Customization**
+  - Risk profile configuration
+  - Loss limit customization
+  - Position sizing rules
+  - Risk monitoring and alerting
+
+#### 1.3.12 Compliance & Security
+- **Data Security**
+  - Encrypted data storage and transmission
+  - Secure API key management
+  - User data protection
+  - Audit trail and logging
+
+- **Trading Compliance**
+  - Regulatory compliance monitoring
+  - Trading rule enforcement
+  - Risk limit enforcement
+  - Compliance reporting
+
+- **System Security**
+  - Authentication and authorization
+  - API security and rate limiting
+  - Network security and firewall
+  - Security monitoring and alerting
+
+## 2. Technical Architecture
+
+### 2.1 Technology Stack
+- **Backend**: Python 3.9+
+- **Trading API**: Alpaca Trading API (v2)
+- **Data Processing**: pandas, numpy
+- **Technical Analysis**: ta-lib, pandas-ta
+- **Database**: PostgreSQL (primary), Redis (caching)
+- **Web Framework**: FastAPI + React/Next.js
+- **Scheduling**: APScheduler
+- **Logging**: Structured logging with ELK stack (Elasticsearch, Logstash, Kibana)
+- **Machine Learning**: scikit-learn, TensorFlow/PyTorch for predictive models
+- **LLM**: Local LLM (Ollama/Llama) for natural language processing
+- **RAG**: Vector database (Chroma) for context retrieval
+- **External Data**: Analyst ratings, news sentiment, fundamental data
+- **Configuration**: YAML/JSON config files
+- **Monitoring**: Prometheus + Grafana
+
+### 2.2 System Components
+1. **Data Manager**: Fetches and processes market data
+2. **Strategy Engine**: Implements trading algorithms
+3. **Signal Generator**: Combines multiple algorithms and intervals
+4. **Order Manager**: Executes trades via Alpaca API
+5. **Risk Manager**: Manages position sizing and risk
+6. **Portfolio Tracker**: Monitors positions and performance
+7. **Configuration Manager**: Handles strategy parameters
+8. **Backtesting Engine**: Historical strategy validation
+9. **Database Manager**: PostgreSQL operations and data persistence
+10. **Web API**: FastAPI REST endpoints
+11. **Web UI**: React/Next.js frontend
+12. **Machine Learning Engine**: Predictive models for price forecasting and pattern recognition
+13. **LLM Interface**: Natural language processing and strategy explanation
+14. **RAG System**: Context retrieval and knowledge base management
+15. **Analyst Rating Manager**: Fetches and processes analyst ratings and recommendations
+16. **External Data Aggregator**: Collects news sentiment, fundamental data, and market sentiment
+17. **Logging Service**: Structured logging and monitoring
+18. **Vector Database**: RAG context storage and retrieval
+
+## 3. Trading Strategies
+
+### 3.1 Core Algorithm Framework
+Each strategy must implement:
+- `calculate_signals()`: Returns buy/sell signals with risk-adjusted confidence
+- `get_position_size()`: Calculates position size based on risk tolerance
+- `get_stop_loss()`: Determines stop loss levels to minimize losses
+- `get_take_profit()`: Determines take profit levels to maximize gains
+- `calculate_risk_reward_ratio()`: Evaluates potential gain vs potential loss
+- `get_risk_adjusted_score()`: Returns risk-adjusted performance score
+- `check_analyst_rating()`: Validates analyst rating requirements for buy decisions
+- `apply_rating_adjustment()`: Adjusts signals based on analyst ratings
+
+### 3.2 Example Strategy: EMA-MACD Strategy
+```python
+class EMAMACDStrategy:
+    def __init__(self, ema_period=20, macd_fast=12, macd_slow=26, 
+                 macd_signal=9, price_threshold_pct=20, risk_reward_ratio=2.0):
+        self.ema_period = ema_period
+        self.macd_fast = macd_fast
+        self.macd_slow = macd_slow
+        self.macd_signal = macd_signal
+        self.price_threshold_pct = price_threshold_pct
+        self.risk_reward_ratio = risk_reward_ratio  # Minimum gain/loss ratio
+    
+    def calculate_signals(self, data):
+        # Calculate EMA
+        ema = data['close'].ewm(span=self.ema_period).mean()
+        
+        # Calculate MACD
+        macd = data['close'].ewm(span=self.macd_fast).mean() - data['close'].ewm(span=self.macd_slow).mean()
+        macd_signal = macd.ewm(span=self.macd_signal).mean()
+        
+        # Calculate volatility for risk assessment
+        volatility = data['close'].rolling(20).std()
+        
+        # Buy conditions with risk-adjusted confidence
+        price_below_ema = data['close'] < ema * (1 - self.price_threshold_pct / 100)
+        macd_above_zero = macd > 0
+        
+        # Risk-adjusted buy signal
+        risk_adjusted_buy = price_below_ema & macd_above_zero
+        
+        # Calculate potential gain vs loss
+        potential_gain = (ema - data['close']) / data['close']  # Distance to EMA
+        potential_loss = volatility / data['close']  # Volatility-based loss estimate
+        
+        # Only buy if risk/reward ratio is favorable
+        favorable_risk_reward = potential_gain / potential_loss > self.risk_reward_ratio
+        
+        buy_signal = risk_adjusted_buy & favorable_risk_reward
+        
+        # Sell conditions to minimize losses
+        stop_loss_triggered = data['close'] < data['low'].shift(1)
+        take_profit_triggered = data['close'] > ema * (1 + self.price_threshold_pct / 100)
+        
+        sell_signal = stop_loss_triggered | take_profit_triggered
+        
+        return buy_signal, sell_signal
+    
+    def calculate_risk_reward_ratio(self, data):
+        """Calculate risk/reward ratio for current market conditions"""
+        ema = data['close'].ewm(span=self.ema_period).mean()
+        volatility = data['close'].rolling(20).std()
+        
+        potential_gain = (ema - data['close'].iloc[-1]) / data['close'].iloc[-1]
+        potential_loss = volatility.iloc[-1] / data['close'].iloc[-1]
+        
+        if potential_loss > 0:
+            return potential_gain / potential_loss
+        return 0
+    
+    def get_risk_adjusted_score(self, data):
+        """Calculate risk-adjusted performance score"""
+        risk_reward = self.calculate_risk_reward_ratio(data)
+        volatility = data['close'].rolling(20).std().iloc[-1] / data['close'].iloc[-1]
+        
+        # Higher score for better risk/reward and lower volatility
+        score = risk_reward * (1 - volatility)
+        return max(0, min(1, score))  # Normalize to 0-1
+    
+    def check_analyst_rating(self, symbol: str, analyst_rating_manager) -> Tuple[bool, Dict[str, Any]]:
+        """Check if analyst rating meets requirements for buy decision"""
+        try:
+            rating_data = analyst_rating_manager.get_analyst_rating(symbol)
+            
+            # Check if rating meets minimum threshold
+            meets_threshold = rating_data['consensus_rating'] >= analyst_rating_manager.min_rating_for_buy
+            
+            # Check if confidence is sufficient
+            confidence_sufficient = rating_data['rating_confidence'] >= analyst_rating_manager.config.get('rating_confidence_threshold', 0.6)
+            
+            # Check rating trend if enabled
+            trend_analysis = analyst_rating_manager.config.get('rating_trend_analysis', True)
+            trend_acceptable = True
+            
+            if trend_analysis:
+                trend_data = analyst_rating_manager.get_rating_trend(symbol)
+                # Prefer improving or stable trends
+                trend_acceptable = trend_data['trend'] != 'declining'
+            
+            should_allow_buy = meets_threshold and confidence_sufficient and trend_acceptable
+            
+            return should_allow_buy, {
+                'rating': rating_data['consensus_rating'],
+                'confidence': rating_data['rating_confidence'],
+                'trend': trend_data['trend'] if trend_analysis else 'not_analyzed',
+                'meets_threshold': meets_threshold,
+                'confidence_sufficient': confidence_sufficient,
+                'trend_acceptable': trend_acceptable,
+                'target_price': rating_data['target_price'],
+                'num_analysts': rating_data['num_analysts']
+            }
+            
+        except Exception as e:
+            logging.error(f"Error checking analyst rating for {symbol}: {e}")
+            # Default to allowing buy if rating check fails
+            return True, {'error': str(e)}
+    
+    def apply_rating_adjustment(self, buy_signal: bool, rating_data: Dict[str, Any], 
+                              analyst_rating_manager) -> Tuple[bool, float]:
+        """Apply analyst rating adjustment to buy signal and position size"""
+        if not buy_signal:
+            return False, 1.0
+        
+        # Get rating adjustment factor
+        rating_adjustment = analyst_rating_manager.calculate_rating_adjustment(rating_data)
+        
+        # Apply rating weight to decision
+        rating_weight = analyst_rating_manager.rating_weight
+        
+        # If rating is below threshold, reduce signal strength
+        if rating_data['consensus_rating'] < analyst_rating_manager.min_rating_for_buy:
+            adjusted_signal = False
+        else:
+            # Rating meets threshold, keep signal but adjust strength
+            adjusted_signal = buy_signal
+        
+        return adjusted_signal, rating_adjustment
+```
+
+### 3.3 Additional Strategies to Implement
+1. **RSI Strategy**: Buy when RSI < 30, sell when RSI > 70
+2. **Bollinger Bands Strategy**: Buy when price touches lower band, sell at upper band
+3. **Moving Average Crossover**: Buy when fast MA crosses above slow MA
+4. **Volume-Weighted Strategy**: Combine price action with volume analysis
+5. **Mean Reversion Strategy**: Trade based on statistical mean reversion
+
+## 4. Multi-Interval Analysis
+
+### 4.1 Supported Time Intervals
+- **Intraday**: 1min, 5min, 15min, 30min, 1hour
+- **Daily**: 1day, 1week, 1month
+- **Custom**: User-defined intervals
+
+### 4.2 Multi-Interval Signal Combination
+```python
+class MultiIntervalAnalyzer:
+    def __init__(self, strategies, intervals):
+        self.strategies = strategies
+        self.intervals = intervals
+    
+    def get_combined_signal(self, symbol):
+        signals = {}
+        
+        for interval in self.intervals:
+            data = self.get_market_data(symbol, interval)
+            interval_signals = {}
+            
+            for strategy_name, strategy in self.strategies.items():
+                buy_signal, sell_signal = strategy.calculate_signals(data)
+                interval_signals[strategy_name] = {
+                    'buy': buy_signal.iloc[-1],
+                    'sell': sell_signal.iloc[-1],
+                    'strength': self.calculate_signal_strength(buy_signal, sell_signal)
+                }
+            
+            signals[interval] = interval_signals
+        
+        return self.combine_signals(signals)
+    
+    def combine_signals(self, signals):
+        # Weight signals by interval and strategy
+        # Higher weight for longer intervals (trend confirmation)
+        # Consensus-based decision making
+        pass
+```
+
+## 5. Buy/Sell Decision Logic
+
+### 5.1 Multi-Condition Framework
+```python
+class DecisionEngine:
+    def __init__(self, min_conditions=2, consensus_threshold=0.6):
+        self.min_conditions = min_conditions
+        self.consensus_threshold = consensus_threshold
+    
+    def evaluate_buy_conditions(self, symbol, signals):
+        # Check multiple algorithms
+        algorithm_signals = []
+        for strategy_name, signal in signals.items():
+            if signal['buy']:
+                algorithm_signals.append(strategy_name)
+        
+        # Check multiple intervals
+        interval_signals = []
+        for interval, interval_data in signals.items():
+            if any(s['buy'] for s in interval_data.values()):
+                interval_signals.append(interval)
+        
+        # Decision criteria
+        conditions_met = len(algorithm_signals) >= self.min_conditions
+        consensus_met = len(interval_signals) / len(signals) >= self.consensus_threshold
+        
+        return conditions_met and consensus_met
+    
+    def evaluate_sell_conditions(self, symbol, signals, position_data):
+        # Similar logic for sell conditions
+        # Must respect minimum hold time after buy
+        pass
+```
+
+### 5.2 Position Management Rules
+1. **Minimum Hold Time**: Positions must be held for at least the interval duration after purchase
+2. **Stop Loss**: Automatic stop loss based on strategy parameters
+3. **Take Profit**: Automatic take profit based on strategy parameters
+4. **Position Sizing**: Based on account balance and risk parameters
+
+## 6. Risk Management and Loss Control
+
+### 6.1 Loss Management Framework
+```python
+class LossManagementSystem:
+    """Comprehensive loss management system with percentage-based limits"""
+    
+    def __init__(self, config):
+        self.config = config
+        self.daily_losses = {}
+        self.lifetime_losses = {}
+        self.transaction_losses = {}
+        
+        # Loss limits (as percentages)
+        self.max_transaction_loss_pct = config.get('max_transaction_loss_pct', 2.0)  # 2% per trade
+        self.max_daily_loss_pct = config.get('max_daily_loss_pct', 5.0)  # 5% per day
+        self.max_lifetime_loss_pct = config.get('max_lifetime_loss_pct', 15.0)  # 15% lifetime
+        self.max_portfolio_loss_pct = config.get('max_portfolio_loss_pct', 10.0)  # 10% portfolio
+        
+        # Risk tolerance levels
+        self.conservative_limits = {
+            'max_transaction_loss_pct': 1.0,
+            'max_daily_loss_pct': 2.0,
+            'max_lifetime_loss_pct': 8.0,
+            'max_portfolio_loss_pct': 5.0
+        }
+        
+        self.aggressive_limits = {
+            'max_transaction_loss_pct': 3.0,
+            'max_daily_loss_pct': 8.0,
+            'max_lifetime_loss_pct': 25.0,
+            'max_portfolio_loss_pct': 15.0
+        }
+    
+    def set_risk_profile(self, profile: str):
+        """Set risk profile (conservative, moderate, aggressive)"""
+        if profile == 'conservative':
+            self.max_transaction_loss_pct = self.conservative_limits['max_transaction_loss_pct']
+            self.max_daily_loss_pct = self.conservative_limits['max_daily_loss_pct']
+            self.max_lifetime_loss_pct = self.conservative_limits['max_lifetime_loss_pct']
+            self.max_portfolio_loss_pct = self.conservative_limits['max_portfolio_loss_pct']
+        elif profile == 'aggressive':
+            self.max_transaction_loss_pct = self.aggressive_limits['max_transaction_loss_pct']
+            self.max_daily_loss_pct = self.aggressive_limits['max_daily_loss_pct']
+            self.max_lifetime_loss_pct = self.aggressive_limits['max_lifetime_loss_pct']
+            self.max_portfolio_loss_pct = self.aggressive_limits['max_portfolio_loss_pct']
+    
+    def check_transaction_loss_limit(self, symbol: str, entry_price: float, 
+                                   current_price: float, position_size: float) -> Dict[str, Any]:
+        """Check if transaction loss exceeds limit"""
+        if entry_price <= 0:
+            return {'within_limit': True, 'current_loss_pct': 0, 'limit_pct': self.max_transaction_loss_pct}
+        
+        current_loss_pct = abs((current_price - entry_price) / entry_price) * 100
+        
+        within_limit = current_loss_pct <= self.max_transaction_loss_pct
+        
+        return {
+            'within_limit': within_limit,
+            'current_loss_pct': current_loss_pct,
+            'limit_pct': self.max_transaction_loss_pct,
+            'should_close': not within_limit
+        }
+    
+    def check_daily_loss_limit(self, symbol: str, portfolio_value: float) -> Dict[str, Any]:
+        """Check if daily loss exceeds limit"""
+        today = datetime.now().date()
+        
+        if symbol not in self.daily_losses:
+            self.daily_losses[symbol] = {}
+        
+        if today not in self.daily_losses[symbol]:
+            self.daily_losses[symbol][today] = 0
+        
+        daily_loss_pct = (self.daily_losses[symbol][today] / portfolio_value) * 100
+        within_limit = daily_loss_pct <= self.max_daily_loss_pct
+        
+        return {
+            'within_limit': within_limit,
+            'current_loss_pct': daily_loss_pct,
+            'limit_pct': self.max_daily_loss_pct,
+            'should_stop_trading': not within_limit
+        }
+    
+    def check_lifetime_loss_limit(self, portfolio_value: float, initial_capital: float) -> Dict[str, Any]:
+        """Check if lifetime loss exceeds limit"""
+        lifetime_loss = initial_capital - portfolio_value
+        lifetime_loss_pct = (lifetime_loss / initial_capital) * 100
+        
+        within_limit = lifetime_loss_pct <= self.max_lifetime_loss_pct
+        
+        return {
+            'within_limit': within_limit,
+            'current_loss_pct': lifetime_loss_pct,
+            'limit_pct': self.max_lifetime_loss_pct,
+            'should_stop_trading': not within_limit
+        }
+    
+    def update_loss_tracking(self, symbol: str, transaction_id: str, 
+                           entry_price: float, exit_price: float, 
+                           position_size: float, portfolio_value: float):
+        """Update loss tracking after trade completion"""
+        if entry_price <= 0 or exit_price <= 0:
+            return
+        
+        # Calculate transaction loss
+        transaction_loss = (entry_price - exit_price) * position_size
+        transaction_loss_pct = (transaction_loss / portfolio_value) * 100
+        
+        # Update transaction losses
+        self.transaction_losses[transaction_id] = {
+            'symbol': symbol,
+            'loss_pct': transaction_loss_pct,
+            'timestamp': datetime.now()
+        }
+        
+        # Update daily losses
+        today = datetime.now().date()
+        if symbol not in self.daily_losses:
+            self.daily_losses[symbol] = {}
+        if today not in self.daily_losses[symbol]:
+            self.daily_losses[symbol][today] = 0
+        
+        if transaction_loss > 0:
+            self.daily_losses[symbol][today] += transaction_loss
+        
+        # Update lifetime losses
+        if 'total_loss' not in self.lifetime_losses:
+            self.lifetime_losses['total_loss'] = 0
+        
+        if transaction_loss > 0:
+            self.lifetime_losses['total_loss'] += transaction_loss
+    
+    def get_loss_summary(self, portfolio_value: float, initial_capital: float) -> Dict[str, Any]:
+        """Get comprehensive loss summary"""
+        today = datetime.now().date()
+        
+        # Calculate daily losses
+        total_daily_loss = sum(
+            losses.get(today, 0) for losses in self.daily_losses.values()
+        )
+        daily_loss_pct = (total_daily_loss / portfolio_value) * 100 if portfolio_value > 0 else 0
+        
+        # Calculate lifetime losses
+        lifetime_loss = self.lifetime_losses.get('total_loss', 0)
+        lifetime_loss_pct = (lifetime_loss / initial_capital) * 100 if initial_capital > 0 else 0
+        
+        # Calculate average transaction loss
+        transaction_losses = list(self.transaction_losses.values())
+        avg_transaction_loss_pct = np.mean([t['loss_pct'] for t in transaction_losses]) if transaction_losses else 0
+        
+        return {
+            'daily_loss_pct': daily_loss_pct,
+            'daily_loss_limit': self.max_daily_loss_pct,
+            'lifetime_loss_pct': lifetime_loss_pct,
+            'lifetime_loss_limit': self.max_lifetime_loss_pct,
+            'avg_transaction_loss_pct': avg_transaction_loss_pct,
+            'transaction_loss_limit': self.max_transaction_loss_pct,
+            'portfolio_loss_pct': lifetime_loss_pct,
+            'portfolio_loss_limit': self.max_portfolio_loss_pct,
+            'risk_status': self.get_risk_status(daily_loss_pct, lifetime_loss_pct)
+        }
+    
+    def get_risk_status(self, daily_loss_pct: float, lifetime_loss_pct: float) -> str:
+        """Get current risk status"""
+        if lifetime_loss_pct >= self.max_lifetime_loss_pct:
+            return 'CRITICAL - Lifetime limit exceeded'
+        elif daily_loss_pct >= self.max_daily_loss_pct:
+            return 'HIGH - Daily limit exceeded'
+        elif daily_loss_pct >= self.max_daily_loss_pct * 0.8:
+            return 'MEDIUM - Approaching daily limit'
+        elif lifetime_loss_pct >= self.max_lifetime_loss_pct * 0.8:
+            return 'MEDIUM - Approaching lifetime limit'
+        else:
+            return 'LOW - Within limits'
+```
+
+### 6.2 Risk-Adjusted Position Sizing
+```python
+class RiskAdjustedPositionSizer:
+    """Position sizing based on risk management and loss limits"""
+    
+    def __init__(self, loss_manager, portfolio_value: float):
+        self.loss_manager = loss_manager
+        self.portfolio_value = portfolio_value
+    
+    def calculate_position_size(self, symbol: str, entry_price: float, 
+                              stop_loss_price: float, confidence_score: float) -> float:
+        """Calculate position size based on risk limits and confidence"""
+        
+        # Calculate potential loss per share
+        potential_loss_per_share = abs(entry_price - stop_loss_price)
+        
+        if potential_loss_per_share <= 0:
+            return 0
+        
+        # Calculate maximum position size based on transaction loss limit
+        max_loss_amount = self.portfolio_value * (self.loss_manager.max_transaction_loss_pct / 100)
+        max_shares_by_loss = max_loss_amount / potential_loss_per_share
+        
+        # Adjust for confidence score (higher confidence = larger position)
+        confidence_adjusted_shares = max_shares_by_loss * confidence_score
+        
+        # Apply Kelly Criterion for optimal position sizing
+        kelly_fraction = self.calculate_kelly_fraction(confidence_score, potential_loss_per_share, entry_price)
+        kelly_adjusted_shares = confidence_adjusted_shares * kelly_fraction
+        
+        # Apply volatility-based adjustment
+        volatility_adjustment = self.calculate_volatility_adjustment(symbol)
+        final_position_size = kelly_adjusted_shares * volatility_adjustment
+        
+        # Ensure position size doesn't exceed portfolio limits
+        max_position_value = self.portfolio_value * 0.05  # Max 5% in single position
+        max_shares_by_value = max_position_value / entry_price
+        
+        return min(final_position_size, max_shares_by_value)
+    
+    def calculate_kelly_fraction(self, win_probability: float, loss_per_share: float, 
+                               entry_price: float) -> float:
+        """Calculate Kelly Criterion fraction for optimal position sizing"""
+        # Estimate potential gain (assuming 2:1 risk/reward ratio)
+        potential_gain_per_share = loss_per_share * 2
+        
+        # Kelly formula: f = (bp - q) / b
+        # where b = odds received, p = probability of win, q = probability of loss
+        b = potential_gain_per_share / loss_per_share
+        p = win_probability
+        q = 1 - p
+        
+        kelly_fraction = (b * p - q) / b
+        
+        # Cap Kelly fraction to prevent over-leveraging
+        return max(0, min(kelly_fraction, 0.25))  # Max 25% of portfolio
+    
+    def calculate_volatility_adjustment(self, symbol: str) -> float:
+        """Calculate position size adjustment based on volatility"""
+        # Get historical volatility for symbol
+        # Higher volatility = smaller position size
+        volatility = self.get_symbol_volatility(symbol)
+        
+        # Volatility adjustment: reduce position size for high volatility
+        if volatility > 0.4:  # High volatility
+            return 0.5
+        elif volatility > 0.2:  # Medium volatility
+            return 0.75
+        else:  # Low volatility
+            return 1.0
+    
+    def get_symbol_volatility(self, symbol: str) -> float:
+        """Get historical volatility for symbol"""
+        # This would typically fetch from market data
+        # For now, return a default value
+        return 0.25  # 25% annualized volatility
+```
+
+### 6.3 Dynamic Stop Loss and Take Profit
+```python
+class DynamicRiskControls:
+    """Dynamic stop loss and take profit management"""
+    
+    def __init__(self, loss_manager):
+        self.loss_manager = loss_manager
+        self.active_positions = {}
+    
+    def calculate_dynamic_stop_loss(self, symbol: str, entry_price: float, 
+                                  position_type: str, volatility: float) -> float:
+        """Calculate dynamic stop loss based on volatility and risk limits"""
+        
+        # Base stop loss percentage
+        base_stop_loss_pct = self.loss_manager.max_transaction_loss_pct
+        
+        # Adjust for volatility (higher volatility = wider stop)
+        volatility_multiplier = 1 + (volatility * 2)  # Scale volatility effect
+        adjusted_stop_loss_pct = base_stop_loss_pct * volatility_multiplier
+        
+        # Calculate stop loss price
+        if position_type == 'long':
+            stop_loss_price = entry_price * (1 - adjusted_stop_loss_pct / 100)
+        else:  # short
+            stop_loss_price = entry_price * (1 + adjusted_stop_loss_pct / 100)
+        
+        return stop_loss_price
+    
+    def calculate_dynamic_take_profit(self, symbol: str, entry_price: float,
+                                    stop_loss_price: float, risk_reward_ratio: float) -> float:
+        """Calculate take profit based on risk/reward ratio"""
+        
+        # Calculate distance to stop loss
+        stop_loss_distance = abs(entry_price - stop_loss_price)
+        
+        # Calculate take profit distance
+        take_profit_distance = stop_loss_distance * risk_reward_ratio
+        
+        # Determine if long or short based on stop loss position
+        if stop_loss_price < entry_price:  # Long position
+            take_profit_price = entry_price + take_profit_distance
+        else:  # Short position
+            take_profit_price = entry_price - take_profit_distance
+        
+        return take_profit_price
+    
+    def update_stop_loss_trailing(self, symbol: str, current_price: float, 
+                                trailing_pct: float = 1.0) -> float:
+        """Update trailing stop loss"""
+        
+        if symbol not in self.active_positions:
+            return None
+        
+        position = self.active_positions[symbol]
+        entry_price = position['entry_price']
+        current_stop = position['stop_loss']
+        
+        if position['type'] == 'long':
+            # For long positions, trail stop loss upward
+            new_stop = current_price * (1 - trailing_pct / 100)
+            if new_stop > current_stop:
+                return new_stop
+        else:  # short
+            # For short positions, trail stop loss downward
+            new_stop = current_price * (1 + trailing_pct / 100)
+            if new_stop < current_stop:
+                return new_stop
+        
+        return current_stop
+    
+    def should_close_position(self, symbol: str, current_price: float, 
+                            portfolio_value: float) -> Dict[str, Any]:
+        """Determine if position should be closed based on risk limits"""
+        
+        if symbol not in self.active_positions:
+            return {'should_close': False, 'reason': 'No active position'}
+        
+        position = self.active_positions[symbol]
+        entry_price = position['entry_price']
+        
+        # Check transaction loss limit
+        transaction_check = self.loss_manager.check_transaction_loss_limit(
+            symbol, entry_price, current_price, position['size']
+        )
+        
+        if transaction_check['should_close']:
+            return {
+                'should_close': True,
+                'reason': f"Transaction loss limit exceeded: {transaction_check['current_loss_pct']:.2f}%"
+            }
+        
+        # Check daily loss limit
+        daily_check = self.loss_manager.check_daily_loss_limit(symbol, portfolio_value)
+        if daily_check['should_stop_trading']:
+            return {
+                'should_close': True,
+                'reason': f"Daily loss limit exceeded: {daily_check['current_loss_pct']:.2f}%"
+            }
+        
+        # Check if stop loss or take profit hit
+        stop_loss = position['stop_loss']
+        take_profit = position['take_profit']
+        
+        if position['type'] == 'long':
+            if current_price <= stop_loss:
+                return {'should_close': True, 'reason': 'Stop loss triggered'}
+            elif current_price >= take_profit:
+                return {'should_close': True, 'reason': 'Take profit triggered'}
+        else:  # short
+            if current_price >= stop_loss:
+                return {'should_close': True, 'reason': 'Stop loss triggered'}
+            elif current_price <= take_profit:
+                return {'should_close': True, 'reason': 'Take profit triggered'}
+        
+        return {'should_close': False, 'reason': 'Position within limits'}
+```
+
+### 6.1 Position Sizing
+```python
+class RiskManager:
+    def __init__(self, max_position_size_pct=5, max_portfolio_risk_pct=2):
+        self.max_position_size_pct = max_position_size_pct
+        self.max_portfolio_risk_pct = max_portfolio_risk_pct
+    
+    def calculate_position_size(self, account_value, symbol_price, volatility):
+        # Kelly Criterion or fixed percentage
+        base_size = account_value * (self.max_position_size_pct / 100)
+        
+        # Adjust for volatility
+        volatility_adjustment = 1 / (1 + volatility)
+        
+        return base_size * volatility_adjustment
+```
+
+### 6.2 Risk Controls
+- Maximum position size per symbol
+- Maximum portfolio exposure
+- Daily loss limits
+- Maximum number of concurrent positions
+- Correlation-based position limits
+
+## 7. Analyst Rating Management and External Data Integration
+
+### 7.1 Analyst Rating Manager
+```python
+import requests
+import pandas as pd
+from typing import Dict, List, Optional, Tuple
+from datetime import datetime, timedelta
+import logging
+
+class AnalystRatingManager:
+    """Manages analyst ratings and recommendations for trading decisions"""
+    
+    def __init__(self, config):
+        self.config = config
+        self.api_keys = config.get('external_data_apis', {})
+        self.min_rating_for_buy = config.get('min_analyst_rating_for_buy', 3.0)  # 1-5 scale
+        self.rating_weight = config.get('analyst_rating_weight', 0.2)  # 20% weight in decisions
+        self.rating_cache = {}
+        self.rating_history = {}
+        
+        # Rating sources configuration
+        self.rating_sources = {
+            'yahoo_finance': self.api_keys.get('yahoo_finance'),
+            'alpha_vantage': self.api_keys.get('alpha_vantage'),
+            'finnhub': self.api_keys.get('finnhub'),
+            'polygon': self.api_keys.get('polygon')
+        }
+    
+    async def get_analyst_rating(self, symbol: str) -> Dict[str, Any]:
+        """Get current analyst rating for a symbol"""
+        try:
+            # Check cache first
+            if symbol in self.rating_cache:
+                cached_rating = self.rating_cache[symbol]
+                if datetime.now() - cached_rating['timestamp'] < timedelta(hours=1):
+                    return cached_rating['data']
+            
+            # Fetch from multiple sources
+            ratings = await self.fetch_ratings_from_sources(symbol)
+            
+            # Aggregate and calculate consensus
+            consensus_rating = self.calculate_consensus_rating(ratings)
+            
+            # Store in cache
+            self.rating_cache[symbol] = {
+                'data': consensus_rating,
+                'timestamp': datetime.now()
+            }
+            
+            # Store in history
+            if symbol not in self.rating_history:
+                self.rating_history[symbol] = []
+            self.rating_history[symbol].append({
+                'rating': consensus_rating,
+                'timestamp': datetime.now()
+            })
+            
+            return consensus_rating
+            
+        except Exception as e:
+            logging.error(f"Error fetching analyst rating for {symbol}: {e}")
+            return self.get_default_rating()
+    
+    async def fetch_ratings_from_sources(self, symbol: str) -> List[Dict[str, Any]]:
+        """Fetch ratings from multiple data sources"""
+        ratings = []
+        
+        # Fetch from Yahoo Finance
+        if self.rating_sources['yahoo_finance']:
+            yahoo_rating = await self.fetch_yahoo_rating(symbol)
+            if yahoo_rating:
+                ratings.append(yahoo_rating)
+        
+        # Fetch from Alpha Vantage
+        if self.rating_sources['alpha_vantage']:
+            alpha_rating = await self.fetch_alpha_vantage_rating(symbol)
+            if alpha_rating:
+                ratings.append(alpha_rating)
+        
+        # Fetch from Finnhub
+        if self.rating_sources['finnhub']:
+            finnhub_rating = await self.fetch_finnhub_rating(symbol)
+            if finnhub_rating:
+                ratings.append(finnhub_rating)
+        
+        return ratings
+    
+    async def fetch_yahoo_rating(self, symbol: str) -> Optional[Dict[str, Any]]:
+        """Fetch analyst rating from Yahoo Finance"""
+        try:
+            url = f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}"
+            params = {
+                'interval': '1d',
+                'range': '1mo',
+                'includePrePost': 'false'
+            }
+            
+            response = requests.get(url, params=params)
+            if response.status_code == 200:
+                data = response.json()
+                
+                # Extract analyst rating from Yahoo Finance data
+                # This is a simplified example - actual implementation would parse the full response
+                rating_data = {
+                    'source': 'yahoo_finance',
+                    'rating': self.parse_yahoo_rating(data),
+                    'target_price': self.parse_yahoo_target_price(data),
+                    'num_analysts': self.parse_yahoo_num_analysts(data),
+                    'timestamp': datetime.now()
+                }
+                
+                return rating_data
+                
+        except Exception as e:
+            logging.error(f"Error fetching Yahoo Finance rating for {symbol}: {e}")
+        
+        return None
+    
+    def parse_yahoo_rating(self, data: Dict) -> float:
+        """Parse rating from Yahoo Finance response"""
+        # This would parse the actual rating from Yahoo Finance response
+        # For now, return a default rating
+        return 3.5
+    
+    def parse_yahoo_target_price(self, data: Dict) -> float:
+        """Parse target price from Yahoo Finance response"""
+        # This would parse the actual target price
+        return 0.0
+    
+    def parse_yahoo_num_analysts(self, data: Dict) -> int:
+        """Parse number of analysts from Yahoo Finance response"""
+        # This would parse the actual number of analysts
+        return 10
+    
+    async def fetch_alpha_vantage_rating(self, symbol: str) -> Optional[Dict[str, Any]]:
+        """Fetch analyst rating from Alpha Vantage"""
+        try:
+            api_key = self.rating_sources['alpha_vantage']
+            url = f"https://www.alphavantage.co/query"
+            params = {
+                'function': 'OVERVIEW',
+                'symbol': symbol,
+                'apikey': api_key
+            }
+            
+            response = requests.get(url, params=params)
+            if response.status_code == 200:
+                data = response.json()
+                
+                rating_data = {
+                    'source': 'alpha_vantage',
+                    'rating': self.parse_alpha_vantage_rating(data),
+                    'target_price': float(data.get('AnalystTargetPrice', 0)),
+                    'num_analysts': int(data.get('AnalystCount', 0)),
+                    'timestamp': datetime.now()
+                }
+                
+                return rating_data
+                
+        except Exception as e:
+            logging.error(f"Error fetching Alpha Vantage rating for {symbol}: {e}")
+        
+        return None
+    
+    def parse_alpha_vantage_rating(self, data: Dict) -> float:
+        """Parse rating from Alpha Vantage response"""
+        # Alpha Vantage doesn't provide direct ratings, so we'll calculate based on other metrics
+        # This is a simplified calculation
+        return 3.0
+    
+    async def fetch_finnhub_rating(self, symbol: str) -> Optional[Dict[str, Any]]:
+        """Fetch analyst rating from Finnhub"""
+        try:
+            api_key = self.rating_sources['finnhub']
+            url = f"https://finnhub.io/api/v1/stock/recommendation"
+            params = {
+                'symbol': symbol,
+                'token': api_key
+            }
+            
+            response = requests.get(url, params=params)
+            if response.status_code == 200:
+                data = response.json()
+                
+                rating_data = {
+                    'source': 'finnhub',
+                    'rating': self.parse_finnhub_rating(data),
+                    'target_price': self.parse_finnhub_target_price(data),
+                    'num_analysts': self.parse_finnhub_num_analysts(data),
+                    'timestamp': datetime.now()
+                }
+                
+                return rating_data
+                
+        except Exception as e:
+            logging.error(f"Error fetching Finnhub rating for {symbol}: {e}")
+        
+        return None
+    
+    def parse_finnhub_rating(self, data: Dict) -> float:
+        """Parse rating from Finnhub response"""
+        # Convert Finnhub recommendation to numeric rating
+        recommendation = data.get('consensus', 'Hold')
+        
+        rating_map = {
+            'Strong Buy': 5.0,
+            'Buy': 4.0,
+            'Hold': 3.0,
+            'Sell': 2.0,
+            'Strong Sell': 1.0
+        }
+        
+        return rating_map.get(recommendation, 3.0)
+    
+    def parse_finnhub_target_price(self, data: Dict) -> float:
+        """Parse target price from Finnhub response"""
+        return data.get('targetMean', 0.0)
+    
+    def parse_finnhub_num_analysts(self, data: Dict) -> int:
+        """Parse number of analysts from Finnhub response"""
+        return data.get('numberOfAnalystOpinions', 0)
+    
+    def calculate_consensus_rating(self, ratings: List[Dict[str, Any]]) -> Dict[str, Any]:
+        """Calculate consensus rating from multiple sources"""
+        if not ratings:
+            return self.get_default_rating()
+        
+        # Calculate weighted average rating
+        total_weight = 0
+        weighted_rating = 0
+        total_target_price = 0
+        total_analysts = 0
+        
+        for rating in ratings:
+            weight = self.get_source_weight(rating['source'])
+            total_weight += weight
+            weighted_rating += rating['rating'] * weight
+            total_target_price += rating.get('target_price', 0)
+            total_analysts += rating.get('num_analysts', 0)
+        
+        if total_weight > 0:
+            consensus_rating = weighted_rating / total_weight
+            avg_target_price = total_target_price / len(ratings) if ratings else 0
+            avg_analysts = total_analysts / len(ratings) if ratings else 0
+        else:
+            consensus_rating = 3.0
+            avg_target_price = 0
+            avg_analysts = 0
+        
+        return {
+            'consensus_rating': consensus_rating,
+            'target_price': avg_target_price,
+            'num_analysts': int(avg_analysts),
+            'sources': [r['source'] for r in ratings],
+            'timestamp': datetime.now(),
+            'rating_confidence': self.calculate_rating_confidence(ratings)
+        }
+    
+    def get_source_weight(self, source: str) -> float:
+        """Get weight for different rating sources"""
+        weights = {
+            'yahoo_finance': 0.4,
+            'alpha_vantage': 0.3,
+            'finnhub': 0.3
+        }
+        return weights.get(source, 0.1)
+    
+    def calculate_rating_confidence(self, ratings: List[Dict[str, Any]]) -> float:
+        """Calculate confidence in the consensus rating"""
+        if len(ratings) < 2:
+            return 0.5
+        
+        # Calculate standard deviation of ratings
+        ratings_list = [r['rating'] for r in ratings]
+        std_dev = pd.Series(ratings_list).std()
+        
+        # Higher standard deviation = lower confidence
+        confidence = max(0.1, 1.0 - (std_dev / 2.0))
+        
+        return confidence
+    
+    def get_default_rating(self) -> Dict[str, Any]:
+        """Get default rating when no data is available"""
+        return {
+            'consensus_rating': 3.0,
+            'target_price': 0.0,
+            'num_analysts': 0,
+            'sources': [],
+            'timestamp': datetime.now(),
+            'rating_confidence': 0.0
+        }
+    
+    def should_allow_buy(self, symbol: str, technical_signal: bool) -> Tuple[bool, Dict[str, Any]]:
+        """Determine if buy signal should be allowed based on analyst rating"""
+        try:
+            rating_data = self.rating_cache.get(symbol, {}).get('data', self.get_default_rating())
+            
+            # Check if rating meets minimum requirement
+            rating_meets_threshold = rating_data['consensus_rating'] >= self.min_rating_for_buy
+            
+            # Calculate rating-adjusted signal strength
+            rating_adjustment = self.calculate_rating_adjustment(rating_data)
+            
+            # Final decision combines technical signal and analyst rating
+            should_buy = technical_signal and rating_meets_threshold
+            
+            decision_data = {
+                'should_buy': should_buy,
+                'technical_signal': technical_signal,
+                'rating_meets_threshold': rating_meets_threshold,
+                'analyst_rating': rating_data['consensus_rating'],
+                'min_required_rating': self.min_rating_for_buy,
+                'rating_adjustment': rating_adjustment,
+                'rating_confidence': rating_data['rating_confidence'],
+                'target_price': rating_data['target_price'],
+                'num_analysts': rating_data['num_analysts']
+            }
+            
+            return should_buy, decision_data
+            
+        except Exception as e:
+            logging.error(f"Error in analyst rating buy decision for {symbol}: {e}")
+            return technical_signal, {'error': str(e)}
+    
+    def calculate_rating_adjustment(self, rating_data: Dict[str, Any]) -> float:
+        """Calculate position size adjustment based on analyst rating"""
+        rating = rating_data['consensus_rating']
+        confidence = rating_data['rating_confidence']
+        
+        # Higher rating and confidence = larger position
+        if rating >= 4.5:
+            adjustment = 1.2  # 20% increase
+        elif rating >= 4.0:
+            adjustment = 1.1  # 10% increase
+        elif rating >= 3.5:
+            adjustment = 1.0  # No adjustment
+        elif rating >= 3.0:
+            adjustment = 0.9  # 10% decrease
+        else:
+            adjustment = 0.7  # 30% decrease
+        
+        # Apply confidence multiplier
+        adjustment *= (0.5 + confidence * 0.5)
+        
+        return adjustment
+    
+    def get_rating_history(self, symbol: str, days: int = 30) -> List[Dict[str, Any]]:
+        """Get rating history for a symbol"""
+        if symbol not in self.rating_history:
+            return []
+        
+        cutoff_date = datetime.now() - timedelta(days=days)
+        history = [
+            rating for rating in self.rating_history[symbol]
+            if rating['timestamp'] >= cutoff_date
+        ]
+        
+        return history
+    
+    def get_rating_trend(self, symbol: str, days: int = 30) -> Dict[str, Any]:
+        """Get rating trend for a symbol"""
+        history = self.get_rating_history(symbol, days)
+        
+        if len(history) < 2:
+            return {'trend': 'stable', 'change': 0.0}
+        
+        # Calculate trend
+        ratings = [h['rating']['consensus_rating'] for h in history]
+        first_rating = ratings[0]
+        last_rating = ratings[-1]
+        change = last_rating - first_rating
+        
+        if change > 0.5:
+            trend = 'improving'
+        elif change < -0.5:
+            trend = 'declining'
+        else:
+            trend = 'stable'
+        
+        return {
+            'trend': trend,
+            'change': change,
+            'first_rating': first_rating,
+            'last_rating': last_rating,
+            'num_ratings': len(history)
+        }
+```
+
+### 7.2 External Data Aggregator
+```python
+class ExternalDataAggregator:
+    """Aggregates external data sources for enhanced trading decisions"""
+    
+    def __init__(self, config):
+        self.config = config
+        self.api_keys = config.get('external_data_apis', {})
+        self.data_cache = {}
+        
+    async def get_market_sentiment(self, symbol: str) -> Dict[str, Any]:
+        """Get market sentiment data for a symbol"""
+        # Implementation for news sentiment, social media sentiment, etc.
+        pass
+    
+    async def get_fundamental_data(self, symbol: str) -> Dict[str, Any]:
+        """Get fundamental data for a symbol"""
+        # Implementation for earnings, P/E ratio, etc.
+        pass
+```
+
+## 8. Database Management and Data Persistence
+
+### 7.1 PostgreSQL Database Schema
+```sql
+-- Trading settings and configuration
+CREATE TABLE trading_configs (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    config_data JSONB NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    is_active BOOLEAN DEFAULT true
+);
+
+-- Transaction history
+CREATE TABLE transactions (
+    id SERIAL PRIMARY KEY,
+    symbol VARCHAR(20) NOT NULL,
+    side VARCHAR(10) NOT NULL, -- 'buy' or 'sell'
+    quantity DECIMAL(15,8) NOT NULL,
+    price DECIMAL(15,8) NOT NULL,
+    commission DECIMAL(15,8) DEFAULT 0,
+    timestamp TIMESTAMP NOT NULL,
+    order_id VARCHAR(100),
+    strategy_name VARCHAR(100),
+    backtest_id INTEGER REFERENCES backtest_results(id),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Backtest results
+CREATE TABLE backtest_results (
+    id SERIAL PRIMARY KEY,
+    strategy_name VARCHAR(100) NOT NULL,
+    symbols TEXT[] NOT NULL,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    initial_capital DECIMAL(15,2) NOT NULL,
+    final_capital DECIMAL(15,2) NOT NULL,
+    total_return DECIMAL(10,4),
+    sharpe_ratio DECIMAL(10,4),
+    max_drawdown DECIMAL(10,4),
+    win_rate DECIMAL(10,4),
+    total_trades INTEGER,
+    results_data JSONB NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Portfolio positions
+CREATE TABLE portfolio_positions (
+    id SERIAL PRIMARY KEY,
+    symbol VARCHAR(20) NOT NULL,
+    quantity DECIMAL(15,8) NOT NULL,
+    avg_price DECIMAL(15,8) NOT NULL,
+    current_value DECIMAL(15,2),
+    unrealized_pnl DECIMAL(15,2),
+    strategy_name VARCHAR(100),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Market data cache
+CREATE TABLE market_data (
+    id SERIAL PRIMARY KEY,
+    symbol VARCHAR(20) NOT NULL,
+    interval VARCHAR(20) NOT NULL,
+    timestamp TIMESTAMP NOT NULL,
+    open_price DECIMAL(15,8),
+    high_price DECIMAL(15,8),
+    low_price DECIMAL(15,8),
+    close_price DECIMAL(15,8),
+    volume BIGINT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(symbol, interval, timestamp)
+);
+
+-- AI/LLM interactions
+CREATE TABLE ai_interactions (
+    id SERIAL PRIMARY KEY,
+    user_query TEXT NOT NULL,
+    ai_response TEXT NOT NULL,
+    context_used JSONB,
+    strategy_recommendations JSONB,
+    confidence_score DECIMAL(5,4),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Analyst ratings
+CREATE TABLE analyst_ratings (
+    id SERIAL PRIMARY KEY,
+    symbol VARCHAR(20) NOT NULL,
+    consensus_rating DECIMAL(3,2) NOT NULL,
+    target_price DECIMAL(15,8),
+    num_analysts INTEGER,
+    rating_confidence DECIMAL(5,4),
+    sources TEXT[],
+    rating_trend VARCHAR(20), -- 'improving', 'declining', 'stable'
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Rating history
+CREATE TABLE rating_history (
+    id SERIAL PRIMARY KEY,
+    symbol VARCHAR(20) NOT NULL,
+    rating DECIMAL(3,2) NOT NULL,
+    target_price DECIMAL(15,8),
+    num_analysts INTEGER,
+    sources TEXT[],
+    timestamp TIMESTAMP NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- External data sources
+CREATE TABLE external_data (
+    id SERIAL PRIMARY KEY,
+    symbol VARCHAR(20) NOT NULL,
+    data_type VARCHAR(50) NOT NULL, -- 'news_sentiment', 'fundamental', 'market_sentiment'
+    data_source VARCHAR(50) NOT NULL,
+    data_value JSONB NOT NULL,
+    confidence_score DECIMAL(5,4),
+    timestamp TIMESTAMP NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- System logs
+CREATE TABLE system_logs (
+    id SERIAL PRIMARY KEY,
+    level VARCHAR(20) NOT NULL,
+    component VARCHAR(100) NOT NULL,
+    message TEXT NOT NULL,
+    metadata JSONB,
+    timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+```
+
+### 7.2 Database Manager
+```python
+class DatabaseManager:
+    def __init__(self, connection_string):
+        self.engine = create_engine(connection_string)
+        self.SessionLocal = sessionmaker(bind=self.engine)
+    
+    def store_transaction(self, transaction_data):
+        """Store transaction in PostgreSQL"""
+        with self.SessionLocal() as session:
+            transaction = Transaction(**transaction_data)
+            session.add(transaction)
+            session.commit()
+    
+    def store_backtest_results(self, results):
+        """Store backtest results"""
+        with self.SessionLocal() as session:
+            backtest_result = BacktestResult(**results)
+            session.add(backtest_result)
+            session.commit()
+    
+    def get_trading_history(self, symbol=None, start_date=None, end_date=None):
+        """Retrieve trading history with filters"""
+        with self.SessionLocal() as session:
+            query = session.query(Transaction)
+            if symbol:
+                query = query.filter(Transaction.symbol == symbol)
+            if start_date:
+                query = query.filter(Transaction.timestamp >= start_date)
+            if end_date:
+                query = query.filter(Transaction.timestamp <= end_date)
+            return query.all()
+    
+    def update_portfolio_position(self, symbol, quantity, price):
+        """Update portfolio position"""
+        with self.SessionLocal() as session:
+            position = session.query(PortfolioPosition).filter(
+                PortfolioPosition.symbol == symbol
+            ).first()
+            
+            if position:
+                position.quantity = quantity
+                position.avg_price = price
+                position.updated_at = datetime.utcnow()
+            else:
+                position = PortfolioPosition(
+                    symbol=symbol,
+                    quantity=quantity,
+                    avg_price=price
+                )
+                session.add(position)
+            
+            session.commit()
+    
+    def store_market_data(self, symbol, interval, data):
+        """Store market data in cache"""
+        with self.SessionLocal() as session:
+            for row in data.itertuples():
+                market_data = MarketData(
+                    symbol=symbol,
+                    interval=interval,
+                    timestamp=row.timestamp,
+                    open_price=row.open,
+                    high_price=row.high,
+                    low_price=row.low,
+                    close_price=row.close,
+                    volume=row.volume
+                )
+                session.add(market_data)
+            session.commit()
+```
+
+### 7.3 Data Management
+```python
+class DataManager:
+    def __init__(self, alpaca_api, db_manager):
+        self.api = alpaca_api
+        self.db = db_manager
+        self.cache = {}
+    
+    def get_market_data(self, symbol, interval, lookback_periods=100):
+        """Fetch market data with caching"""
+        # Check cache first
+        cache_key = f"{symbol}_{interval}_{lookback_periods}"
+        if cache_key in self.cache:
+            return self.cache[cache_key]
+        
+        # Fetch from database cache
+        cached_data = self.db.get_cached_market_data(symbol, interval, lookback_periods)
+        if cached_data is not None:
+            self.cache[cache_key] = cached_data
+            return cached_data
+        
+        # Fetch from Alpaca API
+        data = self.fetch_from_alpaca(symbol, interval, lookback_periods)
+        
+        # Store in database cache
+        self.db.store_market_data(symbol, interval, data)
+        
+        # Update memory cache
+        self.cache[cache_key] = data
+        
+        return data
+    
+    def fetch_from_alpaca(self, symbol, interval, lookback_periods):
+        """Fetch data from Alpaca API with rate limiting"""
+        try:
+            bars = self.api.get_bars(symbol, lookback_periods, timeframe=interval)
+            return bars.df
+        except Exception as e:
+            logger.error(f"Error fetching data for {symbol}: {e}")
+            return None
+```
+
+## 8. Configuration System
+
+### 8.1 Strategy Configuration
+```yaml
+strategies:
+  ema_macd:
+    enabled: true
+    parameters:
+      ema_period: 20
+      macd_fast: 12
+      macd_slow: 26
+      macd_signal: 9
+      price_threshold_pct: 20
+    weights:
+      daily: 0.4
+      hourly: 0.3
+      fifteen_min: 0.2
+      five_min: 0.1
+  
+  rsi_strategy:
+    enabled: true
+    parameters:
+      rsi_period: 14
+      oversold_threshold: 30
+      overbought_threshold: 70
+    weights:
+      daily: 0.3
+      hourly: 0.4
+      fifteen_min: 0.3
+
+intervals:
+  - 5min
+  - 15min
+  - 1hour
+  - 1day
+
+risk_management:
+  # Loss limits (as percentages)
+  max_transaction_loss_pct: 2.0  # Maximum loss per individual trade
+  max_daily_loss_pct: 5.0        # Maximum loss per day
+  max_lifetime_loss_pct: 15.0    # Maximum lifetime loss
+  max_portfolio_loss_pct: 10.0   # Maximum portfolio loss
+  
+  # Risk profiles
+  risk_profile: "moderate"  # conservative, moderate, aggressive
+  
+  # Position sizing
+  max_position_size_pct: 5.0     # Maximum position size as % of portfolio
+  max_portfolio_risk_pct: 2.0    # Maximum portfolio risk per trade
+  
+  # Stop loss and take profit
+  stop_loss_pct: 2.0             # Default stop loss percentage
+  take_profit_pct: 6.0           # Default take profit percentage
+  trailing_stop_pct: 1.0         # Trailing stop percentage
+  
+  # Risk/reward requirements
+  min_risk_reward_ratio: 2.0     # Minimum risk/reward ratio for trades
+  min_win_rate: 0.55             # Minimum win rate requirement
+  
+  # Time-based controls
+  min_hold_time_minutes: 15      # Minimum hold time
+  max_hold_time_days: 30         # Maximum hold time
+  
+  # Volatility adjustments
+  volatility_multiplier: 1.5     # Adjust position size for volatility
+  max_volatility_threshold: 0.4  # Maximum volatility for trading
+
+# Analyst Rating Configuration
+analyst_ratings:
+  enabled: true
+  min_rating_for_buy: 3.0        # Minimum analyst rating required for buy decisions (1-5 scale)
+  rating_weight: 0.2             # Weight of analyst rating in trading decisions (0-1)
+  rating_sources:
+    yahoo_finance: true
+    alpha_vantage: true
+    finnhub: true
+    polygon: true
+  cache_duration_hours: 1        # How long to cache ratings
+  rating_confidence_threshold: 0.6  # Minimum confidence in rating to use it
+  position_size_adjustment: true   # Adjust position size based on rating
+  rating_trend_analysis: true      # Consider rating trends in decisions
+
+# External Data Sources
+external_data:
+  enabled: true
+  news_sentiment: true
+  fundamental_data: true
+  market_sentiment: true
+  social_media_sentiment: false
+
+trading:
+  paper_trading: true
+  symbols:
+    - AAPL
+    - MSFT
+    - GOOGL
+    - TSLA
+  max_concurrent_positions: 10
+```
+
+## 9. Order Management
+
+### 9.1 Order Types
+- Market orders for immediate execution
+- Limit orders for better pricing
+- Stop orders for risk management
+- Stop-limit orders for controlled exits
+
+### 9.2 Order Execution
+```python
+class OrderManager:
+    def __init__(self, alpaca_api):
+        self.api = alpaca_api
+        self.pending_orders = {}
+    
+    def place_buy_order(self, symbol, quantity, order_type='market'):
+        # Place buy order via Alpaca
+        # Track order status
+        # Handle partial fills
+        pass
+    
+    def place_sell_order(self, symbol, quantity, order_type='market'):
+        # Place sell order via Alpaca
+        # Handle stop loss and take profit
+        pass
+    
+    def cancel_order(self, order_id):
+        # Cancel pending order
+        pass
+```
+
+## 10. Performance Tracking
+
+### 10.1 Metrics to Track
+- Total return
+- Sharpe ratio
+- Maximum drawdown
+- Win rate
+- Average win/loss ratio
+- Profit factor
+- Calmar ratio
+
+### 10.2 Portfolio Analytics
+```python
+class PortfolioTracker:
+    def __init__(self):
+        self.positions = {}
+        self.trades = []
+        self.performance_metrics = {}
+    
+    def update_position(self, symbol, quantity, price, timestamp):
+        # Update position data
+        pass
+    
+    def record_trade(self, symbol, side, quantity, price, timestamp):
+        # Record completed trade
+        pass
+    
+    def calculate_performance(self):
+        # Calculate performance metrics
+        pass
+```
+
+## 11. Robust Logging and Monitoring
+
+### 11.1 Structured Logging System
+```python
+import logging
+import json
+from datetime import datetime
+from elasticsearch import Elasticsearch
+from logstash import LogstashHandler
+
+class StructuredLogger:
+    def __init__(self, component_name, log_level=logging.INFO):
+        self.component = component_name
+        self.logger = logging.getLogger(component_name)
+        self.logger.setLevel(log_level)
+        
+        # Console handler
+        console_handler = logging.StreamHandler()
+        console_formatter = logging.Formatter(
+            '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+        )
+        console_handler.setFormatter(console_formatter)
+        self.logger.addHandler(console_handler)
+        
+        # File handler
+        file_handler = logging.FileHandler(f'logs/{component_name}.log')
+        file_handler.setFormatter(console_formatter)
+        self.logger.addHandler(file_handler)
+        
+        # Elasticsearch handler for structured logging
+        es_handler = LogstashHandler('localhost', 5000, version=1)
+        self.logger.addHandler(es_handler)
+    
+    def log_trade(self, trade_data):
+        """Log trade execution"""
+        log_entry = {
+            'event_type': 'trade_execution',
+            'component': self.component,
+            'timestamp': datetime.utcnow().isoformat(),
+            'trade_data': trade_data,
+            'level': 'INFO'
+        }
+        self.logger.info(json.dumps(log_entry))
+    
+    def log_signal(self, signal_data):
+        """Log trading signal generation"""
+        log_entry = {
+            'event_type': 'signal_generation',
+            'component': self.component,
+            'timestamp': datetime.utcnow().isoformat(),
+            'signal_data': signal_data,
+            'level': 'INFO'
+        }
+        self.logger.info(json.dumps(log_entry))
+    
+    def log_error(self, error_data, exception=None):
+        """Log errors with context"""
+        log_entry = {
+            'event_type': 'error',
+            'component': self.component,
+            'timestamp': datetime.utcnow().isoformat(),
+            'error_data': error_data,
+            'exception': str(exception) if exception else None,
+            'level': 'ERROR'
+        }
+        self.logger.error(json.dumps(log_entry))
+    
+    def log_performance(self, performance_data):
+        """Log performance metrics"""
+        log_entry = {
+            'event_type': 'performance_metrics',
+            'component': self.component,
+            'timestamp': datetime.utcnow().isoformat(),
+            'performance_data': performance_data,
+            'level': 'INFO'
+        }
+        self.logger.info(json.dumps(log_entry))
+    
+    def log_api_call(self, api_data):
+        """Log API calls and rate limiting"""
+        log_entry = {
+            'event_type': 'api_call',
+            'component': self.component,
+            'timestamp': datetime.utcnow().isoformat(),
+            'api_data': api_data,
+            'level': 'DEBUG'
+        }
+        self.logger.debug(json.dumps(log_entry))
+```
+
+### 11.2 Monitoring and Alerting
+```python
+class MonitoringSystem:
+    def __init__(self, db_manager, alert_manager):
+        self.db = db_manager
+        self.alerts = alert_manager
+        self.metrics = {}
+    
+    def monitor_positions(self, portfolio):
+        """Monitor portfolio positions in real-time"""
+        for symbol, position in portfolio.positions.items():
+            # Calculate unrealized P&L
+            current_price = self.get_current_price(symbol)
+            unrealized_pnl = (current_price - position.avg_price) * position.quantity
+            
+            # Update database
+            self.db.update_portfolio_position(symbol, position.quantity, position.avg_price)
+            
+            # Check for alerts
+            if unrealized_pnl < -position.avg_price * 0.05:  # 5% loss
+                self.alerts.send_alert(f"Position {symbol} has 5% unrealized loss")
+    
+    def monitor_system_health(self):
+        """Monitor system health metrics"""
+        health_metrics = {
+            'api_latency': self.measure_api_latency(),
+            'database_connections': self.check_db_connections(),
+            'memory_usage': self.get_memory_usage(),
+            'cpu_usage': self.get_cpu_usage(),
+            'disk_usage': self.get_disk_usage()
+        }
+        
+        # Store metrics
+        self.metrics.update(health_metrics)
+        
+        # Check thresholds
+        if health_metrics['api_latency'] > 1000:  # 1 second
+            self.alerts.send_alert("High API latency detected")
+        
+        if health_metrics['memory_usage'] > 80:  # 80%
+            self.alerts.send_alert("High memory usage detected")
+    
+    def generate_daily_report(self):
+        """Generate daily performance and health report"""
+        report = {
+            'date': datetime.now().date(),
+            'portfolio_value': self.get_portfolio_value(),
+            'daily_pnl': self.calculate_daily_pnl(),
+            'trades_executed': self.get_daily_trades_count(),
+            'system_health': self.metrics,
+            'alerts_generated': self.alerts.get_daily_alerts()
+        }
+        
+        # Store report
+        self.db.store_daily_report(report)
+        
+        # Send email report
+        self.alerts.send_daily_report(report)
+```
+
+### 11.3 Alert Management
+```python
+class AlertManager:
+    def __init__(self, email_config, sms_config):
+        self.email_config = email_config
+        self.sms_config = sms_config
+        self.alerts = []
+    
+    def send_alert(self, message, level='INFO', channels=['email']):
+        """Send alert through configured channels"""
+        alert = {
+            'message': message,
+            'level': level,
+            'timestamp': datetime.utcnow(),
+            'channels': channels
+        }
+        
+        self.alerts.append(alert)
+        
+        if 'email' in channels:
+            self.send_email_alert(alert)
+        
+        if 'sms' in channels:
+            self.send_sms_alert(alert)
+    
+    def send_email_alert(self, alert):
+        """Send email alert"""
+        # Implementation for email sending
+        pass
+    
+    def send_sms_alert(self, alert):
+        """Send SMS alert"""
+        # Implementation for SMS sending
+        pass
+```
+
+## 12. Testing Strategy and Implementation
+
+### 12.1 Testing Architecture
+```python
+# Testing framework structure
+import pytest
+import unittest
+from unittest.mock import Mock, patch
+from datetime import datetime, timedelta
+import pandas as pd
+import numpy as np
+
+# Test configuration
+class TestConfig:
+    """Test configuration and fixtures"""
+    TEST_DATABASE_URL = "postgresql://test_user:test_pass@localhost:5432/test_trading"
+    TEST_ALPACA_API_KEY = "test_key"
+    TEST_ALPACA_SECRET_KEY = "test_secret"
+    TEST_SYMBOLS = ["AAPL", "MSFT", "GOOGL"]
+    TEST_START_DATE = "2023-01-01"
+    TEST_END_DATE = "2023-12-31"
+    TEST_INITIAL_CAPITAL = 100000
+```
+
+### 12.2 Unit Testing Framework
+```python
+# tests/unit/test_strategies.py
+import pytest
+from trading.strategies import EMAMACDStrategy, RSIStrategy
+from trading.data_manager import DataManager
+
+class TestEMAMACDStrategy:
+    """Unit tests for EMA-MACD strategy"""
+    
+    @pytest.fixture
+    def strategy(self):
+        return EMAMACDStrategy(
+            ema_period=20,
+            macd_fast=12,
+            macd_slow=26,
+            macd_signal=9,
+            price_threshold_pct=20
+        )
+    
+    @pytest.fixture
+    def sample_data(self):
+        """Generate sample market data for testing"""
+        dates = pd.date_range(start='2023-01-01', end='2023-12-31', freq='D')
+        np.random.seed(42)
+        
+        data = pd.DataFrame({
+            'open': np.random.uniform(100, 200, len(dates)),
+            'high': np.random.uniform(150, 250, len(dates)),
+            'low': np.random.uniform(50, 150, len(dates)),
+            'close': np.random.uniform(100, 200, len(dates)),
+            'volume': np.random.randint(1000000, 10000000, len(dates))
+        }, index=dates)
+        
+        return data
+    
+    def test_strategy_initialization(self, strategy):
+        """Test strategy initialization with parameters"""
+        assert strategy.ema_period == 20
+        assert strategy.macd_fast == 12
+        assert strategy.macd_slow == 26
+        assert strategy.macd_signal == 9
+        assert strategy.price_threshold_pct == 20
+    
+    def test_ema_calculation(self, strategy, sample_data):
+        """Test EMA calculation"""
+        ema = strategy.calculate_ema(sample_data['close'])
+        assert len(ema) == len(sample_data)
+        assert not ema.isna().all()
+        assert ema.iloc[-1] > 0
+    
+    def test_macd_calculation(self, strategy, sample_data):
+        """Test MACD calculation"""
+        macd, signal = strategy.calculate_macd(sample_data['close'])
+        assert len(macd) == len(sample_data)
+        assert len(signal) == len(sample_data)
+        assert not macd.isna().all()
+        assert not signal.isna().all()
+    
+    def test_buy_signal_generation(self, strategy, sample_data):
+        """Test buy signal generation"""
+        buy_signal, sell_signal = strategy.calculate_signals(sample_data)
+        assert isinstance(buy_signal, pd.Series)
+        assert isinstance(sell_signal, pd.Series)
+        assert len(buy_signal) == len(sample_data)
+        assert buy_signal.dtype == bool
+    
+    def test_sell_signal_generation(self, strategy, sample_data):
+        """Test sell signal generation"""
+        buy_signal, sell_signal = strategy.calculate_signals(sample_data)
+        assert isinstance(sell_signal, pd.Series)
+        assert len(sell_signal) == len(sample_data)
+        assert sell_signal.dtype == bool
+    
+    def test_position_sizing(self, strategy):
+        """Test position sizing calculation"""
+        account_value = 100000
+        symbol_price = 150.0
+        volatility = 0.2
+        
+        position_size = strategy.get_position_size(account_value, symbol_price, volatility)
+        assert position_size > 0
+        assert position_size <= account_value * 0.05  # Max 5% per position
+    
+    def test_stop_loss_calculation(self, strategy, sample_data):
+        """Test stop loss calculation"""
+        entry_price = 150.0
+        stop_loss = strategy.get_stop_loss(entry_price, sample_data)
+        assert stop_loss < entry_price
+        assert stop_loss > 0
+    
+    def test_take_profit_calculation(self, strategy, sample_data):
+        """Test take profit calculation"""
+        entry_price = 150.0
+        take_profit = strategy.get_take_profit(entry_price, sample_data)
+        assert take_profit > entry_price
+        assert take_profit > 0
+
+class TestRSIStrategy:
+    """Unit tests for RSI strategy"""
+    
+    @pytest.fixture
+    def strategy(self):
+        return RSIStrategy(
+            rsi_period=14,
+            oversold_threshold=30,
+            overbought_threshold=70
+        )
+    
+    def test_rsi_calculation(self, strategy, sample_data):
+        """Test RSI calculation"""
+        rsi = strategy.calculate_rsi(sample_data['close'])
+        assert len(rsi) == len(sample_data)
+        assert rsi.min() >= 0
+        assert rsi.max() <= 100
+        assert not rsi.isna().all()
+```
+
+### 12.3 Integration Testing
+```python
+# tests/integration/test_trading_system.py
+import pytest
+from trading.trading_system import TradingSystem
+from trading.data_manager import DataManager
+from trading.order_manager import OrderManager
+from trading.risk_manager import RiskManager
+
+class TestTradingSystemIntegration:
+    """Integration tests for the complete trading system"""
+    
+    @pytest.fixture
+    def trading_system(self):
+        """Setup trading system with mocked components"""
+        with patch('trading.data_manager.AlpacaAPI') as mock_api:
+            mock_api.return_value.get_bars.return_value.df = self.get_mock_market_data()
+            
+            system = TradingSystem(
+                api_key="test_key",
+                secret_key="test_secret",
+                paper_trading=True
+            )
+            return system
+    
+    @pytest.fixture
+    def mock_market_data(self):
+        """Generate mock market data"""
+        dates = pd.date_range(start='2023-01-01', end='2023-12-31', freq='D')
+        data = pd.DataFrame({
+            'open': [100] * len(dates),
+            'high': [110] * len(dates),
+            'low': [90] * len(dates),
+            'close': [105] * len(dates),
+            'volume': [1000000] * len(dates)
+        }, index=dates)
+        return data
+    
+    def test_system_initialization(self, trading_system):
+        """Test trading system initialization"""
+        assert trading_system.data_manager is not None
+        assert trading_system.order_manager is not None
+        assert trading_system.risk_manager is not None
+        assert trading_system.portfolio_tracker is not None
+    
+    def test_market_data_fetching(self, trading_system, mock_market_data):
+        """Test market data fetching integration"""
+        data = trading_system.data_manager.get_market_data("AAPL", "1day", 30)
+        assert data is not None
+        assert len(data) > 0
+        assert all(col in data.columns for col in ['open', 'high', 'low', 'close', 'volume'])
+    
+    def test_signal_generation_integration(self, trading_system):
+        """Test signal generation with real data"""
+        signals = trading_system.generate_signals("AAPL")
+        assert signals is not None
+        assert 'buy_signal' in signals
+        assert 'sell_signal' in signals
+        assert isinstance(signals['buy_signal'], bool)
+        assert isinstance(signals['sell_signal'], bool)
+    
+    def test_order_execution_integration(self, trading_system):
+        """Test order execution integration"""
+        with patch.object(trading_system.order_manager, 'place_order') as mock_order:
+            mock_order.return_value = {'id': 'test_order_id', 'status': 'filled'}
+            
+            result = trading_system.execute_trade("AAPL", "buy", 100, 150.0)
+            assert result is not None
+            assert result['status'] == 'filled'
+    
+    def test_risk_management_integration(self, trading_system):
+        """Test risk management integration"""
+        position_size = trading_system.risk_manager.calculate_position_size(
+            account_value=100000,
+            symbol_price=150.0,
+            volatility=0.2
+        )
+        assert position_size > 0
+        assert position_size <= 5000  # Max 5% of account
+    
+    def test_portfolio_tracking_integration(self, trading_system):
+        """Test portfolio tracking integration"""
+        # Add a position
+        trading_system.portfolio_tracker.add_position("AAPL", 100, 150.0)
+        
+        # Get portfolio summary
+        portfolio = trading_system.portfolio_tracker.get_portfolio()
+        assert "AAPL" in portfolio['positions']
+        assert portfolio['positions']["AAPL"]['quantity'] == 100
+        assert portfolio['positions']["AAPL"]['avg_price'] == 150.0
+```
+
+### 12.4 Backtesting Testing
+```python
+# tests/backtest/test_backtesting.py
+import pytest
+from trading.backtesting import BacktestingEngine
+from trading.strategies import EMAMACDStrategy
+
+class TestBacktestingEngine:
+    """Tests for backtesting engine"""
+    
+    @pytest.fixture
+    def backtesting_engine(self):
+        return BacktestingEngine(
+            alpaca_api=None,  # Mocked
+            db_manager=None   # Mocked
+        )
+    
+    @pytest.fixture
+    def strategy_config(self):
+        return {
+            'name': 'EMA-MACD Test',
+            'strategy_class': EMAMACDStrategy,
+            'parameters': {
+                'ema_period': 20,
+                'macd_fast': 12,
+                'macd_slow': 26,
+                'macd_signal': 9,
+                'price_threshold_pct': 20
+            }
+        }
+    
+    def test_backtest_execution(self, backtesting_engine, strategy_config):
+        """Test complete backtest execution"""
+        with patch.object(backtesting_engine, 'fetch_historical_data') as mock_fetch:
+            mock_fetch.return_value = self.get_mock_historical_data()
+            
+            results = backtesting_engine.run_backtest(
+                strategy_config=strategy_config,
+                symbols=["AAPL"],
+                start_date="2023-01-01",
+                end_date="2023-12-31",
+                initial_capital=100000
+            )
+            
+            assert results is not None
+            assert 'strategy_name' in results
+            assert 'trades' in results
+            assert 'equity_curve' in results
+            assert 'performance_metrics' in results
+    
+    def test_performance_metrics_calculation(self, backtesting_engine):
+        """Test performance metrics calculation"""
+        mock_results = {
+            'initial_capital': 100000,
+            'equity_curve': [
+                {'equity': 100000},
+                {'equity': 105000},
+                {'equity': 102000},
+                {'equity': 108000}
+            ],
+            'trades': [
+                {'pnl': 1000, 'duration': 5},
+                {'pnl': -500, 'duration': 3},
+                {'pnl': 2000, 'duration': 7}
+            ]
+        }
+        
+        metrics = backtesting_engine.calculate_performance_metrics(mock_results)
+        
+        assert 'total_return' in metrics
+        assert 'sharpe_ratio' in metrics
+        assert 'max_drawdown' in metrics
+        assert 'win_rate' in metrics
+        assert 'profit_factor' in metrics
+        assert metrics['total_return'] > 0
+        assert 0 <= metrics['win_rate'] <= 1
+    
+    def test_strategy_comparison(self, backtesting_engine):
+        """Test strategy comparison functionality"""
+        strategy_configs = [
+            {
+                'name': 'Strategy A',
+                'strategy_class': EMAMACDStrategy,
+                'parameters': {'ema_period': 20}
+            },
+            {
+                'name': 'Strategy B',
+                'strategy_class': EMAMACDStrategy,
+                'parameters': {'ema_period': 50}
+            }
+        ]
+        
+        with patch.object(backtesting_engine, 'run_backtest') as mock_backtest:
+            mock_backtest.side_effect = [
+                {'performance_metrics': {'sharpe_ratio': 1.5}},
+                {'performance_metrics': {'sharpe_ratio': 1.2}}
+            ]
+            
+            comparison = backtesting_engine.compare_strategies(
+                strategy_configs,
+                symbols=["AAPL"],
+                start_date="2023-01-01",
+                end_date="2023-12-31"
+            )
+            
+            assert len(comparison) == 2
+            assert 'Strategy A' in comparison
+            assert 'Strategy B' in comparison
+            assert comparison['Strategy A']['sharpe_ratio'] > comparison['Strategy B']['sharpe_ratio']
+```
+
+### 12.5 Database Testing
+```python
+# tests/database/test_database.py
+import pytest
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from trading.database import DatabaseManager, Transaction, BacktestResult
+
+class TestDatabaseManager:
+    """Tests for database operations"""
+    
+    @pytest.fixture
+    def db_manager(self):
+        """Setup test database"""
+        engine = create_engine("sqlite:///:memory:")
+        SessionLocal = sessionmaker(bind=engine)
+        
+        # Create tables
+        Base.metadata.create_all(bind=engine)
+        
+        return DatabaseManager(engine.url)
+    
+    def test_transaction_storage(self, db_manager):
+        """Test transaction storage and retrieval"""
+        transaction_data = {
+            'symbol': 'AAPL',
+            'side': 'buy',
+            'quantity': 100,
+            'price': 150.0,
+            'timestamp': datetime.now(),
+            'strategy_name': 'EMA-MACD'
+        }
+        
+        # Store transaction
+        db_manager.store_transaction(transaction_data)
+        
+        # Retrieve transaction
+        transactions = db_manager.get_trading_history(symbol='AAPL')
+        assert len(transactions) == 1
+        assert transactions[0].symbol == 'AAPL'
+        assert transactions[0].side == 'buy'
+        assert transactions[0].quantity == 100
+    
+    def test_backtest_results_storage(self, db_manager):
+        """Test backtest results storage"""
+        results_data = {
+            'strategy_name': 'Test Strategy',
+            'symbols': ['AAPL', 'MSFT'],
+            'start_date': '2023-01-01',
+            'end_date': '2023-12-31',
+            'initial_capital': 100000,
+            'final_capital': 110000,
+            'total_return': 0.10,
+            'sharpe_ratio': 1.5,
+            'max_drawdown': 0.05,
+            'win_rate': 0.6,
+            'total_trades': 50,
+            'results_data': {'trades': [], 'equity_curve': []}
+        }
+        
+        # Store results
+        db_manager.store_backtest_results(results_data)
+        
+        # Verify storage
+        results = db_manager.get_backtest_results('Test Strategy')
+        assert len(results) == 1
+        assert results[0].strategy_name == 'Test Strategy'
+        assert results[0].total_return == 0.10
+    
+    def test_portfolio_position_updates(self, db_manager):
+        """Test portfolio position updates"""
+        # Add position
+        db_manager.update_portfolio_position('AAPL', 100, 150.0)
+        
+        # Update position
+        db_manager.update_portfolio_position('AAPL', 150, 155.0)
+        
+        # Verify position
+        positions = db_manager.get_portfolio_positions()
+        assert 'AAPL' in [p.symbol for p in positions]
+        aapl_position = next(p for p in positions if p.symbol == 'AAPL')
+        assert aapl_position.quantity == 150
+        assert aapl_position.avg_price == 155.0
+```
+
+### 12.6 API Testing
+```python
+# tests/api/test_api.py
+import pytest
+from fastapi.testclient import TestClient
+from trading.main import app
+
+class TestTradingAPI:
+    """Tests for FastAPI endpoints"""
+    
+    @pytest.fixture
+    def client(self):
+        return TestClient(app)
+    
+    def test_health_check(self, client):
+        """Test health check endpoint"""
+        response = client.get("/health")
+        assert response.status_code == 200
+        assert response.json()["status"] == "healthy"
+    
+    def test_portfolio_endpoint(self, client):
+        """Test portfolio endpoint"""
+        with patch('trading.portfolio_tracker.get_portfolio_overview') as mock_portfolio:
+            mock_portfolio.return_value = {
+                'total_value': 100000,
+                'daily_pnl': 1000,
+                'total_return': 0.05
+            }
+            
+            response = client.get("/api/portfolio")
+            assert response.status_code == 200
+            data = response.json()
+            assert data['total_value'] == 100000
+            assert data['daily_pnl'] == 1000
+    
+    def test_positions_endpoint(self, client):
+        """Test positions endpoint"""
+        with patch('trading.portfolio_tracker.get_positions') as mock_positions:
+            mock_positions.return_value = [
+                {
+                    'symbol': 'AAPL',
+                    'quantity': 100,
+                    'avg_price': 150.0,
+                    'current_price': 155.0,
+                    'unrealized_pnl': 500
+                }
+            ]
+            
+            response = client.get("/api/positions")
+            assert response.status_code == 200
+            data = response.json()
+            assert len(data) == 1
+            assert data[0]['symbol'] == 'AAPL'
+    
+    def test_backtest_endpoint(self, client):
+        """Test backtest endpoint"""
+        backtest_config = {
+            'strategy': 'EMA-MACD',
+            'symbols': ['AAPL'],
+            'start_date': '2023-01-01',
+            'end_date': '2023-12-31',
+            'initial_capital': 100000
+        }
+        
+        with patch('trading.backtesting_engine.run_backtest') as mock_backtest:
+            mock_backtest.return_value = {
+                'strategy_name': 'EMA-MACD',
+                'total_return': 0.10,
+                'sharpe_ratio': 1.5
+            }
+            
+            response = client.post("/api/backtest", json=backtest_config)
+            assert response.status_code == 200
+            data = response.json()
+            assert data['strategy_name'] == 'EMA-MACD'
+            assert data['total_return'] == 0.10
+    
+    def test_ai_query_endpoint(self, client):
+        """Test AI query endpoint"""
+        query_data = {
+            'query': 'Analyze AAPL stock and provide trading recommendations'
+        }
+        
+        with patch('trading.ai_interface.process_query') as mock_ai:
+            mock_ai.return_value = {
+                'response': 'AAPL shows bullish signals',
+                'recommendations': {'buy_signals': ['AAPL']},
+                'confidence_score': 0.85
+            }
+            
+            response = client.post("/api/ai/query", json=query_data)
+            assert response.status_code == 200
+            data = response.json()
+            assert 'response' in data
+            assert 'recommendations' in data
+            assert data['confidence_score'] == 0.85
+```
+
+### 12.7 Frontend Testing
+```typescript
+// tests/frontend/components/__tests__/Dashboard.test.tsx
+import React from 'react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
+import Dashboard from '../Dashboard';
+
+const server = setupServer(
+  rest.get('/api/portfolio', (req, res, ctx) => {
+    return res(
+      ctx.json({
+        totalValue: 100000,
+        dailyPnL: 1000,
+        totalReturn: 0.05,
+        sharpeRatio: 1.5
+      })
+    );
+  }),
+  rest.get('/api/positions', (req, res, ctx) => {
+    return res(
+      ctx.json([
+        {
+          symbol: 'AAPL',
+          quantity: 100,
+          avgPrice: 150.0,
+          currentPrice: 155.0,
+          unrealizedPnL: 500
+        }
+      ])
+    );
+  })
+);
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+
+describe('Dashboard Component', () => {
+  test('renders portfolio overview', async () => {
+    render(<Dashboard />);
+    
+    await waitFor(() => {
+      expect(screen.getByText('Portfolio Overview')).toBeInTheDocument();
+      expect(screen.getByText('$100,000')).toBeInTheDocument();
+      expect(screen.getByText('$1,000')).toBeInTheDocument();
+    });
+  });
+  
+  test('renders positions table', async () => {
+    render(<Dashboard />);
+    
+    await waitFor(() => {
+      expect(screen.getByText('Current Positions')).toBeInTheDocument();
+      expect(screen.getByText('AAPL')).toBeInTheDocument();
+      expect(screen.getByText('100')).toBeInTheDocument();
+    });
+  });
+  
+  test('handles portfolio refresh', async () => {
+    render(<Dashboard />);
+    
+    const refreshButton = screen.getByRole('button', { name: /refresh/i });
+    fireEvent.click(refreshButton);
+    
+    await waitFor(() => {
+      expect(screen.getByText('$100,000')).toBeInTheDocument();
+    });
+  });
+});
+
+// tests/frontend/components/__tests__/BacktestInterface.test.tsx
+import React from 'react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
+import BacktestInterface from '../BacktestInterface';
+
+const server = setupServer(
+  rest.post('/api/backtest', (req, res, ctx) => {
+    return res(
+      ctx.json({
+        id: 'test-backtest-id',
+        strategy_name: 'EMA-MACD',
+        total_return: 0.10,
+        sharpe_ratio: 1.5,
+        max_drawdown: 0.05,
+        win_rate: 0.6
+      })
+    );
+  })
+);
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+
+describe('BacktestInterface Component', () => {
+  test('renders backtest form', () => {
+    render(<BacktestInterface />);
+    
+    expect(screen.getByText('Strategy Backtesting')).toBeInTheDocument();
+    expect(screen.getByLabelText(/strategy/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/symbols/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/start date/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/end date/i)).toBeInTheDocument();
+  });
+  
+  test('submits backtest configuration', async () => {
+    render(<BacktestInterface />);
+    
+    // Fill form
+    fireEvent.change(screen.getByLabelText(/strategy/i), {
+      target: { value: 'EMA-MACD' }
+    });
+    fireEvent.change(screen.getByLabelText(/symbols/i), {
+      target: { value: 'AAPL,MSFT' }
+    });
+    
+    // Submit form
+    fireEvent.click(screen.getByRole('button', { name: /run backtest/i }));
+    
+    await waitFor(() => {
+      expect(screen.getByText('EMA-MACD')).toBeInTheDocument();
+      expect(screen.getByText('10.00%')).toBeInTheDocument();
+    });
+  });
+});
+```
+
+### 12.8 Performance Testing
+```python
+# tests/performance/test_performance.py
+import pytest
+import time
+import asyncio
+from trading.trading_system import TradingSystem
+
+class TestPerformance:
+    """Performance tests for trading system"""
+    
+    @pytest.fixture
+    def trading_system(self):
+        return TradingSystem(
+            api_key="test_key",
+            secret_key="test_secret",
+            paper_trading=True
+        )
+    
+    def test_signal_generation_performance(self, trading_system):
+        """Test signal generation performance"""
+        symbols = ["AAPL", "MSFT", "GOOGL", "TSLA", "AMZN"]
+        
+        start_time = time.time()
+        
+        for symbol in symbols:
+            signals = trading_system.generate_signals(symbol)
+            assert signals is not None
+        
+        end_time = time.time()
+        execution_time = end_time - start_time
+        
+        # Should complete within 5 seconds for 5 symbols
+        assert execution_time < 5.0
+    
+    def test_backtest_performance(self, trading_system):
+        """Test backtest performance"""
+        strategy_config = {
+            'name': 'Performance Test Strategy',
+            'strategy_class': EMAMACDStrategy,
+            'parameters': {'ema_period': 20}
+        }
+        
+        start_time = time.time()
+        
+        results = trading_system.run_backtest(
+            strategy_config=strategy_config,
+            symbols=["AAPL"],
+            start_date="2023-01-01",
+            end_date="2023-12-31",
+            initial_capital=100000
+        )
+        
+        end_time = time.time()
+        execution_time = end_time - start_time
+        
+        # Should complete within 30 seconds for 1 year of data
+        assert execution_time < 30.0
+        assert results is not None
+    
+    @pytest.mark.asyncio
+    async def test_concurrent_signal_generation(self, trading_system):
+        """Test concurrent signal generation"""
+        symbols = ["AAPL", "MSFT", "GOOGL", "TSLA", "AMZN", "META", "NVDA", "NFLX"]
+        
+        async def generate_signals_async(symbol):
+            return trading_system.generate_signals(symbol)
+        
+        start_time = time.time()
+        
+        tasks = [generate_signals_async(symbol) for symbol in symbols]
+        results = await asyncio.gather(*tasks)
+        
+        end_time = time.time()
+        execution_time = end_time - start_time
+        
+        # Should complete within 3 seconds for 8 symbols concurrently
+        assert execution_time < 3.0
+        assert len(results) == len(symbols)
+        assert all(result is not None for result in results)
+```
+
+### 12.9 Security Testing
+```python
+# tests/security/test_security.py
+import pytest
+from trading.security import SecurityManager
+from trading.database import DatabaseManager
+
+class TestSecurity:
+    """Security tests for trading system"""
+    
+    @pytest.fixture
+    def security_manager(self):
+        return SecurityManager()
+    
+    def test_api_key_encryption(self, security_manager):
+        """Test API key encryption and decryption"""
+        original_key = "test_api_key_12345"
+        
+        # Encrypt key
+        encrypted_key = security_manager.encrypt_api_key(original_key)
+        assert encrypted_key != original_key
+        
+        # Decrypt key
+        decrypted_key = security_manager.decrypt_api_key(encrypted_key)
+        assert decrypted_key == original_key
+    
+    def test_input_validation(self, security_manager):
+        """Test input validation for security"""
+        # Valid inputs
+        assert security_manager.validate_symbol("AAPL") == True
+        assert security_manager.validate_quantity(100) == True
+        assert security_manager.validate_price(150.0) == True
+        
+        # Invalid inputs
+        assert security_manager.validate_symbol("") == False
+        assert security_manager.validate_symbol("INVALID_SYMBOL_123") == False
+        assert security_manager.validate_quantity(-100) == False
+        assert security_manager.validate_price(-150.0) == False
+    
+    def test_sql_injection_prevention(self, db_manager):
+        """Test SQL injection prevention"""
+        malicious_input = "'; DROP TABLE transactions; --"
+        
+        # Should not cause SQL injection
+        result = db_manager.get_trading_history(symbol=malicious_input)
+        assert result is not None  # Should return empty result, not crash
+    
+    def test_rate_limiting(self, security_manager):
+        """Test rate limiting functionality"""
+        # Simulate multiple rapid requests
+        for i in range(10):
+            result = security_manager.check_rate_limit("test_user")
+            if i < 5:
+                assert result == True  # First 5 requests should pass
+            else:
+                assert result == False  # Subsequent requests should be blocked
+```
+
+### 12.10 Test Configuration and CI/CD
+```yaml
+# .github/workflows/test.yml
+name: Test Suite
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: test_password
+          POSTGRES_DB: test_trading
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install -r requirements-test.txt
+    
+    - name: Install Node.js dependencies
+      run: |
+        cd frontend
+        npm ci
+    
+    - name: Run unit tests
+      run: |
+        pytest tests/unit/ -v --cov=trading --cov-report=xml
+    
+    - name: Run integration tests
+      run: |
+        pytest tests/integration/ -v
+    
+    - name: Run database tests
+      run: |
+        pytest tests/database/ -v
+    
+    - name: Run API tests
+      run: |
+        pytest tests/api/ -v
+    
+    - name: Run frontend tests
+      run: |
+        cd frontend
+        npm test -- --coverage --watchAll=false
+    
+    - name: Run performance tests
+      run: |
+        pytest tests/performance/ -v -m "not slow"
+    
+    - name: Run security tests
+      run: |
+        pytest tests/security/ -v
+    
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+
+# pytest.ini
+[tool:pytest]
+testpaths = tests
+python_files = test_*.py
+python_classes = Test*
+python_functions = test_*
+addopts = 
+    -v
+    --tb=short
+    --strict-markers
+    --disable-warnings
+    --cov=trading
+    --cov-report=html
+    --cov-report=term-missing
+markers =
+    unit: Unit tests
+    integration: Integration tests
+    slow: Slow running tests
+    performance: Performance tests
+    security: Security tests
+```
+
+## 13. Backtesting and Historical Analysis
+
+### 12.1 Comprehensive Backtesting Framework
+```python
+class BacktestingEngine:
+    def __init__(self, alpaca_api, db_manager):
+        self.api = alpaca_api
+        self.db = db_manager
+        self.results_cache = {}
+    
+    def run_backtest(self, strategy_config, symbols, start_date, end_date, 
+                    initial_capital=100000, commission=0.001):
+        """
+        Run comprehensive backtest with historical data from Alpaca
+        """
+        results = {
+            'strategy_name': strategy_config['name'],
+            'symbols': symbols,
+            'start_date': start_date,
+            'end_date': end_date,
+            'initial_capital': initial_capital,
+            'trades': [],
+            'equity_curve': [],
+            'performance_metrics': {}
+        }
+        
+        # Fetch historical data from Alpaca
+        historical_data = self.fetch_historical_data(symbols, start_date, end_date)
+        
+        # Initialize portfolio
+        portfolio = Portfolio(initial_capital)
+        
+        # Run strategy simulation
+        for timestamp in historical_data.index:
+            current_data = historical_data.loc[:timestamp]
+            
+            # Generate signals
+            signals = self.generate_signals(strategy_config, current_data)
+            
+            # Execute trades
+            trades = self.execute_trades(portfolio, signals, timestamp, commission)
+            results['trades'].extend(trades)
+            
+            # Update portfolio
+            portfolio.update_positions(current_data.loc[timestamp])
+            results['equity_curve'].append({
+                'timestamp': timestamp,
+                'equity': portfolio.total_value,
+                'cash': portfolio.cash,
+                'positions': portfolio.positions.copy()
+            })
+        
+        # Calculate performance metrics
+        results['performance_metrics'] = self.calculate_performance_metrics(results)
+        
+        # Store results in database
+        self.store_backtest_results(results)
+        
+        return results
+    
+    def fetch_historical_data(self, symbols, start_date, end_date):
+        """Fetch historical OHLCV data from Alpaca"""
+        data = {}
+        for symbol in symbols:
+            # Fetch daily bars
+            daily_bars = self.api.get_bars(symbol, start_date, end_date, adjustment='all')
+            # Fetch intraday bars for more granular analysis
+            intraday_bars = self.api.get_bars(symbol, start_date, end_date, 
+                                            timeframe='1Hour', adjustment='all')
+            data[symbol] = {
+                'daily': daily_bars.df,
+                'intraday': intraday_bars.df
+            }
+        return data
+    
+    def calculate_performance_metrics(self, results):
+        """Calculate comprehensive performance metrics"""
+        equity_curve = pd.DataFrame(results['equity_curve'])
+        trades_df = pd.DataFrame(results['trades'])
+        
+        metrics = {
+            'total_return': (equity_curve['equity'].iloc[-1] / results['initial_capital']) - 1,
+            'sharpe_ratio': self.calculate_sharpe_ratio(equity_curve['equity']),
+            'max_drawdown': self.calculate_max_drawdown(equity_curve['equity']),
+            'win_rate': len(trades_df[trades_df['pnl'] > 0]) / len(trades_df) if len(trades_df) > 0 else 0,
+            'profit_factor': self.calculate_profit_factor(trades_df),
+            'calmar_ratio': self.calculate_calmar_ratio(equity_curve['equity']),
+            'total_trades': len(trades_df),
+            'avg_trade_duration': trades_df['duration'].mean() if len(trades_df) > 0 else 0
+        }
+        
+        return metrics
+    
+    def store_backtest_results(self, results):
+        """Store backtest results in PostgreSQL"""
+        self.db.store_backtest_results(results)
+    
+    def compare_strategies(self, strategy_configs, symbols, start_date, end_date):
+        """Compare multiple strategies side by side"""
+        comparison_results = {}
+        
+        for config in strategy_configs:
+            results = self.run_backtest(config, symbols, start_date, end_date)
+            comparison_results[config['name']] = results['performance_metrics']
+        
+        return comparison_results
+```
+
+### 12.2 Strategy Optimization
+```python
+class StrategyOptimizer:
+    def __init__(self, backtesting_engine):
+        self.backtester = backtesting_engine
+    
+    def optimize_parameters(self, strategy_template, symbols, start_date, end_date, 
+                          param_ranges, optimization_metric='sharpe_ratio'):
+        """
+        Optimize strategy parameters using grid search or genetic algorithms
+        """
+        best_params = None
+        best_score = float('-inf')
+        
+        # Generate parameter combinations
+        param_combinations = self.generate_param_combinations(param_ranges)
+        
+        for params in param_combinations:
+            strategy_config = strategy_template.copy()
+            strategy_config['parameters'].update(params)
+            
+            results = self.backtester.run_backtest(strategy_config, symbols, start_date, end_date)
+            score = results['performance_metrics'][optimization_metric]
+            
+            if score > best_score:
+                best_score = score
+                best_params = params
+        
+        return best_params, best_score
+```
+
+### 12.3 Paper Trading Validation
+- Full simulation with real market data from Alpaca
+- No real money at risk
+- Validate strategy performance in live market conditions
+- Test order execution logic and slippage
+- Compare paper trading results with backtest results
+
+## 16. Web User Interface
+
+### 13.1 Frontend Architecture
+```typescript
+// React/Next.js frontend structure
+interface DashboardProps {
+  portfolio: PortfolioData;
+  positions: PositionData[];
+  performance: PerformanceMetrics;
+  alerts: AlertData[];
+}
+
+interface TradingInterfaceProps {
+  strategies: StrategyConfig[];
+  symbols: string[];
+  onStrategyUpdate: (strategy: StrategyConfig) => void;
+  onSymbolAdd: (symbol: string) => void;
+}
+
+interface BacktestInterfaceProps {
+  onRunBacktest: (config: BacktestConfig) => void;
+  results: BacktestResult[];
+  onCompareStrategies: (strategies: string[]) => void;
+}
+```
+
+### 13.2 Dashboard Components
+```typescript
+// Main Dashboard
+const Dashboard: React.FC<DashboardProps> = ({ portfolio, positions, performance, alerts }) => {
+  return (
+    <div className="dashboard">
+      <Header />
+      <div className="dashboard-grid">
+        <PortfolioOverview data={portfolio} />
+        <PositionsTable data={positions} />
+        <PerformanceChart data={performance} />
+        <AlertsPanel data={alerts} />
+        <TradingControls />
+      </div>
+    </div>
+  );
+};
+
+// Portfolio Overview Component
+const PortfolioOverview: React.FC<{ data: PortfolioData }> = ({ data }) => {
+  return (
+    <div className="portfolio-overview">
+      <h2>Portfolio Overview</h2>
+      <div className="metrics-grid">
+        <MetricCard title="Total Value" value={data.totalValue} format="currency" />
+        <MetricCard title="Daily P&L" value={data.dailyPnL} format="currency" color={data.dailyPnL >= 0 ? 'green' : 'red'} />
+        <MetricCard title="Total Return" value={data.totalReturn} format="percentage" />
+        <MetricCard title="Sharpe Ratio" value={data.sharpeRatio} format="number" />
+      </div>
+    </div>
+  );
+};
+
+// Real-time Positions Table
+const PositionsTable: React.FC<{ data: PositionData[] }> = ({ data }) => {
+  return (
+    <div className="positions-table">
+      <h2>Current Positions</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Symbol</th>
+            <th>Quantity</th>
+            <th>Avg Price</th>
+            <th>Current Price</th>
+            <th>Unrealized P&L</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map(position => (
+            <tr key={position.symbol}>
+              <td>{position.symbol}</td>
+              <td>{position.quantity}</td>
+              <td>${position.avgPrice}</td>
+              <td>${position.currentPrice}</td>
+              <td className={position.unrealizedPnL >= 0 ? 'positive' : 'negative'}>
+                ${position.unrealizedPnL}
+              </td>
+              <td>
+                <button onClick={() => closePosition(position.symbol)}>Close</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+```
+
+### 13.3 Trading Interface
+```typescript
+// Strategy Management
+const StrategyManager: React.FC = () => {
+  const [strategies, setStrategies] = useState<StrategyConfig[]>([]);
+  const [selectedStrategy, setSelectedStrategy] = useState<StrategyConfig | null>(null);
+
+  return (
+    <div className="strategy-manager">
+      <h2>Strategy Management</h2>
+      <div className="strategy-list">
+        {strategies.map(strategy => (
+          <StrategyCard 
+            key={strategy.id}
+            strategy={strategy}
+            onEdit={() => setSelectedStrategy(strategy)}
+            onToggle={() => toggleStrategy(strategy.id)}
+          />
+        ))}
+      </div>
+      
+      {selectedStrategy && (
+        <StrategyEditor 
+          strategy={selectedStrategy}
+          onSave={updateStrategy}
+          onCancel={() => setSelectedStrategy(null)}
+        />
+      )}
+    </div>
+  );
+};
+
+// Backtesting Interface
+const BacktestInterface: React.FC = () => {
+  const [backtestConfig, setBacktestConfig] = useState<BacktestConfig>({
+    strategy: '',
+    symbols: [],
+    startDate: '',
+    endDate: '',
+    initialCapital: 100000
+  });
+  const [results, setResults] = useState<BacktestResult[]>([]);
+
+  const runBacktest = async () => {
+    const result = await api.runBacktest(backtestConfig);
+    setResults([...results, result]);
+  };
+
+  return (
+    <div className="backtest-interface">
+      <h2>Strategy Backtesting</h2>
+      <BacktestForm config={backtestConfig} onChange={setBacktestConfig} />
+      <button onClick={runBacktest}>Run Backtest</button>
+      
+      <div className="backtest-results">
+        {results.map(result => (
+          <BacktestResultCard key={result.id} result={result} />
+        ))}
+      </div>
+    </div>
+  );
+};
+```
+
+### 13.4 API Endpoints
+```python
+# FastAPI backend endpoints
+from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+
+app = FastAPI(title="Algorithmic Trading System")
+
+# CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+@app.get("/api/portfolio")
+async def get_portfolio():
+    """Get current portfolio overview"""
+    return portfolio_tracker.get_portfolio_overview()
+
+@app.get("/api/positions")
+async def get_positions():
+    """Get current positions"""
+    return portfolio_tracker.get_positions()
+
+@app.get("/api/performance")
+async def get_performance(period: str = "1M"):
+    """Get performance metrics"""
+    return portfolio_tracker.get_performance_metrics(period)
+
+@app.post("/api/strategies")
+async def create_strategy(strategy: StrategyConfig):
+    """Create new trading strategy"""
+    return strategy_manager.create_strategy(strategy)
+
+@app.put("/api/strategies/{strategy_id}")
+async def update_strategy(strategy_id: str, strategy: StrategyConfig):
+    """Update existing strategy"""
+    return strategy_manager.update_strategy(strategy_id, strategy)
+
+@app.post("/api/backtest")
+async def run_backtest(config: BacktestConfig):
+    """Run backtest with given configuration"""
+    return backtesting_engine.run_backtest(config)
+
+@app.get("/api/trading-history")
+async def get_trading_history(symbol: str = None, start_date: str = None, end_date: str = None):
+    """Get trading history with filters"""
+    return db_manager.get_trading_history(symbol, start_date, end_date)
+
+@app.post("/api/ai/query")
+async def ai_query(query: AIQuery):
+    """Query AI/LLM for trading insights"""
+    return ai_interface.process_query(query)
+```
+
+## 14. AI-Driven Autonomous Trading System
+
+### 14.1 AI Architecture Overview
+```python
+# AI-Driven Autonomous Trading System
+import numpy as np
+import pandas as pd
+from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import TimeSeriesSplit
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dense, Dropout
+import joblib
+import pickle
+from typing import Dict, List, Tuple, Any
+import asyncio
+from datetime import datetime, timedelta
+
+class AutonomousTradingAI:
+    """AI-driven autonomous trading system with algorithm discovery and optimization"""
+    
+    def __init__(self, db_manager, alpaca_api, trading_config):
+        self.db = db_manager
+        self.api = alpaca_api
+        self.config = trading_config
+        self.ml_engine = MLTradingEngine(db_manager)
+        self.llm_interface = AITradingInterface(db_manager)
+        self.algorithm_discovery = AlgorithmDiscoveryEngine()
+        self.market_analyzer = MarketTypeAnalyzer()
+        self.trading_executor = AutonomousTradingExecutor(alpaca_api, db_manager)
+        self.performance_optimizer = PerformanceOptimizer(db_manager)
+        
+        # AI state management
+        self.discovered_algorithms = {}
+        self.market_classifications = {}
+        self.active_trades = {}
+        self.performance_history = []
+        
+    async def run_autonomous_trading_cycle(self):
+        """Main autonomous trading cycle"""
+        while True:
+            try:
+                # Step 1: Discover and optimize algorithms
+                await self.discover_and_optimize_algorithms()
+                
+                # Step 2: Analyze market conditions and stock types
+                await self.analyze_market_conditions()
+                
+                # Step 3: Execute trades based on AI decisions
+                await self.execute_ai_trades()
+                
+                # Step 4: Learn from results and optimize
+                await self.learn_and_optimize()
+                
+                # Wait for next cycle
+                await asyncio.sleep(self.config['cycle_interval'])
+                
+            except Exception as e:
+                logger.error(f"Error in autonomous trading cycle: {e}")
+                await asyncio.sleep(60)  # Wait before retry
+```
+
+### 14.2 AI Algorithm Discovery Engine
+```python
+class AlgorithmDiscoveryEngine:
+    """AI engine for automatically discovering and optimizing trading algorithms"""
+    
+    def __init__(self, db_manager, backtesting_engine):
+        self.db = db_manager
+        self.backtester = backtesting_engine
+        self.algorithm_templates = self.load_algorithm_templates()
+        self.discovered_algorithms = {}
+        
+    def load_algorithm_templates(self):
+        """Load base algorithm templates for AI to modify"""
+        return {
+            'trend_following': {
+                'base_class': 'MovingAverageStrategy',
+                'parameters': ['fast_period', 'slow_period', 'signal_period'],
+                'constraints': {'fast_period': (5, 50), 'slow_period': (10, 200)}
+            },
+            'mean_reversion': {
+                'base_class': 'BollingerBandsStrategy',
+                'parameters': ['period', 'std_dev', 'threshold'],
+                'constraints': {'period': (10, 100), 'std_dev': (1, 3)}
+            },
+            'momentum': {
+                'base_class': 'RSIStrategy',
+                'parameters': ['period', 'oversold', 'overbought'],
+                'constraints': {'period': (5, 30), 'oversold': (10, 40)}
+            },
+            'volatility': {
+                'base_class': 'ATRStrategy',
+                'parameters': ['period', 'multiplier'],
+                'constraints': {'period': (10, 50), 'multiplier': (1, 5)}
+            }
+        }
+    
+    async def discover_algorithms_for_symbol(self, symbol: str, market_data: pd.DataFrame):
+        """AI-driven algorithm discovery for a specific symbol"""
+        logger.info(f"Starting AI algorithm discovery for {symbol}")
+        
+        # Analyze market characteristics
+        market_profile = self.analyze_market_profile(market_data)
+        
+        # Generate algorithm candidates
+        candidates = self.generate_algorithm_candidates(market_profile)
+        
+        # Backtest all candidates
+        results = await self.backtest_candidates(symbol, candidates, market_data)
+        
+        # Select best algorithms
+        best_algorithms = self.select_best_algorithms(results, market_profile)
+        
+        # Store discovered algorithms
+        self.discovered_algorithms[symbol] = best_algorithms
+        
+        logger.info(f"Discovered {len(best_algorithms)} algorithms for {symbol}")
+        return best_algorithms
+    
+    def analyze_market_profile(self, market_data: pd.DataFrame) -> Dict[str, Any]:
+        """Analyze market characteristics to guide algorithm selection"""
+        profile = {}
+        
+        # Volatility analysis
+        returns = market_data['close'].pct_change()
+        profile['volatility'] = returns.std() * np.sqrt(252)
+        profile['volatility_regime'] = 'high' if profile['volatility'] > 0.3 else 'low'
+        
+        # Trend analysis
+        sma_20 = market_data['close'].rolling(20).mean()
+        sma_50 = market_data['close'].rolling(50).mean()
+        profile['trend_strength'] = abs(sma_20.iloc[-1] - sma_50.iloc[-1]) / sma_50.iloc[-1]
+        profile['trend_direction'] = 'up' if sma_20.iloc[-1] > sma_50.iloc[-1] else 'down'
+        
+        # Volume analysis
+        volume_ma = market_data['volume'].rolling(20).mean()
+        profile['volume_trend'] = 'increasing' if volume_ma.iloc[-1] > volume_ma.iloc[-20] else 'decreasing'
+        
+        # Price pattern analysis
+        profile['price_pattern'] = self.detect_price_patterns(market_data)
+        
+        # Market efficiency
+        profile['market_efficiency'] = self.calculate_market_efficiency(market_data)
+        
+        return profile
+    
+    def generate_algorithm_candidates(self, market_profile: Dict[str, Any]) -> List[Dict]:
+        """Generate algorithm candidates based on market profile with loss minimization focus"""
+        candidates = []
+        
+        # High volatility markets - favor mean reversion with tight stops
+        if market_profile['volatility_regime'] == 'high':
+            candidates.extend(self.generate_mean_reversion_candidates(market_profile))
+            candidates.extend(self.generate_volatility_breakout_candidates(market_profile))
+        
+        # Strong trend markets - favor trend following with trailing stops
+        if market_profile['trend_strength'] > 0.05:
+            candidates.extend(self.generate_trend_following_candidates(market_profile))
+            candidates.extend(self.generate_momentum_candidates(market_profile))
+        
+        # Low efficiency markets - favor momentum with quick exits
+        if market_profile['market_efficiency'] < 0.7:
+            candidates.extend(self.generate_momentum_candidates(market_profile))
+            candidates.extend(self.generate_scalping_candidates(market_profile))
+        
+        # Add loss-minimizing hybrid algorithms
+        candidates.extend(self.generate_loss_minimizing_hybrids(market_profile))
+        
+        # Add defensive algorithms for all market conditions
+        candidates.extend(self.generate_defensive_candidates(market_profile))
+        
+        return candidates
+    
+    def generate_loss_minimizing_hybrids(self, market_profile: Dict[str, Any]) -> List[Dict]:
+        """Generate hybrid algorithms focused on loss minimization"""
+        candidates = []
+        
+        # Multi-timeframe confirmation with tight stops
+        candidates.append({
+            'type': 'hybrid_loss_minimizing',
+            'name': 'MultiTF_Confirm_TightStop',
+            'parameters': {
+                'primary_tf': '1hour',
+                'confirmation_tf': '15min',
+                'stop_loss_pct': 1.5,  # Tighter stop loss
+                'take_profit_pct': 4.5,  # 3:1 risk/reward
+                'max_hold_time_hours': 24
+            },
+            'base_class': 'MultiTimeframeStrategy'
+        })
+        
+        # Volatility-adjusted position sizing
+        candidates.append({
+            'type': 'hybrid_loss_minimizing',
+            'name': 'VolAdj_Position_Size',
+            'parameters': {
+                'volatility_lookback': 20,
+                'position_size_multiplier': 0.5,  # Reduce size in high volatility
+                'dynamic_stop_loss': True,
+                'trailing_stop_pct': 0.8
+            },
+            'base_class': 'VolatilityAdjustedStrategy'
+        })
+        
+        # Risk-parity approach
+        candidates.append({
+            'type': 'hybrid_loss_minimizing',
+            'name': 'Risk_Parity_Equal',
+            'parameters': {
+                'target_volatility': 0.15,  # 15% annualized volatility target
+                'rebalance_frequency': 'daily',
+                'max_correlation': 0.7
+            },
+            'base_class': 'RiskParityStrategy'
+        })
+        
+        return candidates
+    
+    def generate_defensive_candidates(self, market_profile: Dict[str, Any]) -> List[Dict]:
+        """Generate defensive algorithms for loss minimization"""
+        candidates = []
+        
+        # Capital preservation strategy
+        candidates.append({
+            'type': 'defensive',
+            'name': 'Capital_Preservation',
+            'parameters': {
+                'max_drawdown_limit': 0.05,  # 5% max drawdown
+                'stop_loss_pct': 1.0,  # Very tight stop loss
+                'take_profit_pct': 2.0,  # 2:1 risk/reward
+                'position_size_pct': 1.0,  # Small position sizes
+                'max_positions': 3
+            },
+            'base_class': 'DefensiveStrategy'
+        })
+        
+        # Trend confirmation with multiple filters
+        candidates.append({
+            'type': 'defensive',
+            'name': 'Multi_Filter_Confirm',
+            'parameters': {
+                'price_filter': True,
+                'volume_filter': True,
+                'momentum_filter': True,
+                'volatility_filter': True,
+                'min_filters_passed': 3  # Require 3 out of 4 filters
+            },
+            'base_class': 'MultiFilterStrategy'
+        })
+        
+        return candidates
+    
+    def generate_mean_reversion_candidates(self, market_profile: Dict[str, Any]) -> List[Dict]:
+        """Generate mean reversion algorithm candidates"""
+        candidates = []
+        
+        # Bollinger Bands variations
+        for period in range(10, 51, 10):
+            for std_dev in [1.5, 2.0, 2.5]:
+                candidates.append({
+                    'type': 'mean_reversion',
+                    'name': f'BB_MeanReversion_{period}_{std_dev}',
+                    'parameters': {
+                        'period': period,
+                        'std_dev': std_dev,
+                        'threshold': 0.1
+                    },
+                    'base_class': 'BollingerBandsStrategy'
+                })
+        
+        # RSI mean reversion
+        for period in range(10, 31, 5):
+            candidates.append({
+                'type': 'mean_reversion',
+                'name': f'RSI_MeanReversion_{period}',
+                'parameters': {
+                    'period': period,
+                    'oversold': 30,
+                    'overbought': 70
+                },
+                'base_class': 'RSIStrategy'
+            })
+        
+        return candidates
+    
+    def generate_trend_following_candidates(self, market_profile: Dict[str, Any]) -> List[Dict]:
+        """Generate trend following algorithm candidates"""
+        candidates = []
+        
+        # Moving average crossovers
+        for fast in range(5, 21, 5):
+            for slow in range(fast + 10, 101, 20):
+                candidates.append({
+                    'type': 'trend_following',
+                    'name': f'MA_Crossover_{fast}_{slow}',
+                    'parameters': {
+                        'fast_period': fast,
+                        'slow_period': slow,
+                        'signal_period': 9
+                    },
+                    'base_class': 'MovingAverageStrategy'
+                })
+        
+        # MACD variations
+        for fast in [12, 15, 18]:
+            for slow in [26, 30, 35]:
+                candidates.append({
+                    'type': 'trend_following',
+                    'name': f'MACD_{fast}_{slow}',
+                    'parameters': {
+                        'fast_period': fast,
+                        'slow_period': slow,
+                        'signal_period': 9
+                    },
+                    'base_class': 'MACDStrategy'
+                })
+        
+        return candidates
+    
+    async def backtest_candidates(self, symbol: str, candidates: List[Dict], 
+                                market_data: pd.DataFrame) -> List[Dict]:
+        """Backtest all algorithm candidates"""
+        results = []
+        
+        for candidate in candidates:
+            try:
+                # Create strategy instance
+                strategy = self.create_strategy_instance(candidate)
+                
+                # Run backtest
+                backtest_result = await self.backtester.run_backtest(
+                    strategy_config=candidate,
+                    symbols=[symbol],
+                    start_date=market_data.index[0].strftime('%Y-%m-%d'),
+                    end_date=market_data.index[-1].strftime('%Y-%m-%d'),
+                    initial_capital=100000
+                )
+                
+                # Add candidate info to results
+                backtest_result['candidate'] = candidate
+                results.append(backtest_result)
+                
+            except Exception as e:
+                logger.error(f"Backtest failed for {candidate['name']}: {e}")
+                continue
+        
+        return results
+    
+    def select_best_algorithms(self, results: List[Dict], market_profile: Dict[str, Any]) -> List[Dict]:
+        """Select best algorithms based on performance and market fit"""
+        # Score algorithms based on multiple criteria
+        scored_algorithms = []
+        
+        for result in results:
+            score = self.calculate_algorithm_score(result, market_profile)
+            scored_algorithms.append({
+                'algorithm': result['candidate'],
+                'performance': result['performance_metrics'],
+                'score': score,
+                'backtest_result': result
+            })
+        
+        # Sort by score and select top performers
+        scored_algorithms.sort(key=lambda x: x['score'], reverse=True)
+        
+        # Select top 3 algorithms
+        best_algorithms = scored_algorithms[:3]
+        
+        return best_algorithms
+    
+    def calculate_algorithm_score(self, result: Dict, market_profile: Dict[str, Any]) -> float:
+        """Calculate comprehensive algorithm score with focus on minimizing loss and maximizing gain"""
+        metrics = result['performance_metrics']
+        
+        # Loss minimization score (35%) - Higher weight for loss control
+        max_dd_score = max(0, 1 - metrics['max_drawdown'] / 0.2)  # Stricter drawdown penalty
+        loss_ratio_score = 1 - (metrics.get('avg_loss', 0) / abs(metrics.get('avg_gain', 1)))  # Prefer lower loss ratios
+        volatility_score = max(0, 1 - metrics.get('volatility', 0) / 0.5)  # Penalize high volatility
+        
+        loss_minimization_score = (max_dd_score * 0.5 + loss_ratio_score * 0.3 + volatility_score * 0.2)
+        
+        # Gain maximization score (35%) - Focus on consistent gains
+        return_score = min(metrics['total_return'] / 0.3, 1.0)  # Higher return threshold
+        sharpe_score = min(metrics['sharpe_ratio'] / 1.5, 1.0)  # Stricter Sharpe ratio requirement
+        win_rate_score = metrics['win_rate']
+        profit_factor = metrics.get('profit_factor', 1.0)  # Total gains / total losses
+        profit_factor_score = min(profit_factor / 2.0, 1.0)  # Prefer profit factors > 2
+        
+        gain_maximization_score = (return_score * 0.3 + sharpe_score * 0.3 + win_rate_score * 0.2 + profit_factor_score * 0.2)
+        
+        # Risk-adjusted consistency score (30%)
+        consistency_score = self.calculate_consistency_score(metrics)
+        market_fit_score = self.calculate_market_fit_score(result['candidate'], market_profile)
+        
+        risk_consistency_score = (consistency_score * 0.6 + market_fit_score * 0.4)
+        
+        # Weighted final score prioritizing loss minimization and gain maximization
+        final_score = (loss_minimization_score * 0.35 + gain_maximization_score * 0.35 + risk_consistency_score * 0.30)
+        
+        return final_score
+    
+    def calculate_consistency_score(self, metrics: Dict[str, Any]) -> float:
+        """Calculate consistency score based on trading performance"""
+        # Calculate coefficient of variation (lower is better)
+        returns_std = metrics.get('returns_std', 0)
+        avg_return = metrics.get('avg_return', 0)
+        
+        if avg_return != 0:
+            cv = returns_std / abs(avg_return)
+            consistency_score = max(0, 1 - cv)  # Lower CV = higher consistency
+        else:
+            consistency_score = 0
+        
+        # Factor in consecutive wins/losses
+        max_consecutive_wins = metrics.get('max_consecutive_wins', 0)
+        max_consecutive_losses = metrics.get('max_consecutive_losses', 0)
+        
+        if max_consecutive_losses > 0:
+            win_loss_ratio = max_consecutive_wins / max_consecutive_losses
+            consistency_score *= min(win_loss_ratio / 2.0, 1.0)  # Prefer more wins than losses
+        
+        return consistency_score
+    
+    def calculate_market_fit_score(self, algorithm: Dict, market_profile: Dict[str, Any]) -> float:
+        """Calculate how well algorithm fits current market conditions"""
+        algorithm_type = algorithm['type']
+        
+        if algorithm_type == 'mean_reversion' and market_profile['volatility_regime'] == 'high':
+            return 0.9
+        elif algorithm_type == 'trend_following' and market_profile['trend_strength'] > 0.05:
+            return 0.9
+        elif algorithm_type == 'momentum' and market_profile['market_efficiency'] < 0.7:
+            return 0.8
+        else:
+            return 0.5  # Neutral fit
+```
+
+### 14.3 AI Market Type Analyzer
+```python
+class MarketTypeAnalyzer:
+    """AI engine for understanding market types and stock characteristics"""
+    
+    def __init__(self, db_manager):
+        self.db = db_manager
+        self.market_classifications = {}
+        self.stock_profiles = {}
+        
+    async def analyze_market_type(self, symbol: str, market_data: pd.DataFrame) -> Dict[str, Any]:
+        """Analyze market type and characteristics for a symbol"""
+        logger.info(f"Analyzing market type for {symbol}")
+        
+        # Basic market characteristics
+        market_profile = self.calculate_market_characteristics(market_data)
+        
+        # Market regime classification
+        market_regime = self.classify_market_regime(market_profile)
+        
+        # Stock type classification
+        stock_type = self.classify_stock_type(market_profile)
+        
+        # Volatility clustering
+        volatility_cluster = self.analyze_volatility_clustering(market_data)
+        
+        # Liquidity analysis
+        liquidity_profile = self.analyze_liquidity(market_data)
+        
+        # Correlation analysis
+        correlation_profile = self.analyze_correlations(symbol, market_data)
+        
+        classification = {
+            'symbol': symbol,
+            'market_regime': market_regime,
+            'stock_type': stock_type,
+            'volatility_cluster': volatility_cluster,
+            'liquidity_profile': liquidity_profile,
+            'correlation_profile': correlation_profile,
+            'market_profile': market_profile,
+            'timestamp': datetime.now()
+        }
+        
+        # Store classification
+        self.market_classifications[symbol] = classification
+        self.db.store_market_classification(classification)
+        
+        return classification
+    
+    def calculate_market_characteristics(self, market_data: pd.DataFrame) -> Dict[str, Any]:
+        """Calculate comprehensive market characteristics"""
+        characteristics = {}
+        
+        # Price characteristics
+        returns = market_data['close'].pct_change().dropna()
+        characteristics['daily_volatility'] = returns.std()
+        characteristics['annualized_volatility'] = returns.std() * np.sqrt(252)
+        characteristics['skewness'] = returns.skew()
+        characteristics['kurtosis'] = returns.kurtosis()
+        
+        # Volume characteristics
+        characteristics['avg_volume'] = market_data['volume'].mean()
+        characteristics['volume_volatility'] = market_data['volume'].std()
+        characteristics['volume_trend'] = self.calculate_volume_trend(market_data)
+        
+        # Price trend characteristics
+        characteristics['trend_strength'] = self.calculate_trend_strength(market_data)
+        characteristics['mean_reversion_tendency'] = self.calculate_mean_reversion_tendency(market_data)
+        
+        # Market efficiency
+        characteristics['market_efficiency'] = self.calculate_market_efficiency(market_data)
+        
+        return characteristics
+    
+    def classify_market_regime(self, market_profile: Dict[str, Any]) -> str:
+        """Classify current market regime"""
+        volatility = market_profile['annualized_volatility']
+        trend_strength = market_profile['trend_strength']
+        efficiency = market_profile['market_efficiency']
+        
+        if volatility > 0.4:
+            if trend_strength > 0.1:
+                return 'high_volatility_trending'
+            else:
+                return 'high_volatility_choppy'
+        elif volatility < 0.15:
+            if trend_strength > 0.05:
+                return 'low_volatility_trending'
+            else:
+                return 'low_volatility_sideways'
+        else:
+            if trend_strength > 0.08:
+                return 'moderate_volatility_trending'
+            else:
+                return 'moderate_volatility_sideways'
+    
+    def classify_stock_type(self, market_profile: Dict[str, Any]) -> str:
+        """Classify stock type based on characteristics"""
+        volatility = market_profile['annualized_volatility']
+        volume = market_profile['avg_volume']
+        efficiency = market_profile['market_efficiency']
+        
+        if volatility > 0.5 and volume > 10000000:
+            return 'high_volatility_liquid'
+        elif volatility > 0.5 and volume < 1000000:
+            return 'high_volatility_illiquid'
+        elif volatility < 0.2 and volume > 5000000:
+            return 'low_volatility_liquid'
+        elif volatility < 0.2 and volume < 1000000:
+            return 'low_volatility_illiquid'
+        elif efficiency > 0.8:
+            return 'efficient_market'
+        else:
+            return 'inefficient_market'
+    
+    def analyze_volatility_clustering(self, market_data: pd.DataFrame) -> Dict[str, Any]:
+        """Analyze volatility clustering patterns"""
+        returns = market_data['close'].pct_change().dropna()
+        
+        # Calculate rolling volatility
+        rolling_vol = returns.rolling(20).std()
+        
+        # Detect volatility clusters
+        high_vol_periods = rolling_vol > rolling_vol.quantile(0.8)
+        low_vol_periods = rolling_vol < rolling_vol.quantile(0.2)
+        
+        # Calculate persistence
+        vol_persistence = self.calculate_persistence(high_vol_periods)
+        
+        return {
+            'volatility_persistence': vol_persistence,
+            'high_vol_frequency': high_vol_periods.mean(),
+            'low_vol_frequency': low_vol_periods.mean(),
+            'volatility_regime_switches': self.count_regime_switches(rolling_vol)
+        }
+    
+    def analyze_liquidity(self, market_data: pd.DataFrame) -> Dict[str, Any]:
+        """Analyze liquidity characteristics"""
+        volume = market_data['volume']
+        price = market_data['close']
+        
+        # Calculate various liquidity metrics
+        avg_daily_volume = volume.mean()
+        volume_consistency = volume.std() / volume.mean()
+        
+        # Bid-ask spread approximation (using high-low ratio)
+        spread_approx = (market_data['high'] - market_data['low']) / market_data['close']
+        avg_spread = spread_approx.mean()
+        
+        # Market impact estimation
+        price_impact = self.estimate_market_impact(volume, price)
+        
+        return {
+            'avg_daily_volume': avg_daily_volume,
+            'volume_consistency': volume_consistency,
+            'avg_spread': avg_spread,
+            'estimated_market_impact': price_impact,
+            'liquidity_score': self.calculate_liquidity_score(avg_daily_volume, avg_spread)
+        }
+    
+    def analyze_correlations(self, symbol: str, market_data: pd.DataFrame) -> Dict[str, Any]:
+        """Analyze correlations with market indices and sectors"""
+        # Get market indices data (S&P 500, NASDAQ, etc.)
+        sp500_data = self.db.get_market_data('SPY', '1day', len(market_data))
+        nasdaq_data = self.db.get_market_data('QQQ', '1day', len(market_data))
+        
+        # Calculate correlations
+        symbol_returns = market_data['close'].pct_change().dropna()
+        sp500_returns = sp500_data['close'].pct_change().dropna()
+        nasdaq_returns = nasdaq_data['close'].pct_change().dropna()
+        
+        # Align data
+        aligned_data = pd.concat([symbol_returns, sp500_returns, nasdaq_returns], axis=1).dropna()
+        
+        correlations = {
+            'sp500_correlation': aligned_data.iloc[:, 0].corr(aligned_data.iloc[:, 1]),
+            'nasdaq_correlation': aligned_data.iloc[:, 0].corr(aligned_data.iloc[:, 2]),
+            'beta_sp500': self.calculate_beta(aligned_data.iloc[:, 0], aligned_data.iloc[:, 1]),
+            'beta_nasdaq': self.calculate_beta(aligned_data.iloc[:, 0], aligned_data.iloc[:, 2])
+        }
+        
+        return correlations
+```
+
+### 14.4 Autonomous Trading Executor
+```python
+class AutonomousTradingExecutor:
+    """AI-driven autonomous trading execution system"""
+    
+    def __init__(self, alpaca_api, db_manager, trading_config):
+        self.api = alpaca_api
+        self.db = db_manager
+        self.config = trading_config
+        self.active_trades = {}
+        self.trading_history = []
+        
+    async def execute_ai_trades(self, symbol: str, algorithm_results: List[Dict], 
+                              market_classification: Dict[str, Any]) -> Dict[str, Any]:
+        """Execute trades based on AI decisions with loss management and analyst rating integration"""
+        logger.info(f"Executing AI trades for {symbol}")
+        
+        # Initialize loss management system
+        loss_manager = LossManagementSystem(self.config)
+        
+        # Initialize analyst rating manager
+        analyst_rating_manager = AnalystRatingManager(self.config)
+        
+        # Check if trading should be stopped due to loss limits
+        portfolio_value = await self.get_portfolio_value()
+        initial_capital = self.config.get('initial_capital', portfolio_value)
+        
+        lifetime_check = loss_manager.check_lifetime_loss_limit(portfolio_value, initial_capital)
+        if lifetime_check['should_stop_trading']:
+            logger.warning(f"Trading stopped: Lifetime loss limit exceeded ({lifetime_check['current_loss_pct']:.2f}%)")
+            return {'status': 'stopped', 'reason': 'lifetime_loss_limit_exceeded'}
+        
+        daily_check = loss_manager.check_daily_loss_limit(symbol, portfolio_value)
+        if daily_check['should_stop_trading']:
+            logger.warning(f"Trading stopped for {symbol}: Daily loss limit exceeded ({daily_check['current_loss_pct']:.2f}%)")
+            return {'status': 'stopped', 'reason': 'daily_loss_limit_exceeded'}
+        
+        # Determine trading mode (live vs paper)
+        trading_mode = self.config.get('trading_mode', 'paper')
+        
+        # Get current market data
+        current_data = await self.get_current_market_data(symbol)
+        
+        # Generate trading signals from all algorithms
+        signals = await self.generate_consensus_signals(algorithm_results, current_data)
+        
+        # Apply market-specific adjustments
+        adjusted_signals = self.apply_market_adjustments(signals, market_classification)
+        
+        # Apply analyst rating validation for buy signals
+        if adjusted_signals['action'] in ['buy', 'weak_buy']:
+            rating_allowed, rating_data = analyst_rating_manager.should_allow_buy(
+                symbol, adjusted_signals['action'] == 'buy'
+            )
+            
+            if not rating_allowed:
+                adjusted_signals['action'] = 'hold'
+                adjusted_signals['confidence'] *= 0.5  # Reduce confidence
+                logger.info(f"Buy signal rejected for {symbol}: Analyst rating {rating_data['analyst_rating']:.2f} below threshold {rating_data['min_required_rating']:.2f}")
+            
+            # Store rating data for decision tracking
+            adjusted_signals['analyst_rating_data'] = rating_data
+        else:
+            adjusted_signals['analyst_rating_data'] = None
+        
+        # Calculate risk-adjusted position size
+        position_sizer = RiskAdjustedPositionSizer(loss_manager, portfolio_value)
+        entry_price = await self.get_current_price(symbol)
+        
+        # Calculate dynamic stop loss and take profit
+        risk_controls = DynamicRiskControls(loss_manager)
+        volatility = market_classification['market_profile']['annualized_volatility']
+        stop_loss_price = risk_controls.calculate_dynamic_stop_loss(symbol, entry_price, 'long', volatility)
+        take_profit_price = risk_controls.calculate_dynamic_take_profit(symbol, entry_price, stop_loss_price, 2.0)
+        
+        # Calculate position size with loss management and analyst rating adjustment
+        base_position_size = position_sizer.calculate_position_size(
+            symbol, entry_price, stop_loss_price, adjusted_signals['confidence']
+        )
+        
+        # Apply analyst rating adjustment to position size
+        if adjusted_signals.get('analyst_rating_data'):
+            rating_adjustment = adjusted_signals['analyst_rating_data'].get('rating_adjustment', 1.0)
+            position_size = base_position_size * rating_adjustment
+        else:
+            position_size = base_position_size
+        
+        # Check if position size is sufficient
+        if position_size <= 0:
+            logger.info(f"Insufficient position size for {symbol} - skipping trade")
+            return {'status': 'skipped', 'reason': 'insufficient_position_size'}
+        
+        # Execute trades with loss management
+        if trading_mode == 'live':
+            trade_result = await self.execute_live_trade_with_risk_management(
+                symbol, position_size, adjusted_signals, stop_loss_price, take_profit_price, loss_manager
+            )
+        else:
+            trade_result = await self.execute_paper_trade_with_risk_management(
+                symbol, position_size, adjusted_signals, stop_loss_price, take_profit_price, loss_manager
+            )
+        
+        # Store trade information with risk management and analyst rating data
+        trade_info = {
+            'symbol': symbol,
+            'timestamp': datetime.now(),
+            'signals': signals,
+            'adjusted_signals': adjusted_signals,
+            'position_size': position_size,
+            'entry_price': entry_price,
+            'stop_loss_price': stop_loss_price,
+            'take_profit_price': take_profit_price,
+            'trade_result': trade_result,
+            'market_classification': market_classification,
+            'trading_mode': trading_mode,
+            'risk_management': {
+                'max_transaction_loss_pct': loss_manager.max_transaction_loss_pct,
+                'max_daily_loss_pct': loss_manager.max_daily_loss_pct,
+                'max_lifetime_loss_pct': loss_manager.max_lifetime_loss_pct
+            },
+            'analyst_rating': adjusted_signals.get('analyst_rating_data', {})
+        }
+        
+        self.trading_history.append(trade_info)
+        self.db.store_trade_execution(trade_info)
+        
+        return trade_info
+    
+    async def execute_live_trade_with_risk_management(self, symbol: str, position_size: float,
+                                                    signals: Dict[str, Any], stop_loss_price: float,
+                                                    take_profit_price: float, loss_manager) -> Dict[str, Any]:
+        """Execute live trade with integrated risk management"""
+        try:
+            # Get current account information
+            account = self.api.get_account()
+            portfolio_value = float(account.portfolio_value)
+            
+            # Calculate quantity
+            current_price = await self.get_current_price(symbol)
+            quantity = int((portfolio_value * position_size) / current_price)
+            
+            if quantity <= 0:
+                return {'status': 'no_trade', 'reason': 'insufficient_position_size'}
+            
+            # Place main order
+            if signals['action'] == 'buy':
+                order = self.api.submit_order(
+                    symbol=symbol,
+                    qty=quantity,
+                    side='buy',
+                    type='market',
+                    time_in_force='day'
+                )
+                
+                # Place stop loss order
+                stop_order = self.api.submit_order(
+                    symbol=symbol,
+                    qty=quantity,
+                    side='sell',
+                    type='stop',
+                    stop_price=stop_loss_price,
+                    time_in_force='gtc'
+                )
+                
+                # Place take profit order
+                profit_order = self.api.submit_order(
+                    symbol=symbol,
+                    qty=quantity,
+                    side='sell',
+                    type='limit',
+                    limit_price=take_profit_price,
+                    time_in_force='gtc'
+                )
+                
+            elif signals['action'] == 'sell':
+                order = self.api.submit_order(
+                    symbol=symbol,
+                    qty=quantity,
+                    side='sell',
+                    type='market',
+                    time_in_force='day'
+                )
+            else:
+                return {'status': 'no_trade', 'reason': 'hold_signal'}
+            
+            return {
+                'status': 'executed',
+                'order_id': order.id,
+                'symbol': symbol,
+                'quantity': quantity,
+                'side': signals['action'],
+                'price': current_price,
+                'stop_loss_order_id': stop_order.id if 'stop_order' in locals() else None,
+                'take_profit_order_id': profit_order.id if 'profit_order' in locals() else None
+            }
+            
+        except Exception as e:
+            logger.error(f"Error executing live trade for {symbol}: {e}")
+            return {'status': 'error', 'error': str(e)}
+    
+    async def generate_consensus_signals(self, algorithm_results: List[Dict], 
+                                       current_data: pd.DataFrame) -> Dict[str, Any]:
+        """Generate consensus trading signals from multiple algorithms"""
+        signals = {
+            'buy_signals': [],
+            'sell_signals': [],
+            'hold_signals': [],
+            'confidence_scores': []
+        }
+        
+        for algorithm in algorithm_results:
+            try:
+                # Get algorithm instance
+                strategy = self.create_strategy_instance(algorithm['algorithm'])
+                
+                # Generate signals
+                buy_signal, sell_signal = strategy.calculate_signals(current_data)
+                
+                # Get confidence score
+                confidence = algorithm['score']
+                
+                signals['buy_signals'].append(buy_signal.iloc[-1] if buy_signal.iloc[-1] else False)
+                signals['sell_signals'].append(sell_signal.iloc[-1] if sell_signal.iloc[-1] else False)
+                signals['hold_signals'].append(not (buy_signal.iloc[-1] or sell_signal.iloc[-1]))
+                signals['confidence_scores'].append(confidence)
+                
+            except Exception as e:
+                logger.error(f"Error generating signals for algorithm: {e}")
+                continue
+        
+        # Calculate consensus
+        consensus = self.calculate_consensus(signals)
+        
+        return consensus
+    
+    def calculate_consensus(self, signals: Dict[str, List]) -> Dict[str, Any]:
+        """Calculate consensus from multiple algorithm signals"""
+        buy_count = sum(signals['buy_signals'])
+        sell_count = sum(signals['sell_signals'])
+        hold_count = sum(signals['hold_signals'])
+        total_algorithms = len(signals['buy_signals'])
+        
+        # Weighted consensus based on confidence scores
+        weighted_buy = sum([buy * conf for buy, conf in zip(signals['buy_signals'], signals['confidence_scores'])])
+        weighted_sell = sum([sell * conf for sell, conf in zip(signals['sell_signals'], signals['confidence_scores'])])
+        
+        avg_confidence = np.mean(signals['confidence_scores'])
+        
+        consensus = {
+            'action': self.determine_action(buy_count, sell_count, hold_count, total_algorithms),
+            'confidence': avg_confidence,
+            'buy_ratio': buy_count / total_algorithms,
+            'sell_ratio': sell_count / total_algorithms,
+            'hold_ratio': hold_count / total_algorithms,
+            'weighted_buy_score': weighted_buy,
+            'weighted_sell_score': weighted_sell
+        }
+        
+        return consensus
+    
+    def determine_action(self, buy_count: int, sell_count: int, hold_count: int, total: int) -> str:
+        """Determine trading action based on consensus"""
+        buy_ratio = buy_count / total
+        sell_ratio = sell_count / total
+        
+        if buy_ratio > 0.6:
+            return 'buy'
+        elif sell_ratio > 0.6:
+            return 'sell'
+        elif buy_ratio > sell_ratio and buy_ratio > 0.4:
+            return 'weak_buy'
+        elif sell_ratio > buy_ratio and sell_ratio > 0.4:
+            return 'weak_sell'
+        else:
+            return 'hold'
+    
+    def apply_market_adjustments(self, signals: Dict[str, Any], 
+                               market_classification: Dict[str, Any]) -> Dict[str, Any]:
+        """Apply market-specific adjustments to signals"""
+        adjusted_signals = signals.copy()
+        
+        market_regime = market_classification['market_regime']
+        stock_type = market_classification['stock_type']
+        
+        # Adjust confidence based on market conditions
+        if market_regime == 'high_volatility_choppy':
+            # Reduce confidence in choppy markets
+            adjusted_signals['confidence'] *= 0.8
+        elif market_regime == 'low_volatility_trending':
+            # Increase confidence in trending markets
+            adjusted_signals['confidence'] *= 1.1
+        
+        # Adjust position sizing based on stock type
+        if stock_type == 'high_volatility_illiquid':
+            # Reduce position size for illiquid stocks
+            adjusted_signals['position_multiplier'] = 0.7
+        elif stock_type == 'low_volatility_liquid':
+            # Increase position size for liquid stocks
+            adjusted_signals['position_multiplier'] = 1.2
+        else:
+            adjusted_signals['position_multiplier'] = 1.0
+        
+        return adjusted_signals
+    
+    def calculate_position_size(self, symbol: str, signals: Dict[str, Any], 
+                              market_classification: Dict[str, Any]) -> float:
+        """Calculate optimal position size based on AI signals and market conditions"""
+        base_position_size = self.config.get('base_position_size', 0.02)  # 2% of portfolio
+        
+        # Adjust based on signal confidence
+        confidence_multiplier = signals['confidence']
+        
+        # Adjust based on market conditions
+        market_multiplier = signals.get('position_multiplier', 1.0)
+        
+        # Adjust based on volatility
+        volatility = market_classification['market_profile']['annualized_volatility']
+        volatility_multiplier = 1.0 / (1.0 + volatility)  # Reduce size for high volatility
+        
+        # Calculate final position size
+        position_size = base_position_size * confidence_multiplier * market_multiplier * volatility_multiplier
+        
+        # Apply limits
+        max_position = self.config.get('max_position_size', 0.05)  # 5% max
+        position_size = min(position_size, max_position)
+        
+        return position_size
+    
+    async def execute_live_trade(self, symbol: str, position_size: float, 
+                               signals: Dict[str, Any]) -> Dict[str, Any]:
+        """Execute live trade via Alpaca API"""
+        try:
+            # Get current account information
+            account = self.api.get_account()
+            portfolio_value = float(account.portfolio_value)
+            
+            # Calculate quantity
+            current_price = await self.get_current_price(symbol)
+            quantity = int((portfolio_value * position_size) / current_price)
+            
+            if quantity <= 0:
+                return {'status': 'no_trade', 'reason': 'insufficient_position_size'}
+            
+            # Place order
+            if signals['action'] == 'buy':
+                order = self.api.submit_order(
+                    symbol=symbol,
+                    qty=quantity,
+                    side='buy',
+                    type='market',
+                    time_in_force='day'
+                )
+            elif signals['action'] == 'sell':
+                order = self.api.submit_order(
+                    symbol=symbol,
+                    qty=quantity,
+                    side='sell',
+                    type='market',
+                    time_in_force='day'
+                )
+            else:
+                return {'status': 'no_trade', 'reason': 'hold_signal'}
+            
+            return {
+                'status': 'executed',
+                'order_id': order.id,
+                'symbol': symbol,
+                'quantity': quantity,
+                'side': signals['action'],
+                'price': current_price
+            }
+            
+        except Exception as e:
+            logger.error(f"Error executing live trade for {symbol}: {e}")
+            return {'status': 'error', 'error': str(e)}
+    
+    async def execute_paper_trade(self, symbol: str, position_size: float, 
+                                signals: Dict[str, Any]) -> Dict[str, Any]:
+        """Execute paper trade (simulation)"""
+        try:
+            # Get current price
+            current_price = await self.get_current_price(symbol)
+            
+            # Simulate trade execution
+            trade_id = f"paper_{symbol}_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+            
+            return {
+                'status': 'executed',
+                'order_id': trade_id,
+                'symbol': symbol,
+                'quantity': position_size,
+                'side': signals['action'],
+                'price': current_price,
+                'mode': 'paper'
+            }
+            
+        except Exception as e:
+            logger.error(f"Error executing paper trade for {symbol}: {e}")
+            return {'status': 'error', 'error': str(e)}
+```
+
+### 14.5 Performance Optimizer and Learning System
+```python
+class PerformanceOptimizer:
+    """AI system for learning from trading results and optimizing performance"""
+    
+    def __init__(self, db_manager, ml_engine):
+        self.db = db_manager
+        self.ml_engine = ml_engine
+        self.performance_history = []
+        self.optimization_results = {}
+        
+    async def learn_from_trading_results(self, trading_history: List[Dict]) -> Dict[str, Any]:
+        """Learn from trading results and optimize algorithms"""
+        logger.info("Starting performance optimization and learning")
+        
+        # Analyze trading performance
+        performance_analysis = self.analyze_trading_performance(trading_history)
+        
+        # Identify successful patterns
+        successful_patterns = self.identify_successful_patterns(trading_history)
+        
+        # Identify failure patterns
+        failure_patterns = self.identify_failure_patterns(trading_history)
+        
+        # Generate optimization recommendations
+        optimizations = self.generate_optimization_recommendations(
+            performance_analysis, successful_patterns, failure_patterns
+        )
+        
+        # Apply optimizations
+        optimization_results = await self.apply_optimizations(optimizations)
+        
+        # Update algorithm parameters
+        await self.update_algorithm_parameters(optimization_results)
+        
+        # Retrain models if necessary
+        await self.retrain_models_if_needed(performance_analysis)
+        
+        return {
+            'performance_analysis': performance_analysis,
+            'successful_patterns': successful_patterns,
+            'failure_patterns': failure_patterns,
+            'optimizations': optimizations,
+            'optimization_results': optimization_results
+        }
+    
+    def analyze_trading_performance(self, trading_history: List[Dict]) -> Dict[str, Any]:
+        """Analyze trading performance metrics"""
+        if not trading_history:
+            return {}
+        
+        # Calculate basic metrics
+        total_trades = len(trading_history)
+        successful_trades = len([t for t in trading_history if t.get('pnl', 0) > 0])
+        win_rate = successful_trades / total_trades if total_trades > 0 else 0
+        
+        # Calculate P&L metrics
+        pnls = [t.get('pnl', 0) for t in trading_history]
+        total_pnl = sum(pnls)
+        avg_pnl = np.mean(pnls) if pnls else 0
+        pnl_std = np.std(pnls) if pnls else 0
+        
+        # Calculate risk metrics
+        max_drawdown = self.calculate_max_drawdown(pnls)
+        sharpe_ratio = self.calculate_sharpe_ratio(pnls)
+        
+        # Analyze by market conditions
+        performance_by_market = self.analyze_performance_by_market_conditions(trading_history)
+        
+        # Analyze by algorithm
+        performance_by_algorithm = self.analyze_performance_by_algorithm(trading_history)
+        
+        return {
+            'total_trades': total_trades,
+            'win_rate': win_rate,
+            'total_pnl': total_pnl,
+            'avg_pnl': avg_pnl,
+            'pnl_std': pnl_std,
+            'max_drawdown': max_drawdown,
+            'sharpe_ratio': sharpe_ratio,
+            'performance_by_market': performance_by_market,
+            'performance_by_algorithm': performance_by_algorithm
+        }
+    
+    def identify_successful_patterns(self, trading_history: List[Dict]) -> List[Dict]:
+        """Identify patterns in successful trades"""
+        successful_trades = [t for t in trading_history if t.get('pnl', 0) > 0]
+        
+        patterns = []
+        
+        # Market condition patterns
+        market_patterns = self.analyze_market_patterns(successful_trades)
+        patterns.extend(market_patterns)
+        
+        # Algorithm patterns
+        algorithm_patterns = self.analyze_algorithm_patterns(successful_trades)
+        patterns.extend(algorithm_patterns)
+        
+        # Timing patterns
+        timing_patterns = self.analyze_timing_patterns(successful_trades)
+        patterns.extend(timing_patterns)
+        
+        return patterns
+    
+    def identify_failure_patterns(self, trading_history: List[Dict]) -> List[Dict]:
+        """Identify patterns in failed trades"""
+        failed_trades = [t for t in trading_history if t.get('pnl', 0) <= 0]
+        
+        patterns = []
+        
+        # Market condition patterns
+        market_patterns = self.analyze_market_patterns(failed_trades)
+        patterns.extend(market_patterns)
+        
+        # Algorithm patterns
+        algorithm_patterns = self.analyze_algorithm_patterns(failed_trades)
+        patterns.extend(algorithm_patterns)
+        
+        # Timing patterns
+        timing_patterns = self.analyze_timing_patterns(failed_trades)
+        patterns.extend(timing_patterns)
+        
+        return patterns
+    
+    def generate_optimization_recommendations(self, performance_analysis: Dict[str, Any],
+                                           successful_patterns: List[Dict],
+                                           failure_patterns: List[Dict]) -> List[Dict]:
+        """Generate optimization recommendations based on analysis"""
+        recommendations = []
+        
+        # Algorithm optimization recommendations
+        algo_recommendations = self.generate_algorithm_optimizations(
+            performance_analysis, successful_patterns, failure_patterns
+        )
+        recommendations.extend(algo_recommendations)
+        
+        # Risk management optimization recommendations
+        risk_recommendations = self.generate_risk_optimizations(performance_analysis)
+        recommendations.extend(risk_recommendations)
+        
+        # Market condition optimization recommendations
+        market_recommendations = self.generate_market_optimizations(
+            performance_analysis, successful_patterns, failure_patterns
+        )
+        recommendations.extend(market_recommendations)
+        
+        return recommendations
+    
+    async def apply_optimizations(self, optimizations: List[Dict]) -> List[Dict]:
+        """Apply optimization recommendations"""
+        results = []
+        
+        for optimization in optimizations:
+            try:
+                if optimization['type'] == 'algorithm_parameter':
+                    result = await self.optimize_algorithm_parameters(optimization)
+                elif optimization['type'] == 'risk_management':
+                    result = await self.optimize_risk_management(optimization)
+                elif optimization['type'] == 'market_condition':
+                    result = await self.optimize_market_conditions(optimization)
+                else:
+                    result = {'status': 'unknown_optimization_type'}
+                
+                results.append({
+                    'optimization': optimization,
+                    'result': result
+                })
+                
+            except Exception as e:
+                logger.error(f"Error applying optimization: {e}")
+                results.append({
+                    'optimization': optimization,
+                    'result': {'status': 'error', 'error': str(e)}
+                })
+        
+        return results
+    
+    async def update_algorithm_parameters(self, optimization_results: List[Dict]):
+        """Update algorithm parameters based on optimization results"""
+        for result in optimization_results:
+            if result['result']['status'] == 'success':
+                optimization = result['optimization']
+                
+                if optimization['type'] == 'algorithm_parameter':
+                    # Update algorithm parameters in database
+                    await self.db.update_algorithm_parameters(
+                        algorithm_name=optimization['algorithm_name'],
+                        new_parameters=optimization['new_parameters']
+                    )
+                    
+                    logger.info(f"Updated parameters for {optimization['algorithm_name']}")
+    
+    async def retrain_models_if_needed(self, performance_analysis: Dict[str, Any]):
+        """Retrain ML models if performance is poor"""
+        # Check if performance is below threshold
+        if performance_analysis.get('sharpe_ratio', 0) < 0.5:
+            logger.info("Performance below threshold, retraining models")
+            
+            # Retrain price prediction models
+            symbols = self.get_active_symbols()
+            for symbol in symbols:
+                try:
+                    await self.ml_engine.train_price_prediction_model(symbol)
+                    await self.ml_engine.train_lstm_model(symbol)
+                    logger.info(f"Retrained models for {symbol}")
+                except Exception as e:
+                    logger.error(f"Error retraining models for {symbol}: {e}")
+```
+
+### 14.6 ML Architecture Overview
+```python
+# ML Engine for predictive trading models
+import numpy as np
+import pandas as pd
+from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
+from sklearn.preprocessing import StandardScaler
+from sklearn.model_selection import TimeSeriesSplit
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dense, Dropout
+import joblib
+import pickle
+
+class MLTradingEngine:
+    """Machine Learning engine for predictive trading models"""
+    
+    def __init__(self, db_manager, model_storage_path="./models"):
+        self.db = db_manager
+        self.model_storage_path = model_storage_path
+        self.models = {}
+        self.scalers = {}
+        self.feature_importance = {}
+        
+    def create_features(self, market_data):
+        """Create technical features for ML models"""
+        features = pd.DataFrame()
+        
+        # Price-based features
+        features['price_change'] = market_data['close'].pct_change()
+        features['price_volatility'] = market_data['close'].rolling(20).std()
+        features['price_momentum'] = market_data['close'] - market_data['close'].shift(5)
+        
+        # Volume features
+        features['volume_change'] = market_data['volume'].pct_change()
+        features['volume_ma_ratio'] = market_data['volume'] / market_data['volume'].rolling(20).mean()
+        
+        # Technical indicators
+        features['rsi'] = self.calculate_rsi(market_data['close'])
+        features['macd'] = self.calculate_macd(market_data['close'])
+        features['bollinger_position'] = self.calculate_bollinger_position(market_data)
+        
+        # Time-based features
+        features['day_of_week'] = market_data.index.dayofweek
+        features['month'] = market_data.index.month
+        features['quarter'] = market_data.index.quarter
+        
+        return features.dropna()
+    
+    def train_price_prediction_model(self, symbol, lookback_days=252):
+        """Train price prediction model using Random Forest"""
+        # Get historical data
+        market_data = self.db.get_market_data(symbol, '1day', lookback_days)
+        
+        # Create features
+        features = self.create_features(market_data)
+        
+        # Create target (next day's price change)
+        target = market_data['close'].pct_change().shift(-1)
+        
+        # Align features and target
+        data = pd.concat([features, target], axis=1).dropna()
+        X = data.iloc[:, :-1]
+        y = data.iloc[:, -1]
+        
+        # Split data (time series split)
+        tscv = TimeSeriesSplit(n_splits=5)
+        
+        # Train model
+        model = RandomForestRegressor(
+            n_estimators=100,
+            max_depth=10,
+            random_state=42
+        )
+        
+        # Cross-validation
+        scores = []
+        for train_idx, val_idx in tscv.split(X):
+            X_train, X_val = X.iloc[train_idx], X.iloc[val_idx]
+            y_train, y_val = y.iloc[train_idx], y.iloc[val_idx]
+            
+            model.fit(X_train, y_train)
+            score = model.score(X_val, y_val)
+            scores.append(score)
+        
+        # Train final model on all data
+        model.fit(X, y)
+        
+        # Store model and feature importance
+        self.models[f'{symbol}_price_prediction'] = model
+        self.feature_importance[f'{symbol}_price_prediction'] = dict(zip(X.columns, model.feature_importances_))
+        
+        # Save model
+        self.save_model(f'{symbol}_price_prediction', model)
+        
+        return {
+            'model_name': f'{symbol}_price_prediction',
+            'cv_score': np.mean(scores),
+            'feature_importance': self.feature_importance[f'{symbol}_price_prediction']
+        }
+    
+    def train_lstm_model(self, symbol, lookback_days=252):
+        """Train LSTM model for sequence prediction"""
+        # Get historical data
+        market_data = self.db.get_market_data(symbol, '1day', lookback_days)
+        
+        # Create features
+        features = self.create_features(market_data)
+        
+        # Normalize features
+        scaler = StandardScaler()
+        features_scaled = scaler.fit_transform(features)
+        
+        # Create sequences for LSTM
+        sequence_length = 60
+        X, y = self.create_sequences(features_scaled, sequence_length)
+        
+        # Split data
+        split_idx = int(0.8 * len(X))
+        X_train, X_test = X[:split_idx], X[split_idx:]
+        y_train, y_test = y[:split_idx], y[split_idx:]
+        
+        # Build LSTM model
+        model = Sequential([
+            LSTM(50, return_sequences=True, input_shape=(sequence_length, features_scaled.shape[1])),
+            Dropout(0.2),
+            LSTM(50, return_sequences=False),
+            Dropout(0.2),
+            Dense(25),
+            Dense(1)
+        ])
+        
+        model.compile(optimizer='adam', loss='mse')
+        
+        # Train model
+        history = model.fit(
+            X_train, y_train,
+            epochs=50,
+            batch_size=32,
+            validation_data=(X_test, y_test),
+            verbose=0
+        )
+        
+        # Store model and scaler
+        self.models[f'{symbol}_lstm'] = model
+        self.scalers[f'{symbol}_lstm'] = scaler
+        
+        # Save model
+        self.save_model(f'{symbol}_lstm', model, scaler)
+        
+        return {
+            'model_name': f'{symbol}_lstm',
+            'val_loss': min(history.history['val_loss']),
+            'training_loss': min(history.history['loss'])
+        }
+    
+    def predict_price_movement(self, symbol, model_type='price_prediction'):
+        """Predict price movement for a symbol"""
+        if f'{symbol}_{model_type}' not in self.models:
+            raise ValueError(f"Model {symbol}_{model_type} not found. Train it first.")
+        
+        # Get recent market data
+        market_data = self.db.get_market_data(symbol, '1day', 100)
+        features = self.create_features(market_data)
+        
+        if model_type == 'price_prediction':
+            # Random Forest prediction
+            model = self.models[f'{symbol}_{model_type}']
+            latest_features = features.iloc[-1:].values
+            prediction = model.predict(latest_features)[0]
+            
+            return {
+                'predicted_change': prediction,
+                'confidence': self.calculate_prediction_confidence(model, latest_features),
+                'direction': 'up' if prediction > 0 else 'down'
+            }
+        
+        elif model_type == 'lstm':
+            # LSTM prediction
+            model = self.models[f'{symbol}_{model_type}']
+            scaler = self.scalers[f'{symbol}_{model_type}']
+            
+            # Prepare sequence
+            features_scaled = scaler.transform(features)
+            sequence = features_scaled[-60:].reshape(1, 60, features_scaled.shape[1])
+            
+            prediction = model.predict(sequence)[0][0]
+            
+            return {
+                'predicted_change': prediction,
+                'confidence': 0.8,  # LSTM confidence calculation
+                'direction': 'up' if prediction > 0 else 'down'
+            }
+    
+    def create_sequences(self, data, sequence_length):
+        """Create sequences for LSTM training"""
+        X, y = [], []
+        for i in range(sequence_length, len(data)):
+            X.append(data[i-sequence_length:i])
+            y.append(data[i, 0])  # Predict price change
+        return np.array(X), np.array(y)
+    
+    def calculate_prediction_confidence(self, model, features):
+        """Calculate prediction confidence using model uncertainty"""
+        if hasattr(model, 'estimators_'):
+            # For ensemble models, use variance of predictions
+            predictions = [estimator.predict(features)[0] for estimator in model.estimators_]
+            confidence = 1 - np.std(predictions)
+            return max(0, min(1, confidence))
+        else:
+            return 0.7  # Default confidence
+    
+    def save_model(self, model_name, model, scaler=None):
+        """Save trained model"""
+        model_path = f"{self.model_storage_path}/{model_name}"
+        
+        if isinstance(model, tf.keras.Model):
+            model.save(f"{model_path}.h5")
+        else:
+            joblib.dump(model, f"{model_path}.pkl")
+        
+        if scaler is not None:
+            joblib.dump(scaler, f"{model_path}_scaler.pkl")
+    
+    def load_model(self, model_name):
+        """Load trained model"""
+        model_path = f"{self.model_storage_path}/{model_name}"
+        
+        if os.path.exists(f"{model_path}.h5"):
+            model = tf.keras.models.load_model(f"{model_path}.h5")
+        else:
+            model = joblib.load(f"{model_path}.pkl")
+        
+        if os.path.exists(f"{model_path}_scaler.pkl"):
+            scaler = joblib.load(f"{model_path}_scaler.pkl")
+            return model, scaler
+        
+        return model
+```
+
+### 14.2 ML Strategy Integration
+```python
+class MLStrategy:
+    """ML-enhanced trading strategy"""
+    
+    def __init__(self, ml_engine, base_strategy):
+        self.ml_engine = ml_engine
+        self.base_strategy = base_strategy
+        self.ml_weight = 0.3  # Weight for ML predictions
+    
+    def calculate_signals(self, data, symbol):
+        """Combine traditional signals with ML predictions"""
+        # Get base strategy signals
+        base_buy, base_sell = self.base_strategy.calculate_signals(data)
+        
+        # Get ML predictions
+        try:
+            ml_prediction = self.ml_engine.predict_price_movement(symbol)
+            
+            # Combine signals
+            if ml_prediction['direction'] == 'up' and ml_prediction['confidence'] > 0.6:
+                ml_buy_signal = True
+                ml_sell_signal = False
+            elif ml_prediction['direction'] == 'down' and ml_prediction['confidence'] > 0.6:
+                ml_buy_signal = False
+                ml_sell_signal = True
+            else:
+                ml_buy_signal = False
+                ml_sell_signal = False
+            
+            # Weighted combination
+            final_buy = (base_buy.iloc[-1] * (1 - self.ml_weight) + 
+                        ml_buy_signal * self.ml_weight * ml_prediction['confidence'])
+            final_sell = (base_sell.iloc[-1] * (1 - self.ml_weight) + 
+                         ml_sell_signal * self.ml_weight * ml_prediction['confidence'])
+            
+            return final_buy > 0.5, final_sell > 0.5
+            
+        except Exception as e:
+            # Fallback to base strategy if ML fails
+            logger.warning(f"ML prediction failed for {symbol}: {e}")
+            return base_buy.iloc[-1], base_sell.iloc[-1]
+```
+
+### 14.3 Model Performance Monitoring
+```python
+class MLPerformanceMonitor:
+    """Monitor ML model performance"""
+    
+    def __init__(self, db_manager):
+        self.db = db_manager
+    
+    def track_prediction_accuracy(self, symbol, model_name, predictions, actual_outcomes):
+        """Track prediction accuracy over time"""
+        accuracy_data = {
+            'symbol': symbol,
+            'model_name': model_name,
+            'predictions': predictions,
+            'actual_outcomes': actual_outcomes,
+            'timestamp': datetime.now()
+        }
+        
+        # Calculate accuracy metrics
+        correct_predictions = sum(1 for p, a in zip(predictions, actual_outcomes) if p == a)
+        accuracy = correct_predictions / len(predictions)
+        
+        accuracy_data['accuracy'] = accuracy
+        
+        # Store in database
+        self.db.store_ml_performance(accuracy_data)
+        
+        return accuracy
+    
+    def generate_performance_report(self, symbol, model_name, days=30):
+        """Generate ML performance report"""
+        performance_data = self.db.get_ml_performance(symbol, model_name, days)
+        
+        report = {
+            'symbol': symbol,
+            'model_name': model_name,
+            'period_days': days,
+            'total_predictions': len(performance_data),
+            'average_accuracy': np.mean([p['accuracy'] for p in performance_data]),
+            'recent_trend': self.calculate_trend(performance_data)
+        }
+        
+        return report
+```
+
+### 14.4 AI-Driven Autonomous Trading System
+```python
+class AutonomousTradingAI:
+    """AI-driven autonomous trading system with algorithm discovery and optimization"""
+    
+    def __init__(self, db_manager, alpaca_api, trading_config):
+        self.db = db_manager
+        self.api = alpaca_api
+        self.config = trading_config
+        self.ml_engine = MLTradingEngine(db_manager)
+        self.llm_interface = AITradingInterface(db_manager)
+        self.algorithm_discovery = AlgorithmDiscoveryEngine()
+        self.market_analyzer = MarketTypeAnalyzer()
+        self.trading_executor = AutonomousTradingExecutor(alpaca_api, db_manager)
+        self.performance_optimizer = PerformanceOptimizer(db_manager)
+        
+        # AI state management
+        self.discovered_algorithms = {}
+        self.market_classifications = {}
+        self.active_trades = {}
+        self.performance_history = []
+        
+    async def run_autonomous_trading_cycle(self):
+        """Main autonomous trading cycle"""
+        while True:
+            try:
+                # Step 1: Discover and optimize algorithms
+                await self.discover_and_optimize_algorithms()
+                
+                # Step 2: Analyze market conditions and stock types
+                await self.analyze_market_conditions()
+                
+                # Step 3: Execute trades based on AI decisions
+                await self.execute_ai_trades()
+                
+                # Step 4: Learn from results and optimize
+                await self.learn_and_optimize()
+                
+                # Wait for next cycle
+                await asyncio.sleep(self.config['cycle_interval'])
+                
+            except Exception as e:
+                logger.error(f"Error in autonomous trading cycle: {e}")
+                await asyncio.sleep(60)  # Wait before retry
+```
+
+### 14.5 AI Algorithm Discovery Engine
+```python
+class AlgorithmDiscoveryEngine:
+    """AI engine for automatically discovering and optimizing trading algorithms"""
+    
+    def __init__(self, db_manager, backtesting_engine):
+        self.db = db_manager
+        self.backtester = backtesting_engine
+        self.algorithm_templates = self.load_algorithm_templates()
+        self.discovered_algorithms = {}
+        
+    def load_algorithm_templates(self):
+        """Load base algorithm templates for AI to modify"""
+        return {
+            'trend_following': {
+                'base_class': 'MovingAverageStrategy',
+                'parameters': ['fast_period', 'slow_period', 'signal_period'],
+                'constraints': {'fast_period': (5, 50), 'slow_period': (10, 200)}
+            },
+            'mean_reversion': {
+                'base_class': 'BollingerBandsStrategy',
+                'parameters': ['period', 'std_dev', 'threshold'],
+                'constraints': {'period': (10, 100), 'std_dev': (1, 3)}
+            },
+            'momentum': {
+                'base_class': 'RSIStrategy',
+                'parameters': ['period', 'oversold', 'overbought'],
+                'constraints': {'period': (5, 30), 'oversold': (10, 40)}
+            },
+            'volatility': {
+                'base_class': 'ATRStrategy',
+                'parameters': ['period', 'multiplier'],
+                'constraints': {'period': (10, 50), 'multiplier': (1, 5)}
+            }
+        }
+    
+    async def discover_algorithms_for_symbol(self, symbol: str, market_data: pd.DataFrame):
+        """AI-driven algorithm discovery for a specific symbol"""
+        logger.info(f"Starting AI algorithm discovery for {symbol}")
+        
+        # Analyze market characteristics
+        market_profile = self.analyze_market_profile(market_data)
+        
+        # Generate algorithm candidates
+        candidates = self.generate_algorithm_candidates(market_profile)
+        
+        # Backtest all candidates
+        results = await self.backtest_candidates(symbol, candidates, market_data)
+        
+        # Select best algorithms
+        best_algorithms = self.select_best_algorithms(results, market_profile)
+        
+        # Store discovered algorithms
+        self.discovered_algorithms[symbol] = best_algorithms
+        
+        logger.info(f"Discovered {len(best_algorithms)} algorithms for {symbol}")
+        return best_algorithms
+    
+    def analyze_market_profile(self, market_data: pd.DataFrame) -> Dict[str, Any]:
+        """Analyze market characteristics to guide algorithm selection"""
+        profile = {}
+        
+        # Volatility analysis
+        returns = market_data['close'].pct_change()
+        profile['volatility'] = returns.std() * np.sqrt(252)
+        profile['volatility_regime'] = 'high' if profile['volatility'] > 0.3 else 'low'
+        
+        # Trend analysis
+        sma_20 = market_data['close'].rolling(20).mean()
+        sma_50 = market_data['close'].rolling(50).mean()
+        profile['trend_strength'] = abs(sma_20.iloc[-1] - sma_50.iloc[-1]) / sma_50.iloc[-1]
+        profile['trend_direction'] = 'up' if sma_20.iloc[-1] > sma_50.iloc[-1] else 'down'
+        
+        # Volume analysis
+        volume_ma = market_data['volume'].rolling(20).mean()
+        profile['volume_trend'] = 'increasing' if volume_ma.iloc[-1] > volume_ma.iloc[-20] else 'decreasing'
+        
+        # Price pattern analysis
+        profile['price_pattern'] = self.detect_price_patterns(market_data)
+        
+        # Market efficiency
+        profile['market_efficiency'] = self.calculate_market_efficiency(market_data)
+        
+        return profile
+    
+    def generate_algorithm_candidates(self, market_profile: Dict[str, Any]) -> List[Dict]:
+        """Generate algorithm candidates based on market profile"""
+        candidates = []
+        
+        # High volatility markets - favor mean reversion
+        if market_profile['volatility_regime'] == 'high':
+            candidates.extend(self.generate_mean_reversion_candidates(market_profile))
+        
+        # Strong trend markets - favor trend following
+        if market_profile['trend_strength'] > 0.05:
+            candidates.extend(self.generate_trend_following_candidates(market_profile))
+        
+        # Low efficiency markets - favor momentum
+        if market_profile['market_efficiency'] < 0.7:
+            candidates.extend(self.generate_momentum_candidates(market_profile))
+        
+        # Add hybrid algorithms
+        candidates.extend(self.generate_hybrid_candidates(market_profile))
+        
+        return candidates
+    
+    def generate_mean_reversion_candidates(self, market_profile: Dict[str, Any]) -> List[Dict]:
+        """Generate mean reversion algorithm candidates"""
+        candidates = []
+        
+        # Bollinger Bands variations
+        for period in range(10, 51, 10):
+            for std_dev in [1.5, 2.0, 2.5]:
+                candidates.append({
+                    'type': 'mean_reversion',
+                    'name': f'BB_MeanReversion_{period}_{std_dev}',
+                    'parameters': {
+                        'period': period,
+                        'std_dev': std_dev,
+                        'threshold': 0.1
+                    },
+                    'base_class': 'BollingerBandsStrategy'
+                })
+        
+        # RSI mean reversion
+        for period in range(10, 31, 5):
+            candidates.append({
+                'type': 'mean_reversion',
+                'name': f'RSI_MeanReversion_{period}',
+                'parameters': {
+                    'period': period,
+                    'oversold': 30,
+                    'overbought': 70
+                },
+                'base_class': 'RSIStrategy'
+            })
+        
+        return candidates
+    
+    def generate_trend_following_candidates(self, market_profile: Dict[str, Any]) -> List[Dict]:
+        """Generate trend following algorithm candidates"""
+        candidates = []
+        
+        # Moving average crossovers
+        for fast in range(5, 21, 5):
+            for slow in range(fast + 10, 101, 20):
+                candidates.append({
+                    'type': 'trend_following',
+                    'name': f'MA_Crossover_{fast}_{slow}',
+                    'parameters': {
+                        'fast_period': fast,
+                        'slow_period': slow,
+                        'signal_period': 9
+                    },
+                    'base_class': 'MovingAverageStrategy'
+                })
+        
+        # MACD variations
+        for fast in [12, 15, 18]:
+            for slow in [26, 30, 35]:
+                candidates.append({
+                    'type': 'trend_following',
+                    'name': f'MACD_{fast}_{slow}',
+                    'parameters': {
+                        'fast_period': fast,
+                        'slow_period': slow,
+                        'signal_period': 9
+                    },
+                    'base_class': 'MACDStrategy'
+                })
+        
+        return candidates
+    
+    async def backtest_candidates(self, symbol: str, candidates: List[Dict], 
+                                market_data: pd.DataFrame) -> List[Dict]:
+        """Backtest all algorithm candidates"""
+        results = []
+        
+        for candidate in candidates:
+            try:
+                # Create strategy instance
+                strategy = self.create_strategy_instance(candidate)
+                
+                # Run backtest
+                backtest_result = await self.backtester.run_backtest(
+                    strategy_config=candidate,
+                    symbols=[symbol],
+                    start_date=market_data.index[0].strftime('%Y-%m-%d'),
+                    end_date=market_data.index[-1].strftime('%Y-%m-%d'),
+                    initial_capital=100000
+                )
+                
+                # Add candidate info to results
+                backtest_result['candidate'] = candidate
+                results.append(backtest_result)
+                
+            except Exception as e:
+                logger.error(f"Backtest failed for {candidate['name']}: {e}")
+                continue
+        
+        return results
+    
+    def select_best_algorithms(self, results: List[Dict], market_profile: Dict[str, Any]) -> List[Dict]:
+        """Select best algorithms based on performance and market fit"""
+        # Score algorithms based on multiple criteria
+        scored_algorithms = []
+        
+        for result in results:
+            score = self.calculate_algorithm_score(result, market_profile)
+            scored_algorithms.append({
+                'algorithm': result['candidate'],
+                'performance': result['performance_metrics'],
+                'score': score,
+                'backtest_result': result
+            })
+        
+        # Sort by score and select top performers
+        scored_algorithms.sort(key=lambda x: x['score'], reverse=True)
+        
+        # Select top 3 algorithms
+        best_algorithms = scored_algorithms[:3]
+        
+        return best_algorithms
+    
+    def calculate_algorithm_score(self, result: Dict, market_profile: Dict[str, Any]) -> float:
+        """Calculate comprehensive algorithm score"""
+        metrics = result['performance_metrics']
+        
+        # Base performance score (40%)
+        sharpe_score = min(metrics['sharpe_ratio'] / 2.0, 1.0)  # Normalize to 0-1
+        return_score = min(metrics['total_return'] / 0.5, 1.0)  # Normalize to 0-1
+        performance_score = (sharpe_score + return_score) / 2
+        
+        # Risk score (30%)
+        max_dd_score = max(0, 1 - metrics['max_drawdown'] / 0.3)  # Penalize high drawdown
+        win_rate_score = metrics['win_rate']
+        risk_score = (max_dd_score + win_rate_score) / 2
+        
+        # Market fit score (30%)
+        market_fit_score = self.calculate_market_fit_score(result['candidate'], market_profile)
+        
+        # Weighted final score
+        final_score = (performance_score * 0.4 + risk_score * 0.3 + market_fit_score * 0.3)
+        
+        return final_score
+    
+    def calculate_market_fit_score(self, algorithm: Dict, market_profile: Dict[str, Any]) -> float:
+        """Calculate how well algorithm fits current market conditions"""
+        algorithm_type = algorithm['type']
+        
+        if algorithm_type == 'mean_reversion' and market_profile['volatility_regime'] == 'high':
+            return 0.9
+        elif algorithm_type == 'trend_following' and market_profile['trend_strength'] > 0.05:
+            return 0.9
+        elif algorithm_type == 'momentum' and market_profile['market_efficiency'] < 0.7:
+            return 0.8
+        else:
+            return 0.5  # Neutral fit
+```
+
+### 14.6 AI Market Type Analyzer
+```python
+class MarketTypeAnalyzer:
+    """AI engine for understanding market types and stock characteristics"""
+    
+    def __init__(self, db_manager):
+        self.db = db_manager
+        self.market_classifications = {}
+        self.stock_profiles = {}
+        
+    async def analyze_market_type(self, symbol: str, market_data: pd.DataFrame) -> Dict[str, Any]:
+        """Analyze market type and characteristics for a symbol"""
+        logger.info(f"Analyzing market type for {symbol}")
+        
+        # Basic market characteristics
+        market_profile = self.calculate_market_characteristics(market_data)
+        
+        # Market regime classification
+        market_regime = self.classify_market_regime(market_profile)
+        
+        # Stock type classification
+        stock_type = self.classify_stock_type(market_profile)
+        
+        # Volatility clustering
+        volatility_cluster = self.analyze_volatility_clustering(market_data)
+        
+        # Liquidity analysis
+        liquidity_profile = self.analyze_liquidity(market_data)
+        
+        # Correlation analysis
+        correlation_profile = self.analyze_correlations(symbol, market_data)
+        
+        classification = {
+            'symbol': symbol,
+            'market_regime': market_regime,
+            'stock_type': stock_type,
+            'volatility_cluster': volatility_cluster,
+            'liquidity_profile': liquidity_profile,
+            'correlation_profile': correlation_profile,
+            'market_profile': market_profile,
+            'timestamp': datetime.now()
+        }
+        
+        # Store classification
+        self.market_classifications[symbol] = classification
+        self.db.store_market_classification(classification)
+        
+        return classification
+    
+    def calculate_market_characteristics(self, market_data: pd.DataFrame) -> Dict[str, Any]:
+        """Calculate comprehensive market characteristics"""
+        characteristics = {}
+        
+        # Price characteristics
+        returns = market_data['close'].pct_change().dropna()
+        characteristics['daily_volatility'] = returns.std()
+        characteristics['annualized_volatility'] = returns.std() * np.sqrt(252)
+        characteristics['skewness'] = returns.skew()
+        characteristics['kurtosis'] = returns.kurtosis()
+        
+        # Volume characteristics
+        characteristics['avg_volume'] = market_data['volume'].mean()
+        characteristics['volume_volatility'] = market_data['volume'].std()
+        characteristics['volume_trend'] = self.calculate_volume_trend(market_data)
+        
+        # Price trend characteristics
+        characteristics['trend_strength'] = self.calculate_trend_strength(market_data)
+        characteristics['mean_reversion_tendency'] = self.calculate_mean_reversion_tendency(market_data)
+        
+        # Market efficiency
+        characteristics['market_efficiency'] = self.calculate_market_efficiency(market_data)
+        
+        return characteristics
+    
+    def classify_market_regime(self, market_profile: Dict[str, Any]) -> str:
+        """Classify current market regime"""
+        volatility = market_profile['annualized_volatility']
+        trend_strength = market_profile['trend_strength']
+        efficiency = market_profile['market_efficiency']
+        
+        if volatility > 0.4:
+            if trend_strength > 0.1:
+                return 'high_volatility_trending'
+            else:
+                return 'high_volatility_choppy'
+        elif volatility < 0.15:
+            if trend_strength > 0.05:
+                return 'low_volatility_trending'
+            else:
+                return 'low_volatility_sideways'
+        else:
+            if trend_strength > 0.08:
+                return 'moderate_volatility_trending'
+            else:
+                return 'moderate_volatility_sideways'
+    
+    def classify_stock_type(self, market_profile: Dict[str, Any]) -> str:
+        """Classify stock type based on characteristics"""
+        volatility = market_profile['annualized_volatility']
+        volume = market_profile['avg_volume']
+        efficiency = market_profile['market_efficiency']
+        
+        if volatility > 0.5 and volume > 10000000:
+            return 'high_volatility_liquid'
+        elif volatility > 0.5 and volume < 1000000:
+            return 'high_volatility_illiquid'
+        elif volatility < 0.2 and volume > 5000000:
+            return 'low_volatility_liquid'
+        elif volatility < 0.2 and volume < 1000000:
+            return 'low_volatility_illiquid'
+        elif efficiency > 0.8:
+            return 'efficient_market'
+        else:
+            return 'inefficient_market'
+    
+    def analyze_volatility_clustering(self, market_data: pd.DataFrame) -> Dict[str, Any]:
+        """Analyze volatility clustering patterns"""
+        returns = market_data['close'].pct_change().dropna()
+        
+        # Calculate rolling volatility
+        rolling_vol = returns.rolling(20).std()
+        
+        # Detect volatility clusters
+        high_vol_periods = rolling_vol > rolling_vol.quantile(0.8)
+        low_vol_periods = rolling_vol < rolling_vol.quantile(0.2)
+        
+        # Calculate persistence
+        vol_persistence = self.calculate_persistence(high_vol_periods)
+        
+        return {
+            'volatility_persistence': vol_persistence,
+            'high_vol_frequency': high_vol_periods.mean(),
+            'low_vol_frequency': low_vol_periods.mean(),
+            'volatility_regime_switches': self.count_regime_switches(rolling_vol)
+        }
+    
+    def analyze_liquidity(self, market_data: pd.DataFrame) -> Dict[str, Any]:
+        """Analyze liquidity characteristics"""
+        volume = market_data['volume']
+        price = market_data['close']
+        
+        # Calculate various liquidity metrics
+        avg_daily_volume = volume.mean()
+        volume_consistency = volume.std() / volume.mean()
+        
+        # Bid-ask spread approximation (using high-low ratio)
+        spread_approx = (market_data['high'] - market_data['low']) / market_data['close']
+        avg_spread = spread_approx.mean()
+        
+        # Market impact estimation
+        price_impact = self.estimate_market_impact(volume, price)
+        
+        return {
+            'avg_daily_volume': avg_daily_volume,
+            'volume_consistency': volume_consistency,
+            'avg_spread': avg_spread,
+            'estimated_market_impact': price_impact,
+            'liquidity_score': self.calculate_liquidity_score(avg_daily_volume, avg_spread)
+        }
+    
+    def analyze_correlations(self, symbol: str, market_data: pd.DataFrame) -> Dict[str, Any]:
+        """Analyze correlations with market indices and sectors"""
+        # Get market indices data (S&P 500, NASDAQ, etc.)
+        sp500_data = self.db.get_market_data('SPY', '1day', len(market_data))
+        nasdaq_data = self.db.get_market_data('QQQ', '1day', len(market_data))
+        
+        # Calculate correlations
+        symbol_returns = market_data['close'].pct_change().dropna()
+        sp500_returns = sp500_data['close'].pct_change().dropna()
+        nasdaq_returns = nasdaq_data['close'].pct_change().dropna()
+        
+        # Align data
+        aligned_data = pd.concat([symbol_returns, sp500_returns, nasdaq_returns], axis=1).dropna()
+        
+        correlations = {
+            'sp500_correlation': aligned_data.iloc[:, 0].corr(aligned_data.iloc[:, 1]),
+            'nasdaq_correlation': aligned_data.iloc[:, 0].corr(aligned_data.iloc[:, 2]),
+            'beta_sp500': self.calculate_beta(aligned_data.iloc[:, 0], aligned_data.iloc[:, 1]),
+            'beta_nasdaq': self.calculate_beta(aligned_data.iloc[:, 0], aligned_data.iloc[:, 2])
+        }
+        
+        return correlations
+```
+
+### 14.7 Autonomous Trading Executor
+```python
+class AutonomousTradingExecutor:
+    """AI-driven autonomous trading execution system"""
+    
+    def __init__(self, alpaca_api, db_manager, trading_config):
+        self.api = alpaca_api
+        self.db = db_manager
+        self.config = trading_config
+        self.active_trades = {}
+        self.trading_history = []
+        
+    async def execute_ai_trades(self, symbol: str, algorithm_results: List[Dict], 
+                              market_classification: Dict[str, Any]) -> Dict[str, Any]:
+        """Execute trades based on AI decisions"""
+        logger.info(f"Executing AI trades for {symbol}")
+        
+        # Determine trading mode (live vs paper)
+        trading_mode = self.config.get('trading_mode', 'paper')
+        
+        # Get current market data
+        current_data = await self.get_current_market_data(symbol)
+        
+        # Generate trading signals from all algorithms
+        signals = await self.generate_consensus_signals(algorithm_results, current_data)
+        
+        # Apply market-specific adjustments
+        adjusted_signals = self.apply_market_adjustments(signals, market_classification)
+        
+        # Calculate position size
+        position_size = self.calculate_position_size(symbol, adjusted_signals, market_classification)
+        
+        # Execute trades
+        if trading_mode == 'live':
+            trade_result = await self.execute_live_trade(symbol, position_size, adjusted_signals)
+        else:
+            trade_result = await self.execute_paper_trade(symbol, position_size, adjusted_signals)
+        
+        # Store trade information
+        trade_info = {
+            'symbol': symbol,
+            'timestamp': datetime.now(),
+            'signals': signals,
+            'adjusted_signals': adjusted_signals,
+            'position_size': position_size,
+            'trade_result': trade_result,
+            'market_classification': market_classification,
+            'trading_mode': trading_mode
+        }
+        
+        self.trading_history.append(trade_info)
+        self.db.store_trade_execution(trade_info)
+        
+        return trade_info
+    
+    async def generate_consensus_signals(self, algorithm_results: List[Dict], 
+                                       current_data: pd.DataFrame) -> Dict[str, Any]:
+        """Generate consensus trading signals from multiple algorithms"""
+        signals = {
+            'buy_signals': [],
+            'sell_signals': [],
+            'hold_signals': [],
+            'confidence_scores': []
+        }
+        
+        for algorithm in algorithm_results:
+            try:
+                # Get algorithm instance
+                strategy = self.create_strategy_instance(algorithm['algorithm'])
+                
+                # Generate signals
+                buy_signal, sell_signal = strategy.calculate_signals(current_data)
+                
+                # Get confidence score
+                confidence = algorithm['score']
+                
+                signals['buy_signals'].append(buy_signal.iloc[-1] if buy_signal.iloc[-1] else False)
+                signals['sell_signals'].append(sell_signal.iloc[-1] if sell_signal.iloc[-1] else False)
+                signals['hold_signals'].append(not (buy_signal.iloc[-1] or sell_signal.iloc[-1]))
+                signals['confidence_scores'].append(confidence)
+                
+            except Exception as e:
+                logger.error(f"Error generating signals for algorithm: {e}")
+                continue
+        
+        # Calculate consensus
+        consensus = self.calculate_consensus(signals)
+        
+        return consensus
+    
+    def calculate_consensus(self, signals: Dict[str, List]) -> Dict[str, Any]:
+        """Calculate consensus from multiple algorithm signals"""
+        buy_count = sum(signals['buy_signals'])
+        sell_count = sum(signals['sell_signals'])
+        hold_count = sum(signals['hold_signals'])
+        total_algorithms = len(signals['buy_signals'])
+        
+        # Weighted consensus based on confidence scores
+        weighted_buy = sum([buy * conf for buy, conf in zip(signals['buy_signals'], signals['confidence_scores'])])
+        weighted_sell = sum([sell * conf for sell, conf in zip(signals['sell_signals'], signals['confidence_scores'])])
+        
+        avg_confidence = np.mean(signals['confidence_scores'])
+        
+        consensus = {
+            'action': self.determine_action(buy_count, sell_count, hold_count, total_algorithms),
+            'confidence': avg_confidence,
+            'buy_ratio': buy_count / total_algorithms,
+            'sell_ratio': sell_count / total_algorithms,
+            'hold_ratio': hold_count / total_algorithms,
+            'weighted_buy_score': weighted_buy,
+            'weighted_sell_score': weighted_sell
+        }
+        
+        return consensus
+    
+    def determine_action(self, buy_count: int, sell_count: int, hold_count: int, total: int) -> str:
+        """Determine trading action based on consensus"""
+        buy_ratio = buy_count / total
+        sell_ratio = sell_count / total
+        
+        if buy_ratio > 0.6:
+            return 'buy'
+        elif sell_ratio > 0.6:
+            return 'sell'
+        elif buy_ratio > sell_ratio and buy_ratio > 0.4:
+            return 'weak_buy'
+        elif sell_ratio > buy_ratio and sell_ratio > 0.4:
+            return 'weak_sell'
+        else:
+            return 'hold'
+    
+    def apply_market_adjustments(self, signals: Dict[str, Any], 
+                               market_classification: Dict[str, Any]) -> Dict[str, Any]:
+        """Apply market-specific adjustments to signals"""
+        adjusted_signals = signals.copy()
+        
+        market_regime = market_classification['market_regime']
+        stock_type = market_classification['stock_type']
+        
+        # Adjust confidence based on market conditions
+        if market_regime == 'high_volatility_choppy':
+            # Reduce confidence in choppy markets
+            adjusted_signals['confidence'] *= 0.8
+        elif market_regime == 'low_volatility_trending':
+            # Increase confidence in trending markets
+            adjusted_signals['confidence'] *= 1.1
+        
+        # Adjust position sizing based on stock type
+        if stock_type == 'high_volatility_illiquid':
+            # Reduce position size for illiquid stocks
+            adjusted_signals['position_multiplier'] = 0.7
+        elif stock_type == 'low_volatility_liquid':
+            # Increase position size for liquid stocks
+            adjusted_signals['position_multiplier'] = 1.2
+        else:
+            adjusted_signals['position_multiplier'] = 1.0
+        
+        return adjusted_signals
+    
+    def calculate_position_size(self, symbol: str, signals: Dict[str, Any], 
+                              market_classification: Dict[str, Any]) -> float:
+        """Calculate optimal position size based on AI signals and market conditions"""
+        base_position_size = self.config.get('base_position_size', 0.02)  # 2% of portfolio
+        
+        # Adjust based on signal confidence
+        confidence_multiplier = signals['confidence']
+        
+        # Adjust based on market conditions
+        market_multiplier = signals.get('position_multiplier', 1.0)
+        
+        # Adjust based on volatility
+        volatility = market_classification['market_profile']['annualized_volatility']
+        volatility_multiplier = 1.0 / (1.0 + volatility)  # Reduce size for high volatility
+        
+        # Calculate final position size
+        position_size = base_position_size * confidence_multiplier * market_multiplier * volatility_multiplier
+        
+        # Apply limits
+        max_position = self.config.get('max_position_size', 0.05)  # 5% max
+        position_size = min(position_size, max_position)
+        
+        return position_size
+    
+    async def execute_live_trade(self, symbol: str, position_size: float, 
+                               signals: Dict[str, Any]) -> Dict[str, Any]:
+        """Execute live trade via Alpaca API"""
+        try:
+            # Get current account information
+            account = self.api.get_account()
+            portfolio_value = float(account.portfolio_value)
+            
+            # Calculate quantity
+            current_price = await self.get_current_price(symbol)
+            quantity = int((portfolio_value * position_size) / current_price)
+            
+            if quantity <= 0:
+                return {'status': 'no_trade', 'reason': 'insufficient_position_size'}
+            
+            # Place order
+            if signals['action'] == 'buy':
+                order = self.api.submit_order(
+                    symbol=symbol,
+                    qty=quantity,
+                    side='buy',
+                    type='market',
+                    time_in_force='day'
+                )
+            elif signals['action'] == 'sell':
+                order = self.api.submit_order(
+                    symbol=symbol,
+                    qty=quantity,
+                    side='sell',
+                    type='market',
+                    time_in_force='day'
+                )
+            else:
+                return {'status': 'no_trade', 'reason': 'hold_signal'}
+            
+            return {
+                'status': 'executed',
+                'order_id': order.id,
+                'symbol': symbol,
+                'quantity': quantity,
+                'side': signals['action'],
+                'price': current_price
+            }
+            
+        except Exception as e:
+            logger.error(f"Error executing live trade for {symbol}: {e}")
+            return {'status': 'error', 'error': str(e)}
+    
+    async def execute_paper_trade(self, symbol: str, position_size: float, 
+                                signals: Dict[str, Any]) -> Dict[str, Any]:
+        """Execute paper trade (simulation)"""
+        try:
+            # Get current price
+            current_price = await self.get_current_price(symbol)
+            
+            # Simulate trade execution
+            trade_id = f"paper_{symbol}_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+            
+            return {
+                'status': 'executed',
+                'order_id': trade_id,
+                'symbol': symbol,
+                'quantity': position_size,
+                'side': signals['action'],
+                'price': current_price,
+                'mode': 'paper'
+            }
+            
+        except Exception as e:
+            logger.error(f"Error executing paper trade for {symbol}: {e}")
+            return {'status': 'error', 'error': str(e)}
+```
+
+### 14.8 Performance Optimizer and Learning System
+```python
+class PerformanceOptimizer:
+    """AI system for learning from trading results and optimizing performance"""
+    
+    def __init__(self, db_manager, ml_engine):
+        self.db = db_manager
+        self.ml_engine = ml_engine
+        self.performance_history = []
+        self.optimization_results = {}
+        
+    async def learn_from_trading_results(self, trading_history: List[Dict]) -> Dict[str, Any]:
+        """Learn from trading results and optimize algorithms"""
+        logger.info("Starting performance optimization and learning")
+        
+        # Analyze trading performance
+        performance_analysis = self.analyze_trading_performance(trading_history)
+        
+        # Identify successful patterns
+        successful_patterns = self.identify_successful_patterns(trading_history)
+        
+        # Identify failure patterns
+        failure_patterns = self.identify_failure_patterns(trading_history)
+        
+        # Generate optimization recommendations
+        optimizations = self.generate_optimization_recommendations(
+            performance_analysis, successful_patterns, failure_patterns
+        )
+        
+        # Apply optimizations
+        optimization_results = await self.apply_optimizations(optimizations)
+        
+        # Update algorithm parameters
+        await self.update_algorithm_parameters(optimization_results)
+        
+        # Retrain models if necessary
+        await self.retrain_models_if_needed(performance_analysis)
+        
+        return {
+            'performance_analysis': performance_analysis,
+            'successful_patterns': successful_patterns,
+            'failure_patterns': failure_patterns,
+            'optimizations': optimizations,
+            'optimization_results': optimization_results
+        }
+    
+    def analyze_trading_performance(self, trading_history: List[Dict]) -> Dict[str, Any]:
+        """Analyze trading performance metrics"""
+        if not trading_history:
+            return {}
+        
+        # Calculate basic metrics
+        total_trades = len(trading_history)
+        successful_trades = len([t for t in trading_history if t.get('pnl', 0) > 0])
+        win_rate = successful_trades / total_trades if total_trades > 0 else 0
+        
+        # Calculate P&L metrics
+        pnls = [t.get('pnl', 0) for t in trading_history]
+        total_pnl = sum(pnls)
+        avg_pnl = np.mean(pnls) if pnls else 0
+        pnl_std = np.std(pnls) if pnls else 0
+        
+        # Calculate risk metrics
+        max_drawdown = self.calculate_max_drawdown(pnls)
+        sharpe_ratio = self.calculate_sharpe_ratio(pnls)
+        
+        # Analyze by market conditions
+        performance_by_market = self.analyze_performance_by_market_conditions(trading_history)
+        
+        # Analyze by algorithm
+        performance_by_algorithm = self.analyze_performance_by_algorithm(trading_history)
+        
+        return {
+            'total_trades': total_trades,
+            'win_rate': win_rate,
+            'total_pnl': total_pnl,
+            'avg_pnl': avg_pnl,
+            'pnl_std': pnl_std,
+            'max_drawdown': max_drawdown,
+            'sharpe_ratio': sharpe_ratio,
+            'performance_by_market': performance_by_market,
+            'performance_by_algorithm': performance_by_algorithm
+        }
+    
+    def identify_successful_patterns(self, trading_history: List[Dict]) -> List[Dict]:
+        """Identify patterns in successful trades"""
+        successful_trades = [t for t in trading_history if t.get('pnl', 0) > 0]
+        
+        patterns = []
+        
+        # Market condition patterns
+        market_patterns = self.analyze_market_patterns(successful_trades)
+        patterns.extend(market_patterns)
+        
+        # Algorithm patterns
+        algorithm_patterns = self.analyze_algorithm_patterns(successful_trades)
+        patterns.extend(algorithm_patterns)
+        
+        # Timing patterns
+        timing_patterns = self.analyze_timing_patterns(successful_trades)
+        patterns.extend(timing_patterns)
+        
+        return patterns
+    
+    def identify_failure_patterns(self, trading_history: List[Dict]) -> List[Dict]:
+        """Identify patterns in failed trades"""
+        failed_trades = [t for t in trading_history if t.get('pnl', 0) <= 0]
+        
+        patterns = []
+        
+        # Market condition patterns
+        market_patterns = self.analyze_market_patterns(failed_trades)
+        patterns.extend(market_patterns)
+        
+        # Algorithm patterns
+        algorithm_patterns = self.analyze_algorithm_patterns(failed_trades)
+        patterns.extend(algorithm_patterns)
+        
+        # Timing patterns
+        timing_patterns = self.analyze_timing_patterns(failed_trades)
+        patterns.extend(timing_patterns)
+        
+        return patterns
+    
+    def generate_optimization_recommendations(self, performance_analysis: Dict[str, Any],
+                                           successful_patterns: List[Dict],
+                                           failure_patterns: List[Dict]) -> List[Dict]:
+        """Generate optimization recommendations based on analysis"""
+        recommendations = []
+        
+        # Algorithm optimization recommendations
+        algo_recommendations = self.generate_algorithm_optimizations(
+            performance_analysis, successful_patterns, failure_patterns
+        )
+        recommendations.extend(algo_recommendations)
+        
+        # Risk management optimization recommendations
+        risk_recommendations = self.generate_risk_optimizations(performance_analysis)
+        recommendations.extend(risk_recommendations)
+        
+        # Market condition optimization recommendations
+        market_recommendations = self.generate_market_optimizations(
+            performance_analysis, successful_patterns, failure_patterns
+        )
+        recommendations.extend(market_recommendations)
+        
+        return recommendations
+    
+    async def apply_optimizations(self, optimizations: List[Dict]) -> List[Dict]:
+        """Apply optimization recommendations"""
+        results = []
+        
+        for optimization in optimizations:
+            try:
+                if optimization['type'] == 'algorithm_parameter':
+                    result = await self.optimize_algorithm_parameters(optimization)
+                elif optimization['type'] == 'risk_management':
+                    result = await self.optimize_risk_management(optimization)
+                elif optimization['type'] == 'market_condition':
+                    result = await self.optimize_market_conditions(optimization)
+                else:
+                    result = {'status': 'unknown_optimization_type'}
+                
+                results.append({
+                    'optimization': optimization,
+                    'result': result
+                })
+                
+            except Exception as e:
+                logger.error(f"Error applying optimization: {e}")
+                results.append({
+                    'optimization': optimization,
+                    'result': {'status': 'error', 'error': str(e)}
+                })
+        
+        return results
+    
+    async def update_algorithm_parameters(self, optimization_results: List[Dict]):
+        """Update algorithm parameters based on optimization results"""
+        for result in optimization_results:
+            if result['result']['status'] == 'success':
+                optimization = result['optimization']
+                
+                if optimization['type'] == 'algorithm_parameter':
+                    # Update algorithm parameters in database
+                    await self.db.update_algorithm_parameters(
+                        algorithm_name=optimization['algorithm_name'],
+                        new_parameters=optimization['new_parameters']
+                    )
+                    
+                    logger.info(f"Updated parameters for {optimization['algorithm_name']}")
+    
+    async def retrain_models_if_needed(self, performance_analysis: Dict[str, Any]):
+        """Retrain ML models if performance is poor"""
+        # Check if performance is below threshold
+        if performance_analysis.get('sharpe_ratio', 0) < 0.5:
+            logger.info("Performance below threshold, retraining models")
+            
+            # Retrain price prediction models
+            symbols = self.get_active_symbols()
+            for symbol in symbols:
+                try:
+                    await self.ml_engine.train_price_prediction_model(symbol)
+                    await self.ml_engine.train_lstm_model(symbol)
+                    logger.info(f"Retrained models for {symbol}")
+                except Exception as e:
+                    logger.error(f"Error retraining models for {symbol}: {e}")
+```
+
+## 15. LLM Interface with RAG
+
+### 15.1 Local LLM Integration
+```python
+from langchain.llms import Ollama
+from langchain.embeddings import HuggingFaceEmbeddings
+from langchain.vectorstores import Chroma
+from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain.chains import RetrievalQA
+
+class AITradingInterface:
+    def __init__(self, db_manager, vector_db_path="./vector_db"):
+        self.db = db_manager
+        self.llm = Ollama(model="llama2:13b")  # Local LLM
+        self.embeddings = HuggingFaceEmbeddings()
+        self.vector_db_path = vector_db_path
+        self.vector_db = self.initialize_vector_db()
+        self.qa_chain = RetrievalQA.from_chain_type(
+            llm=self.llm,
+            chain_type="stuff",
+            retriever=self.vector_db.as_retriever(search_kwargs={"k": 5})
+        )
+    
+    def initialize_vector_db(self):
+        """Initialize vector database with trading context"""
+        try:
+            vector_db = Chroma(
+                persist_directory=self.vector_db_path,
+                embedding_function=self.embeddings
+            )
+            return vector_db
+        except:
+            # Create new vector database
+            return self.create_vector_db()
+    
+    def create_vector_db(self):
+        """Create vector database with trading knowledge base"""
+        # Trading strategy documentation
+        strategy_docs = self.get_strategy_documentation()
+        
+        # Market analysis reports
+        market_docs = self.get_market_analysis_docs()
+        
+        # Historical trading data insights
+        historical_docs = self.get_historical_insights()
+        
+        # Combine all documents
+        all_docs = strategy_docs + market_docs + historical_docs
+        
+        # Split documents into chunks
+        text_splitter = RecursiveCharacterTextSplitter(
+            chunk_size=1000,
+            chunk_overlap=200
+        )
+        chunks = text_splitter.split_documents(all_docs)
+        
+        # Create vector database
+        vector_db = Chroma.from_documents(
+            documents=chunks,
+            embedding=self.embeddings,
+            persist_directory=self.vector_db_path
+        )
+        
+        return vector_db
+    
+    def process_query(self, user_query: str):
+        """Process user query with RAG context"""
+        try:
+            # Get relevant context from vector database
+            context = self.get_relevant_context(user_query)
+            
+            # Enhance query with context
+            enhanced_query = self.enhance_query_with_context(user_query, context)
+            
+            # Get LLM response
+            response = self.qa_chain.run(enhanced_query)
+            
+            # Extract trading recommendations
+            recommendations = self.extract_trading_recommendations(response)
+            
+            # Store interaction
+            self.store_ai_interaction(user_query, response, context, recommendations)
+            
+            return {
+                'response': response,
+                'recommendations': recommendations,
+                'confidence_score': self.calculate_confidence(response),
+                'context_used': context
+            }
+            
+        except Exception as e:
+            logger.error(f"Error processing AI query: {e}")
+            return {'error': str(e)}
+    
+    def get_relevant_context(self, query: str):
+        """Retrieve relevant context from vector database"""
+        # Search for similar documents
+        docs = self.vector_db.similarity_search(query, k=5)
+        
+        # Get recent market data
+        market_data = self.get_recent_market_data()
+        
+        # Get current portfolio state
+        portfolio_state = self.get_portfolio_state()
+        
+        # Get recent trading signals
+        recent_signals = self.get_recent_signals()
+        
+        context = {
+            'similar_docs': docs,
+            'market_data': market_data,
+            'portfolio_state': portfolio_state,
+            'recent_signals': recent_signals
+        }
+        
+        return context
+    
+    def enhance_query_with_context(self, query: str, context: dict):
+        """Enhance user query with relevant context"""
+        enhanced_query = f"""
+        Context:
+        - Current market conditions: {context['market_data']}
+        - Portfolio state: {context['portfolio_state']}
+        - Recent signals: {context['recent_signals']}
+        
+        User Query: {query}
+        
+        Please provide trading analysis and recommendations based on the above context.
+        """
+        return enhanced_query
+    
+    def extract_trading_recommendations(self, response: str):
+        """Extract trading recommendations from LLM response"""
+        # Use regex or NLP to extract specific recommendations
+        recommendations = {
+            'buy_signals': [],
+            'sell_signals': [],
+            'hold_recommendations': [],
+            'risk_warnings': [],
+            'strategy_suggestions': []
+        }
+        
+        # Parse response for specific patterns
+        # Implementation depends on LLM response format
+        
+        return recommendations
+    
+    def calculate_confidence(self, response: str):
+        """Calculate confidence score for AI response"""
+        # Analyze response quality and consistency
+        # Return score between 0 and 1
+        return 0.85  # Placeholder
+```
+
+### 15.2 AI Trading Analysis
+```python
+class AITradingAnalyzer:
+    def __init__(self, ai_interface, data_manager):
+        self.ai = ai_interface
+        self.data = data_manager
+    
+    def analyze_market_conditions(self, symbols: list):
+        """AI-powered market analysis"""
+        market_data = {}
+        for symbol in symbols:
+            # Get technical indicators
+            technical_data = self.get_technical_indicators(symbol)
+            
+            # Get fundamental data
+            fundamental_data = self.get_fundamental_data(symbol)
+            
+            # Get sentiment data
+            sentiment_data = self.get_sentiment_data(symbol)
+            
+            market_data[symbol] = {
+                'technical': technical_data,
+                'fundamental': fundamental_data,
+                'sentiment': sentiment_data
+            }
+        
+        # Generate AI analysis
+        analysis_query = f"Analyze market conditions for {symbols}: {market_data}"
+        analysis = self.ai.process_query(analysis_query)
+        
+        return analysis
+    
+    def generate_trading_signals(self, symbols: list):
+        """Generate AI-powered trading signals"""
+        signals = {}
+        
+        for symbol in symbols:
+            # Get current market data
+            current_data = self.data.get_market_data(symbol, '1day', 30)
+            
+            # Generate signal query
+            signal_query = f"""
+            Analyze {symbol} and generate trading signals:
+            - Current price: {current_data['close'].iloc[-1]}
+            - Technical indicators: {self.get_technical_indicators(symbol)}
+            - Market sentiment: {self.get_sentiment_data(symbol)}
+            
+            Provide specific buy/sell recommendations with confidence levels.
+            """
+            
+            signal_analysis = self.ai.process_query(signal_query)
+            signals[symbol] = signal_analysis
+        
+        return signals
+    
+    def optimize_strategy_parameters(self, strategy_name: str, historical_data: dict):
+        """AI-powered strategy parameter optimization"""
+        optimization_query = f"""
+        Optimize parameters for {strategy_name} strategy:
+        - Historical performance: {historical_data}
+        - Current market conditions: {self.get_market_conditions()}
+        
+        Suggest optimal parameter values and explain reasoning.
+        """
+        
+        optimization_result = self.ai.process_query(optimization_query)
+        return optimization_result
+    
+    def risk_assessment(self, portfolio: dict):
+        """AI-powered portfolio risk assessment"""
+        risk_query = f"""
+        Assess portfolio risk:
+        - Current positions: {portfolio['positions']}
+        - Market conditions: {self.get_market_conditions()}
+        - Correlation analysis: {self.get_correlation_analysis(portfolio)}
+        
+        Identify potential risks and suggest mitigation strategies.
+        """
+        
+        risk_analysis = self.ai.process_query(risk_query)
+        return risk_analysis
+```
+
+### 15.3 Natural Language Interface
+```python
+class NaturalLanguageInterface:
+    def __init__(self, ai_interface, trading_system):
+        self.ai = ai_interface
+        self.trading = trading_system
+        self.command_parser = self.initialize_command_parser()
+    
+    def process_natural_language_command(self, command: str):
+        """Process natural language commands"""
+        try:
+            # Parse command intent
+            intent = self.parse_intent(command)
+            
+            # Execute appropriate action
+            if intent['action'] == 'check_portfolio':
+                return self.get_portfolio_summary()
+            
+            elif intent['action'] == 'run_backtest':
+                return self.run_backtest_from_nl(command)
+            
+            elif intent['action'] == 'analyze_symbol':
+                return self.analyze_symbol_from_nl(command)
+            
+            elif intent['action'] == 'modify_strategy':
+                return self.modify_strategy_from_nl(command)
+            
+            elif intent['action'] == 'get_recommendations':
+                return self.get_ai_recommendations(command)
+            
+            else:
+                # Fallback to AI analysis
+                return self.ai.process_query(command)
+                
+        except Exception as e:
+            return f"Error processing command: {str(e)}"
+    
+    def parse_intent(self, command: str):
+        """Parse natural language command intent"""
+        # Use NLP or simple keyword matching
+        command_lower = command.lower()
+        
+        if any(word in command_lower for word in ['portfolio', 'positions', 'holdings']):
+            return {'action': 'check_portfolio'}
+        
+        elif any(word in command_lower for word in ['backtest', 'test', 'simulate']):
+            return {'action': 'run_backtest'}
+        
+        elif any(word in command_lower for word in ['analyze', 'analysis', 'look at']):
+            return {'action': 'analyze_symbol'}
+        
+        elif any(word in command_lower for word in ['strategy', 'modify', 'change']):
+            return {'action': 'modify_strategy'}
+        
+        elif any(word in command_lower for word in ['recommend', 'suggestion', 'advice']):
+            return {'action': 'get_recommendations'}
+        
+        else:
+            return {'action': 'ai_analysis'}
+    
+    def get_portfolio_summary(self):
+        """Get portfolio summary in natural language"""
+        portfolio = self.trading.get_portfolio()
+        
+        summary = f"""
+        Portfolio Summary:
+        - Total Value: ${portfolio['total_value']:,.2f}
+        - Daily P&L: ${portfolio['daily_pnl']:,.2f}
+        - Total Return: {portfolio['total_return']:.2%}
+        - Number of Positions: {len(portfolio['positions'])}
+        
+        Top Positions:
+        {self.format_top_positions(portfolio['positions'])}
+        """
+        
+        return summary
+    
+    def run_backtest_from_nl(self, command: str):
+        """Run backtest from natural language command"""
+        # Extract parameters from command
+        params = self.extract_backtest_params(command)
+        
+        # Run backtest
+        results = self.trading.run_backtest(params)
+        
+        # Format results in natural language
+        summary = f"""
+        Backtest Results for {params['strategy']}:
+        - Period: {params['start_date']} to {params['end_date']}
+        - Total Return: {results['total_return']:.2%}
+        - Sharpe Ratio: {results['sharpe_ratio']:.2f}
+        - Max Drawdown: {results['max_drawdown']:.2%}
+        - Win Rate: {results['win_rate']:.2%}
+        """
+        
+        return summary
+```
+
+## 15. Deployment and Operations
+
+### 15.1 System Requirements
+- Python 3.9+
+- 8GB RAM minimum
+- SSD storage for data
+- Stable internet connection
+- Alpaca API credentials
+- PostgreSQL database
+- Local LLM (Ollama/Llama)
+- Node.js 18+ (for frontend)
+
+### 15.2 Docker-Based Environment Setup
+
+#### 15.2.1 Docker Compose Configuration
+```yaml
+# docker-compose.yml
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: trading_postgres
+    environment:
+      POSTGRES_DB: trading_system
+      POSTGRES_USER: trading_user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --lc-collate=C --lc-ctype=C"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d
+    ports:
+      - "5432:5432"
+    networks:
+      - trading_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U trading_user -d trading_system"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: trading_redis
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - trading_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Machine Learning Service
+  ml_service:
+    image: tensorflow/tensorflow:latest-gpu
+    container_name: trading_ml_service
+    volumes:
+      - ./ml_models:/app/models
+      - ./ml_data:/app/data
+    ports:
+      - "8002:8002"
+    networks:
+      - trading_network
+    environment:
+      - PYTHONPATH=/app
+      - CUDA_VISIBLE_DEVICES=0
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8002/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Local LLM (Ollama)
+  ollama:
+    image: ollama/ollama:latest
+    container_name: trading_ollama
+    volumes:
+      - ollama_data:/root/.ollama
+      - ./llm_models:/models
+    ports:
+      - "11434:11434"
+    networks:
+      - trading_network
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+      interval: 60s
+      timeout: 30s
+      retries: 3
+
+  # Vector Database (Chroma)
+  chroma:
+    image: chromadb/chroma:latest
+    container_name: trading_chroma
+    environment:
+      - CHROMA_SERVER_HOST=0.0.0.0
+      - CHROMA_SERVER_HTTP_PORT=8000
+      - CHROMA_SERVER_CORS_ALLOW_ORIGINS=["*"]
+    volumes:
+      - chroma_data:/chroma/chroma
+    ports:
+      - "8000:8000"
+    networks:
+      - trading_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/heartbeat"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Elasticsearch
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
+    container_name: trading_elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+    networks:
+      - trading_network
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Logstash
+  logstash:
+    image: docker.elastic.co/logstash/logstash:8.11.0
+    container_name: trading_logstash
+    volumes:
+      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
+    ports:
+      - "5044:5044"
+      - "9600:9600"
+    networks:
+      - trading_network
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+
+  # Kibana
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.11.0
+    container_name: trading_kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+    networks:
+      - trading_network
+    depends_on:
+      elasticsearch:
+        condition: service_healthy
+
+  # Prometheus
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: trading_prometheus
+    volumes:
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    ports:
+      - "9090:9090"
+    networks:
+      - trading_network
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+
+  # Grafana
+  grafana:
+    image: grafana/grafana:latest
+    container_name: trading_grafana
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana/provisioning:/etc/grafana/provisioning
+    ports:
+      - "3000:3000"
+    networks:
+      - trading_network
+    depends_on:
+      - prometheus
+
+  # Trading System Backend
+  trading_backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: trading_backend
+    environment:
+      - DATABASE_URL=postgresql://trading_user:${POSTGRES_PASSWORD}@postgres:5432/trading_system
+      - REDIS_URL=redis://redis:6379
+      - ML_SERVICE_URL=http://ml_service:8002
+      - OLLAMA_URL=http://ollama:11434
+      - CHROMA_URL=http://chroma:8000
+      - ELASTICSEARCH_URL=http://elasticsearch:9200
+      - ALPACA_API_KEY=${ALPACA_API_KEY}
+      - ALPACA_SECRET_KEY=${ALPACA_SECRET_KEY}
+      - ALPACA_BASE_URL=${ALPACA_BASE_URL}
+    volumes:
+      - ./backend:/app
+      - ./logs:/app/logs
+    ports:
+      - "8001:8001"
+    networks:
+      - trading_network
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      ml_service:
+        condition: service_healthy
+      ollama:
+        condition: service_healthy
+      chroma:
+        condition: service_healthy
+
+  # Trading System Frontend
+  trading_frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: trading_frontend
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8001
+    ports:
+      - "3001:3000"
+    networks:
+      - trading_network
+    depends_on:
+      - trading_backend
+
+volumes:
+  postgres_data:
+  redis_data:
+  ml_models_data:
+  llm_models_data:
+  ollama_data:
+  chroma_data:
+  elasticsearch_data:
+  prometheus_data:
+  grafana_data:
+
+networks:
+  trading_network:
+    driver: bridge
+```
+
+#### 15.2.2 Backend Dockerfile
+```dockerfile
+# backend/Dockerfile
+FROM python:3.11-slim
+
+# Set working directory
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements first for better caching
+COPY requirements.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application code
+COPY . .
+
+# Create logs directory
+RUN mkdir -p /app/logs
+
+# Expose port
+EXPOSE 8001
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8001/health || exit 1
+
+# Run the application
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8001", "--reload"]
+```
+
+#### 15.2.3 Frontend Dockerfile
+```dockerfile
+# frontend/Dockerfile
+FROM node:18-alpine AS builder
+
+WORKDIR /app
+
+# Copy package files
+COPY package*.json ./
+
+# Install dependencies
+RUN npm ci
+
+# Copy source code
+COPY . .
+
+# Build the application
+RUN npm run build
+
+# Production stage
+FROM node:18-alpine AS runner
+
+WORKDIR /app
+
+# Copy built application
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/node_modules ./node_modules
+
+# Expose port
+EXPOSE 3000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:3000/api/health || exit 1
+
+# Start the application
+CMD ["npm", "start"]
+```
+
+#### 15.2.4 Environment Configuration
+```bash
+# .env
+# Database Configuration
+POSTGRES_PASSWORD=your_secure_password_here
+POSTGRES_DB=trading_system
+POSTGRES_USER=trading_user
+
+# Redis Configuration
+REDIS_PASSWORD=your_redis_password_here
+
+# Alpaca API Configuration
+ALPACA_API_KEY=your_alpaca_api_key
+ALPACA_SECRET_KEY=your_alpaca_secret_key
+ALPACA_BASE_URL=https://paper-api.alpaca.markets
+
+# Grafana Configuration
+GRAFANA_PASSWORD=your_grafana_password_here
+
+# Machine Learning Configuration
+ML_SERVICE_URL=http://localhost:8002
+ML_MODEL_PATH=./ml_models
+ML_DATA_PATH=./ml_data
+
+# LLM Configuration
+OLLAMA_MODEL=llama2:13b
+LLM_MODEL_PATH=./llm_models
+
+# Application Configuration
+ENVIRONMENT=development
+LOG_LEVEL=INFO
+```
+
+#### 15.2.5 Database Initialization Scripts
+```sql
+-- init-scripts/01-init.sql
+-- Create extensions
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+-- Create indexes for better performance
+CREATE INDEX IF NOT EXISTS idx_transactions_symbol_timestamp 
+ON transactions(symbol, timestamp);
+
+CREATE INDEX IF NOT EXISTS idx_transactions_strategy_name 
+ON transactions(strategy_name);
+
+CREATE INDEX IF NOT EXISTS idx_backtest_results_strategy_name 
+ON backtest_results(strategy_name);
+
+CREATE INDEX IF NOT EXISTS idx_market_data_symbol_interval_timestamp 
+ON market_data(symbol, interval, timestamp);
+
+-- Create views for common queries
+CREATE OR REPLACE VIEW portfolio_summary AS
+SELECT 
+    symbol,
+    SUM(CASE WHEN side = 'buy' THEN quantity ELSE -quantity END) as net_quantity,
+    AVG(CASE WHEN side = 'buy' THEN price END) as avg_buy_price,
+    MAX(timestamp) as last_trade_time
+FROM transactions 
+GROUP BY symbol 
+HAVING SUM(CASE WHEN side = 'buy' THEN quantity ELSE -quantity END) > 0;
+
+-- Create functions for common operations
+CREATE OR REPLACE FUNCTION calculate_portfolio_value()
+RETURNS DECIMAL AS $$
+DECLARE
+    total_value DECIMAL := 0;
+BEGIN
+    SELECT COALESCE(SUM(net_quantity * avg_buy_price), 0)
+    INTO total_value
+    FROM portfolio_summary;
+    
+    RETURN total_value;
+END;
+$$ LANGUAGE plpgsql;
+```
+
+#### 15.2.6 Prometheus Configuration
+```yaml
+# prometheus/prometheus.yml
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  - "alert_rules.yml"
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          - alertmanager:9093
+
+scrape_configs:
+  - job_name: 'trading-backend'
+    static_configs:
+      - targets: ['trading_backend:8001']
+    metrics_path: '/metrics'
+    scrape_interval: 5s
+
+  - job_name: 'postgres'
+    static_configs:
+      - targets: ['postgres:5432']
+    scrape_interval: 30s
+
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis:6379']
+    scrape_interval: 30s
+
+  - job_name: 'ollama'
+    static_configs:
+      - targets: ['ollama:11434']
+    scrape_interval: 60s
+```
+
+#### 15.2.7 Logstash Configuration
+```yaml
+# logstash/config/logstash.yml
+http.host: "0.0.0.0"
+xpack.monitoring.elasticsearch.hosts: [ "http://elasticsearch:9200" ]
+```
+
+```conf
+# logstash/pipeline/logstash.conf
+input {
+  beats {
+    port => 5044
+  }
+  tcp {
+    port => 5000
+    codec => json
+  }
+}
+
+filter {
+  if [type] == "trading_logs" {
+    date {
+      match => [ "timestamp", "ISO8601" ]
+    }
+    mutate {
+      add_field => { "environment" => "trading_system" }
+    }
+  }
+}
+
+output {
+  elasticsearch {
+    hosts => ["elasticsearch:9200"]
+    index => "trading-logs-%{+YYYY.MM.dd}"
+  }
+  stdout { codec => rubydebug }
+}
+```
+
+#### 15.2.8 Setup and Deployment Scripts
+```bash
+#!/bin/bash
+# setup.sh
+
+echo "Setting up Trading System Environment..."
+
+# Create necessary directories
+mkdir -p logs
+mkdir -p models
+mkdir -p init-scripts
+mkdir -p prometheus
+mkdir -p grafana/provisioning
+mkdir -p logstash/config
+mkdir -p logstash/pipeline
+
+# Copy configuration files
+cp configs/prometheus.yml prometheus/
+cp configs/logstash.yml logstash/config/
+cp configs/logstash.conf logstash/pipeline/
+
+# Set proper permissions
+chmod 755 logs
+chmod 644 .env
+
+# Pull LLM model
+echo "Pulling LLM model..."
+docker-compose up -d ollama
+sleep 30
+docker exec trading_ollama ollama pull llama2:13b
+
+# Start all services
+echo "Starting all services..."
+docker-compose up -d
+
+# Wait for services to be healthy
+echo "Waiting for services to be ready..."
+sleep 60
+
+# Initialize database
+echo "Initializing database..."
+docker-compose exec postgres psql -U trading_user -d trading_system -f /docker-entrypoint-initdb.d/01-init.sql
+
+# Create initial admin user for Grafana
+echo "Setting up Grafana..."
+curl -X POST http://localhost:3000/api/admin/users \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Admin",
+    "email": "admin@trading.com",
+    "login": "admin",
+    "password": "'$GRAFANA_PASSWORD'"
+  }'
+
+echo "Setup complete! Access the system at:"
+echo "- Frontend: http://localhost:3001"
+echo "- Backend API: http://localhost:8001"
+echo "- Grafana: http://localhost:3000"
+echo "- Kibana: http://localhost:5601"
+echo "- Prometheus: http://localhost:9090"
+```
+
+#### 15.2.9 Development Environment
+```yaml
+# docker-compose.dev.yml
+version: '3.8'
+
+services:
+  trading_backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./backend:/app
+      - /app/__pycache__
+    environment:
+      - ENVIRONMENT=development
+      - DEBUG=true
+    command: ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8001", "--reload"]
+
+  trading_frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    command: ["npm", "run", "dev"]
+```
+
+### 15.3 Deployment Options
+- Local machine deployment with Docker
+- Cloud deployment (AWS, GCP, Azure) with Docker
+- Kubernetes orchestration (for production)
+- Docker Swarm for simple clustering
+
+### 15.3 Monitoring and Alerts
+- Email/SMS alerts for critical events
+- Dashboard for real-time monitoring
+- Automated restart on failures
+- Performance degradation alerts
+
+## 16. Security and Compliance
+
+### 16.1 API Security
+- Secure storage of API keys
+- Environment variable configuration
+- API key rotation procedures
+- Rate limiting compliance
+
+### 16.2 Data Security
+- Encrypted data storage
+- Secure log management
+- Access control and authentication
+- Audit trail maintenance
+
+### 16.3 AI/LLM Security
+- Local LLM deployment for data privacy
+- Secure vector database access
+- Input validation and sanitization
+- Rate limiting for AI queries
+
+## 17. Future Enhancements
+
+### 17.1 Advanced Features
+- Machine learning integration
+- Sentiment analysis
+- Options trading support
+- Multi-broker support
+- Mobile app interface
+- Real-time streaming data
+- Advanced caching strategies
+
+### 17.2 Scalability
+- Multi-threaded processing
+- Distributed computing
+- Microservices architecture
+- Load balancing
+- Auto-scaling capabilities
+
+### 17.3 AI/LLM Enhancements
+- Multi-modal AI (text, charts, news)
+- Real-time market sentiment analysis
+- Automated strategy generation
+- Portfolio optimization using AI
+- Natural language strategy creation
+
+This specification provides a comprehensive framework for building a sophisticated algorithmic trading system using the Alpaca platform. The system supports multiple strategies, time intervals, implements robust risk management and performance tracking capabilities, includes comprehensive backtesting with historical data, PostgreSQL database storage, robust logging with ELK stack, a modern web UI, and advanced AI/LLM integration with RAG capabilities for enhanced trading decisions.
+
+## 18. Comprehensive Testing Strategy
+
+### 18.1 Testing Architecture
+```python
+# Testing framework structure
+import pytest
+import unittest
+from unittest.mock import Mock, patch
+from datetime import datetime, timedelta
+import pandas as pd
+import numpy as np
+
+# Test configuration
+class TestConfig:
+    """Test configuration and fixtures"""
+    TEST_DATABASE_URL = "postgresql://test_user:test_pass@localhost:5432/test_trading"
+    TEST_ALPACA_API_KEY = "test_key"
+    TEST_ALPACA_SECRET_KEY = "test_secret"
+    TEST_SYMBOLS = ["AAPL", "MSFT", "GOOGL"]
+    TEST_START_DATE = "2023-01-01"
+    TEST_END_DATE = "2023-12-31"
+    TEST_INITIAL_CAPITAL = 100000
+```
+
+### 18.2 Unit Testing Framework
+```python
+# tests/unit/test_strategies.py
+import pytest
+from trading.strategies import EMAMACDStrategy, RSIStrategy
+from trading.data_manager import DataManager
+
+class TestEMAMACDStrategy:
+    """Unit tests for EMA-MACD strategy"""
+    
+    @pytest.fixture
+    def strategy(self):
+        return EMAMACDStrategy(
+            ema_period=20,
+            macd_fast=12,
+            macd_slow=26,
+            macd_signal=9,
+            price_threshold_pct=20
+        )
+    
+    @pytest.fixture
+    def sample_data(self):
+        """Generate sample market data for testing"""
+        dates = pd.date_range(start='2023-01-01', end='2023-12-31', freq='D')
+        np.random.seed(42)
+        
+        data = pd.DataFrame({
+            'open': np.random.uniform(100, 200, len(dates)),
+            'high': np.random.uniform(150, 250, len(dates)),
+            'low': np.random.uniform(50, 150, len(dates)),
+            'close': np.random.uniform(100, 200, len(dates)),
+            'volume': np.random.randint(1000000, 10000000, len(dates))
+        }, index=dates)
+        
+        return data
+    
+    def test_strategy_initialization(self, strategy):
+        """Test strategy initialization with parameters"""
+        assert strategy.ema_period == 20
+        assert strategy.macd_fast == 12
+        assert strategy.macd_slow == 26
+        assert strategy.macd_signal == 9
+        assert strategy.price_threshold_pct == 20
+    
+    def test_ema_calculation(self, strategy, sample_data):
+        """Test EMA calculation"""
+        ema = strategy.calculate_ema(sample_data['close'])
+        assert len(ema) == len(sample_data)
+        assert not ema.isna().all()
+        assert ema.iloc[-1] > 0
+    
+    def test_macd_calculation(self, strategy, sample_data):
+        """Test MACD calculation"""
+        macd, signal = strategy.calculate_macd(sample_data['close'])
+        assert len(macd) == len(sample_data)
+        assert len(signal) == len(sample_data)
+        assert not macd.isna().all()
+        assert not signal.isna().all()
+    
+    def test_buy_signal_generation(self, strategy, sample_data):
+        """Test buy signal generation"""
+        buy_signal, sell_signal = strategy.calculate_signals(sample_data)
+        assert isinstance(buy_signal, pd.Series)
+        assert isinstance(sell_signal, pd.Series)
+        assert len(buy_signal) == len(sample_data)
+        assert buy_signal.dtype == bool
+    
+    def test_sell_signal_generation(self, strategy, sample_data):
+        """Test sell signal generation"""
+        buy_signal, sell_signal = strategy.calculate_signals(sample_data)
+        assert isinstance(sell_signal, pd.Series)
+        assert len(sell_signal) == len(sample_data)
+        assert sell_signal.dtype == bool
+    
+    def test_position_sizing(self, strategy):
+        """Test position sizing calculation"""
+        account_value = 100000
+        symbol_price = 150.0
+        volatility = 0.2
+        
+        position_size = strategy.get_position_size(account_value, symbol_price, volatility)
+        assert position_size > 0
+        assert position_size <= account_value * 0.05  # Max 5% per position
+    
+    def test_stop_loss_calculation(self, strategy, sample_data):
+        """Test stop loss calculation"""
+        entry_price = 150.0
+        stop_loss = strategy.get_stop_loss(entry_price, sample_data)
+        assert stop_loss < entry_price
+        assert stop_loss > 0
+    
+    def test_take_profit_calculation(self, strategy, sample_data):
+        """Test take profit calculation"""
+        entry_price = 150.0
+        take_profit = strategy.get_take_profit(entry_price, sample_data)
+        assert take_profit > entry_price
+        assert take_profit > 0
+
+class TestRSIStrategy:
+    """Unit tests for RSI strategy"""
+    
+    @pytest.fixture
+    def strategy(self):
+        return RSIStrategy(
+            rsi_period=14,
+            oversold_threshold=30,
+            overbought_threshold=70
+        )
+    
+    def test_rsi_calculation(self, strategy, sample_data):
+        """Test RSI calculation"""
+        rsi = strategy.calculate_rsi(sample_data['close'])
+        assert len(rsi) == len(sample_data)
+        assert rsi.min() >= 0
+        assert rsi.max() <= 100
+        assert not rsi.isna().all()
+```
+
+### 18.3 Integration Testing
+```python
+# tests/integration/test_trading_system.py
+import pytest
+from trading.trading_system import TradingSystem
+from trading.data_manager import DataManager
+from trading.order_manager import OrderManager
+from trading.risk_manager import RiskManager
+
+class TestTradingSystemIntegration:
+    """Integration tests for the complete trading system"""
+    
+    @pytest.fixture
+    def trading_system(self):
+        """Setup trading system with mocked components"""
+        with patch('trading.data_manager.AlpacaAPI') as mock_api:
+            mock_api.return_value.get_bars.return_value.df = self.get_mock_market_data()
+            
+            system = TradingSystem(
+                api_key="test_key",
+                secret_key="test_secret",
+                paper_trading=True
+            )
+            return system
+    
+    @pytest.fixture
+    def mock_market_data(self):
+        """Generate mock market data"""
+        dates = pd.date_range(start='2023-01-01', end='2023-12-31', freq='D')
+        data = pd.DataFrame({
+            'open': [100] * len(dates),
+            'high': [110] * len(dates),
+            'low': [90] * len(dates),
+            'close': [105] * len(dates),
+            'volume': [1000000] * len(dates)
+        }, index=dates)
+        return data
+    
+    def test_system_initialization(self, trading_system):
+        """Test trading system initialization"""
+        assert trading_system.data_manager is not None
+        assert trading_system.order_manager is not None
+        assert trading_system.risk_manager is not None
+        assert trading_system.portfolio_tracker is not None
+    
+    def test_market_data_fetching(self, trading_system, mock_market_data):
+        """Test market data fetching integration"""
+        data = trading_system.data_manager.get_market_data("AAPL", "1day", 30)
+        assert data is not None
+        assert len(data) > 0
+        assert all(col in data.columns for col in ['open', 'high', 'low', 'close', 'volume'])
+    
+    def test_signal_generation_integration(self, trading_system):
+        """Test signal generation with real data"""
+        signals = trading_system.generate_signals("AAPL")
+        assert signals is not None
+        assert 'buy_signal' in signals
+        assert 'sell_signal' in signals
+        assert isinstance(signals['buy_signal'], bool)
+        assert isinstance(signals['sell_signal'], bool)
+    
+    def test_order_execution_integration(self, trading_system):
+        """Test order execution integration"""
+        with patch.object(trading_system.order_manager, 'place_order') as mock_order:
+            mock_order.return_value = {'id': 'test_order_id', 'status': 'filled'}
+            
+            result = trading_system.execute_trade("AAPL", "buy", 100, 150.0)
+            assert result is not None
+            assert result['status'] == 'filled'
+    
+    def test_risk_management_integration(self, trading_system):
+        """Test risk management integration"""
+        position_size = trading_system.risk_manager.calculate_position_size(
+            account_value=100000,
+            symbol_price=150.0,
+            volatility=0.2
+        )
+        assert position_size > 0
+        assert position_size <= 5000  # Max 5% of account
+    
+    def test_portfolio_tracking_integration(self, trading_system):
+        """Test portfolio tracking integration"""
+        # Add a position
+        trading_system.portfolio_tracker.add_position("AAPL", 100, 150.0)
+        
+        # Get portfolio summary
+        portfolio = trading_system.portfolio_tracker.get_portfolio()
+        assert "AAPL" in portfolio['positions']
+        assert portfolio['positions']["AAPL"]['quantity'] == 100
+        assert portfolio['positions']["AAPL"]['avg_price'] == 150.0
+```
+
+### 18.4 Database Testing
+```python
+# tests/database/test_database.py
+import pytest
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+from trading.database import DatabaseManager, Transaction, BacktestResult
+
+class TestDatabaseManager:
+    """Tests for database operations"""
+    
+    @pytest.fixture
+    def db_manager(self):
+        """Setup test database"""
+        engine = create_engine("sqlite:///:memory:")
+        SessionLocal = sessionmaker(bind=engine)
+        
+        # Create tables
+        Base.metadata.create_all(bind=engine)
+        
+        return DatabaseManager(engine.url)
+    
+    def test_transaction_storage(self, db_manager):
+        """Test transaction storage and retrieval"""
+        transaction_data = {
+            'symbol': 'AAPL',
+            'side': 'buy',
+            'quantity': 100,
+            'price': 150.0,
+            'timestamp': datetime.now(),
+            'strategy_name': 'EMA-MACD'
+        }
+        
+        # Store transaction
+        db_manager.store_transaction(transaction_data)
+        
+        # Retrieve transaction
+        transactions = db_manager.get_trading_history(symbol='AAPL')
+        assert len(transactions) == 1
+        assert transactions[0].symbol == 'AAPL'
+        assert transactions[0].side == 'buy'
+        assert transactions[0].quantity == 100
+    
+    def test_backtest_results_storage(self, db_manager):
+        """Test backtest results storage"""
+        results_data = {
+            'strategy_name': 'Test Strategy',
+            'symbols': ['AAPL', 'MSFT'],
+            'start_date': '2023-01-01',
+            'end_date': '2023-12-31',
+            'initial_capital': 100000,
+            'final_capital': 110000,
+            'total_return': 0.10,
+            'sharpe_ratio': 1.5,
+            'max_drawdown': 0.05,
+            'win_rate': 0.6,
+            'total_trades': 50,
+            'results_data': {'trades': [], 'equity_curve': []}
+        }
+        
+        # Store results
+        db_manager.store_backtest_results(results_data)
+        
+        # Verify storage
+        results = db_manager.get_backtest_results('Test Strategy')
+        assert len(results) == 1
+        assert results[0].strategy_name == 'Test Strategy'
+        assert results[0].total_return == 0.10
+    
+    def test_portfolio_position_updates(self, db_manager):
+        """Test portfolio position updates"""
+        # Add position
+        db_manager.update_portfolio_position('AAPL', 100, 150.0)
+        
+        # Update position
+        db_manager.update_portfolio_position('AAPL', 150, 155.0)
+        
+        # Verify position
+        positions = db_manager.get_portfolio_positions()
+        assert 'AAPL' in [p.symbol for p in positions]
+        aapl_position = next(p for p in positions if p.symbol == 'AAPL')
+        assert aapl_position.quantity == 150
+        assert aapl_position.avg_price == 155.0
+```
+
+### 18.5 API Testing
+```python
+# tests/api/test_api.py
+import pytest
+from fastapi.testclient import TestClient
+from trading.main import app
+
+class TestTradingAPI:
+    """Tests for FastAPI endpoints"""
+    
+    @pytest.fixture
+    def client(self):
+        return TestClient(app)
+    
+    def test_health_check(self, client):
+        """Test health check endpoint"""
+        response = client.get("/health")
+        assert response.status_code == 200
+        assert response.json()["status"] == "healthy"
+    
+    def test_portfolio_endpoint(self, client):
+        """Test portfolio endpoint"""
+        with patch('trading.portfolio_tracker.get_portfolio_overview') as mock_portfolio:
+            mock_portfolio.return_value = {
+                'total_value': 100000,
+                'daily_pnl': 1000,
+                'total_return': 0.05
+            }
+            
+            response = client.get("/api/portfolio")
+            assert response.status_code == 200
+            data = response.json()
+            assert data['total_value'] == 100000
+            assert data['daily_pnl'] == 1000
+    
+    def test_positions_endpoint(self, client):
+        """Test positions endpoint"""
+        with patch('trading.portfolio_tracker.get_positions') as mock_positions:
+            mock_positions.return_value = [
+                {
+                    'symbol': 'AAPL',
+                    'quantity': 100,
+                    'avg_price': 150.0,
+                    'current_price': 155.0,
+                    'unrealized_pnl': 500
+                }
+            ]
+            
+            response = client.get("/api/positions")
+            assert response.status_code == 200
+            data = response.json()
+            assert len(data) == 1
+            assert data[0]['symbol'] == 'AAPL'
+    
+    def test_backtest_endpoint(self, client):
+        """Test backtest endpoint"""
+        backtest_config = {
+            'strategy': 'EMA-MACD',
+            'symbols': ['AAPL'],
+            'start_date': '2023-01-01',
+            'end_date': '2023-12-31',
+            'initial_capital': 100000
+        }
+        
+        with patch('trading.backtesting_engine.run_backtest') as mock_backtest:
+            mock_backtest.return_value = {
+                'strategy_name': 'EMA-MACD',
+                'total_return': 0.10,
+                'sharpe_ratio': 1.5
+            }
+            
+            response = client.post("/api/backtest", json=backtest_config)
+            assert response.status_code == 200
+            data = response.json()
+            assert data['strategy_name'] == 'EMA-MACD'
+            assert data['total_return'] == 0.10
+    
+    def test_ai_query_endpoint(self, client):
+        """Test AI query endpoint"""
+        query_data = {
+            'query': 'Analyze AAPL stock and provide trading recommendations'
+        }
+        
+        with patch('trading.ai_interface.process_query') as mock_ai:
+            mock_ai.return_value = {
+                'response': 'AAPL shows bullish signals',
+                'recommendations': {'buy_signals': ['AAPL']},
+                'confidence_score': 0.85
+            }
+            
+            response = client.post("/api/ai/query", json=query_data)
+            assert response.status_code == 200
+            data = response.json()
+            assert 'response' in data
+            assert 'recommendations' in data
+            assert data['confidence_score'] == 0.85
+```
+
+### 18.6 Frontend Testing
+```typescript
+// tests/frontend/components/__tests__/Dashboard.test.tsx
+import React from 'react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
+import Dashboard from '../Dashboard';
+
+const server = setupServer(
+  rest.get('/api/portfolio', (req, res, ctx) => {
+    return res(
+      ctx.json({
+        totalValue: 100000,
+        dailyPnL: 1000,
+        totalReturn: 0.05,
+        sharpeRatio: 1.5
+      })
+    );
+  }),
+  rest.get('/api/positions', (req, res, ctx) => {
+    return res(
+      ctx.json([
+        {
+          symbol: 'AAPL',
+          quantity: 100,
+          avgPrice: 150.0,
+          currentPrice: 155.0,
+          unrealizedPnL: 500
+        }
+      ])
+    );
+  })
+);
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+
+describe('Dashboard Component', () => {
+  test('renders portfolio overview', async () => {
+    render(<Dashboard />);
+    
+    await waitFor(() => {
+      expect(screen.getByText('Portfolio Overview')).toBeInTheDocument();
+      expect(screen.getByText('$100,000')).toBeInTheDocument();
+      expect(screen.getByText('$1,000')).toBeInTheDocument();
+    });
+  });
+  
+  test('renders positions table', async () => {
+    render(<Dashboard />);
+    
+    await waitFor(() => {
+      expect(screen.getByText('Current Positions')).toBeInTheDocument();
+      expect(screen.getByText('AAPL')).toBeInTheDocument();
+      expect(screen.getByText('100')).toBeInTheDocument();
+    });
+  });
+  
+  test('handles portfolio refresh', async () => {
+    render(<Dashboard />);
+    
+    const refreshButton = screen.getByRole('button', { name: /refresh/i });
+    fireEvent.click(refreshButton);
+    
+    await waitFor(() => {
+      expect(screen.getByText('$100,000')).toBeInTheDocument();
+    });
+  });
+});
+
+// tests/frontend/components/__tests__/BacktestInterface.test.tsx
+import React from 'react';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
+import BacktestInterface from '../BacktestInterface';
+
+const server = setupServer(
+  rest.post('/api/backtest', (req, res, ctx) => {
+    return res(
+      ctx.json({
+        id: 'test-backtest-id',
+        strategy_name: 'EMA-MACD',
+        total_return: 0.10,
+        sharpe_ratio: 1.5,
+        max_drawdown: 0.05,
+        win_rate: 0.6
+      })
+    );
+  })
+);
+
+beforeAll(() => server.listen());
+afterEach(() => server.resetHandlers());
+afterAll(() => server.close());
+
+describe('BacktestInterface Component', () => {
+  test('renders backtest form', () => {
+    render(<BacktestInterface />);
+    
+    expect(screen.getByText('Strategy Backtesting')).toBeInTheDocument();
+    expect(screen.getByLabelText(/strategy/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/symbols/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/start date/i)).toBeInTheDocument();
+    expect(screen.getByLabelText(/end date/i)).toBeInTheDocument();
+  });
+  
+  test('submits backtest configuration', async () => {
+    render(<BacktestInterface />);
+    
+    // Fill form
+    fireEvent.change(screen.getByLabelText(/strategy/i), {
+      target: { value: 'EMA-MACD' }
+    });
+    fireEvent.change(screen.getByLabelText(/symbols/i), {
+      target: { value: 'AAPL,MSFT' }
+    });
+    
+    // Submit form
+    fireEvent.click(screen.getByRole('button', { name: /run backtest/i }));
+    
+    await waitFor(() => {
+      expect(screen.getByText('EMA-MACD')).toBeInTheDocument();
+      expect(screen.getByText('10.00%')).toBeInTheDocument();
+    });
+  });
+});
+```
+
+### 18.7 Performance Testing
+```python
+# tests/performance/test_performance.py
+import pytest
+import time
+import asyncio
+from trading.trading_system import TradingSystem
+
+class TestPerformance:
+    """Performance tests for trading system"""
+    
+    @pytest.fixture
+    def trading_system(self):
+        return TradingSystem(
+            api_key="test_key",
+            secret_key="test_secret",
+            paper_trading=True
+        )
+    
+    def test_signal_generation_performance(self, trading_system):
+        """Test signal generation performance"""
+        symbols = ["AAPL", "MSFT", "GOOGL", "TSLA", "AMZN"]
+        
+        start_time = time.time()
+        
+        for symbol in symbols:
+            signals = trading_system.generate_signals(symbol)
+            assert signals is not None
+        
+        end_time = time.time()
+        execution_time = end_time - start_time
+        
+        # Should complete within 5 seconds for 5 symbols
+        assert execution_time < 5.0
+    
+    def test_backtest_performance(self, trading_system):
+        """Test backtest performance"""
+        strategy_config = {
+            'name': 'Performance Test Strategy',
+            'strategy_class': EMAMACDStrategy,
+            'parameters': {'ema_period': 20}
+        }
+        
+        start_time = time.time()
+        
+        results = trading_system.run_backtest(
+            strategy_config=strategy_config,
+            symbols=["AAPL"],
+            start_date="2023-01-01",
+            end_date="2023-12-31",
+            initial_capital=100000
+        )
+        
+        end_time = time.time()
+        execution_time = end_time - start_time
+        
+        # Should complete within 30 seconds for 1 year of data
+        assert execution_time < 30.0
+        assert results is not None
+    
+    @pytest.mark.asyncio
+    async def test_concurrent_signal_generation(self, trading_system):
+        """Test concurrent signal generation"""
+        symbols = ["AAPL", "MSFT", "GOOGL", "TSLA", "AMZN", "META", "NVDA", "NFLX"]
+        
+        async def generate_signals_async(symbol):
+            return trading_system.generate_signals(symbol)
+        
+        start_time = time.time()
+        
+        tasks = [generate_signals_async(symbol) for symbol in symbols]
+        results = await asyncio.gather(*tasks)
+        
+        end_time = time.time()
+        execution_time = end_time - start_time
+        
+        # Should complete within 3 seconds for 8 symbols concurrently
+        assert execution_time < 3.0
+        assert len(results) == len(symbols)
+        assert all(result is not None for result in results)
+```
+
+### 18.8 Security Testing
+```python
+# tests/security/test_security.py
+import pytest
+from trading.security import SecurityManager
+from trading.database import DatabaseManager
+
+class TestSecurity:
+    """Security tests for trading system"""
+    
+    @pytest.fixture
+    def security_manager(self):
+        return SecurityManager()
+    
+    def test_api_key_encryption(self, security_manager):
+        """Test API key encryption and decryption"""
+        original_key = "test_api_key_12345"
+        
+        # Encrypt key
+        encrypted_key = security_manager.encrypt_api_key(original_key)
+        assert encrypted_key != original_key
+        
+        # Decrypt key
+        decrypted_key = security_manager.decrypt_api_key(encrypted_key)
+        assert decrypted_key == original_key
+    
+    def test_input_validation(self, security_manager):
+        """Test input validation for security"""
+        # Valid inputs
+        assert security_manager.validate_symbol("AAPL") == True
+        assert security_manager.validate_quantity(100) == True
+        assert security_manager.validate_price(150.0) == True
+        
+        # Invalid inputs
+        assert security_manager.validate_symbol("") == False
+        assert security_manager.validate_symbol("INVALID_SYMBOL_123") == False
+        assert security_manager.validate_quantity(-100) == False
+        assert security_manager.validate_price(-150.0) == False
+    
+    def test_sql_injection_prevention(self, db_manager):
+        """Test SQL injection prevention"""
+        malicious_input = "'; DROP TABLE transactions; --"
+        
+        # Should not cause SQL injection
+        result = db_manager.get_trading_history(symbol=malicious_input)
+        assert result is not None  # Should return empty result, not crash
+    
+    def test_rate_limiting(self, security_manager):
+        """Test rate limiting functionality"""
+        # Simulate multiple rapid requests
+        for i in range(10):
+            result = security_manager.check_rate_limit("test_user")
+            if i < 5:
+                assert result == True  # First 5 requests should pass
+            else:
+                assert result == False  # Subsequent requests should be blocked
+```
+
+### 18.9 Test Configuration and CI/CD
+```yaml
+# .github/workflows/test.yml
+name: Test Suite
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_PASSWORD: test_password
+          POSTGRES_DB: test_trading
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+    
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install -r requirements-test.txt
+    
+    - name: Install Node.js dependencies
+      run: |
+        cd frontend
+        npm ci
+    
+    - name: Run unit tests
+      run: |
+        pytest tests/unit/ -v --cov=trading --cov-report=xml
+    
+    - name: Run integration tests
+      run: |
+        pytest tests/integration/ -v
+    
+    - name: Run database tests
+      run: |
+        pytest tests/database/ -v
+    
+    - name: Run API tests
+      run: |
+        pytest tests/api/ -v
+    
+    - name: Run frontend tests
+      run: |
+        cd frontend
+        npm test -- --coverage --watchAll=false
+    
+    - name: Run performance tests
+      run: |
+        pytest tests/performance/ -v -m "not slow"
+    
+    - name: Run security tests
+      run: |
+        pytest tests/security/ -v
+    
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        file: ./coverage.xml
+        flags: unittests
+        name: codecov-umbrella
+
+# pytest.ini
+[tool:pytest]
+testpaths = tests
+python_files = test_*.py
+python_classes = Test*
+python_functions = test_*
+addopts = 
+    -v
+    --tb=short
+    --strict-markers
+    --disable-warnings
+    --cov=trading
+    --cov-report=html
+    --cov-report=term-missing
+markers =
+    unit: Unit tests
+    integration: Integration tests
+    slow: Slow running tests
+    performance: Performance tests
+    security: Security tests
+```
+
+### 18.10 Docker Testing Environment
+```yaml
+# docker-compose.test.yml
+version: '3.8'
+
+services:
+  test_postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: test_trading
+      POSTGRES_USER: test_user
+      POSTGRES_PASSWORD: test_password
+    ports:
+      - "5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U test_user -d test_trading"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  test_redis:
+    image: redis:7-alpine
+    ports:
+      - "6380:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  test_ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11435:11434"
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:11434/api/tags"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  test_chroma:
+    image: chromadb/chroma:latest
+    environment:
+      - CHROMA_SERVER_HOST=0.0.0.0
+      - CHROMA_SERVER_HTTP_PORT=8000
+    ports:
+      - "8001:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/heartbeat"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  test_backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.test
+    environment:
+      - DATABASE_URL=postgresql://test_user:test_password@test_postgres:5432/test_trading
+      - REDIS_URL=redis://test_redis:6379
+      - OLLAMA_URL=http://test_ollama:11434
+      - CHROMA_URL=http://test_chroma:8000
+      - TESTING=true
+    depends_on:
+      test_postgres:
+        condition: service_healthy
+      test_redis:
+        condition: service_healthy
+      test_ollama:
+        condition: service_healthy
+      test_chroma:
+        condition: service_healthy
+    command: ["pytest", "-v", "--cov=trading", "--cov-report=html"]
+
+  test_frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile.test
+    environment:
+      - CI=true
+    command: ["npm", "test", "--", "--coverage", "--watchAll=false"]
+```
+
+This comprehensive testing strategy ensures the algorithmic trading system is thoroughly tested across all components, including unit tests for individual strategies, integration tests for system components, database tests for data persistence, API tests for endpoints, frontend tests for UI components, performance tests for system efficiency, and security tests for vulnerability prevention. The CI/CD pipeline automates all testing processes and provides comprehensive coverage reporting.

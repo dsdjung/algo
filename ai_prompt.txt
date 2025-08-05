@@ -1,0 +1,4 @@
+Do not remove existing functions during code change unless specifically asked to.
+Do not use mock data for features and authentication.
+Do not bypass permission checks
+Add debugs to make sure you understand what is going on, rather than guessing what could be happening.
