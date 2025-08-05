@@ -173,6 +173,160 @@ This is a specification repository. To contribute:
 3. Implement components according to the specification
 4. Add tests and documentation
 
+## 🚀 GitHub Repository Setup Guide
+
+### Setting Up a New Repository with Correct GitHub Account
+
+This guide helps you set up a new repository using the `dsdjung` GitHub account instead of the default `pulzzedavid` account.
+
+#### Prerequisites
+- Git installed on your system
+- GitHub account (`dsdjung`)
+- GitHub Personal Access Token (for HTTPS authentication)
+
+#### Step-by-Step Process
+
+##### 1. Initialize Git Repository
+```bash
+# Navigate to your project directory
+cd /path/to/your/project
+
+# Initialize git repository
+git init
+
+# Set the default branch to main
+git branch -m main
+```
+
+##### 2. Configure Git User (Local Repository)
+```bash
+# Set local git user configuration (overrides global)
+git config --local user.name "dsdjung"
+git config --local user.email "david@interactor.com"
+
+# Verify the configuration
+git config --local --list | grep user
+```
+
+##### 3. Add Files and Make Initial Commit
+```bash
+# Add all files to staging
+git add .
+
+# Make initial commit
+git commit -m "Initial commit: [Your project description]"
+```
+
+##### 4. Create Remote Repository on GitHub
+- Go to [GitHub.com](https://github.com) and log in with your `dsdjung` account
+- Click the "+" icon → "New repository"
+- Name your repository (e.g., `your-project-name`)
+- Make it public or private as preferred
+- **Don't** initialize with README (you already have files)
+- Click "Create repository"
+
+##### 5. Fix Authentication Issues (If Using SSH)
+If you encounter authentication errors like:
+```
+ERROR: Permission to dsdjung/repo.git denied to pulzzedavid.
+```
+
+**Solution: Use HTTPS instead of SSH**
+```bash
+# Check current remote (if already added)
+git remote -v
+
+# Remove existing remote if it uses SSH
+git remote remove origin
+
+# Add remote using HTTPS
+git remote add origin https://github.com/dsdjung/your-repo-name.git
+
+# Verify remote URL
+git remote -v
+```
+
+##### 6. Push to GitHub
+```bash
+# Push to GitHub (will prompt for username and token)
+git push -u origin main
+```
+
+When prompted:
+- **Username**: `dsdjung`
+- **Password**: Use your GitHub Personal Access Token (not your GitHub password)
+
+#### Alternative: GitHub CLI Setup
+```bash
+# Install GitHub CLI
+brew install gh
+
+# Login with dsdjung account
+gh auth login
+
+# Create repository and push in one command
+gh repo create your-repo-name --public --source=. --remote=origin --push
+```
+
+#### Troubleshooting Common Issues
+
+##### Issue: SSH Key Associated with Wrong Account
+```bash
+# Check which account your SSH key is associated with
+ssh -T git@github.com
+
+# If it shows "Hi pulzzedavid!" instead of "Hi dsdjung!"
+# Use HTTPS authentication instead of SSH
+```
+
+##### Issue: Global Git Configuration Override
+```bash
+# Check global configuration
+git config --global --list | grep user
+
+# If global config shows pulzzedavid, use local config
+git config --local user.name "dsdjung"
+git config --local user.email "david@interactor.com"
+```
+
+##### Issue: URL Conversion from HTTPS to SSH
+```bash
+# Check if there's a URL conversion rule
+git config --list | grep url
+
+# Remove any URL conversion rules
+git config --global --unset url."git@github.com:".insteadof
+git config --global --unset url."https://github.com/".insteadOf
+```
+
+#### Verification Steps
+```bash
+# Verify local git configuration
+git config --local --list | grep user
+
+# Verify remote URL
+git remote -v
+
+# Test authentication (for HTTPS)
+git ls-remote origin
+
+# Check commit author
+git log --oneline --decorate
+```
+
+#### Best Practices
+1. **Always use local git config** for project-specific user settings
+2. **Use HTTPS authentication** to avoid SSH key conflicts
+3. **Create Personal Access Token** for secure authentication
+4. **Verify configuration** before pushing
+5. **Test authentication** with `git ls-remote origin`
+
+#### Security Notes
+- Store your GitHub Personal Access Token securely
+- Use environment variables for sensitive data
+- Regularly rotate your access tokens
+- Never commit API keys or sensitive credentials
+
 ## 📄 License
 
 This project is for educational and development purposes. Please ensure compliance with all applicable trading regulations and broker terms of service.
