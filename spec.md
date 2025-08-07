@@ -11488,3 +11488,699 @@ migration_phase_3:
 ```
 
 This high-performance architecture ensures sub-millisecond latency for critical trading operations, high throughput for market data processing, and scalable infrastructure for growth. The combination of Rust, C++, Go, and optimized databases provides the performance needed for professional algorithmic trading systems.
+
+## 28. MacBook Local Deployment Compatibility Analysis
+
+### 28.1 MacBook System Requirements and Compatibility
+
+#### 28.1.1 Current Technology Stack MacBook Compatibility
+
+**✅ Fully Compatible Components:**
+
+1. **Core Backend (Python/FastAPI)**
+   - ✅ **Python 3.9+**: Native macOS support
+   - ✅ **FastAPI**: Cross-platform compatibility
+   - ✅ **pandas/numpy**: Optimized for macOS
+   - ✅ **ta-lib**: Available via Homebrew
+   - ✅ **Alpaca API**: Platform-independent
+
+2. **Database Systems**
+   - ✅ **PostgreSQL**: Native Docker support on macOS
+   - ✅ **Redis**: Excellent macOS compatibility
+   - ✅ **Chroma (Vector DB)**: Cross-platform
+
+3. **Web Framework**
+   - ✅ **React/Next.js**: Excellent macOS development experience
+   - ✅ **Node.js**: Native macOS support
+
+4. **Development Tools**
+   - ✅ **Docker Desktop**: Native macOS application
+   - ✅ **Git**: Built-in macOS support
+   - ✅ **VS Code/Cursor**: Excellent macOS integration
+
+**⚠️ Partially Compatible Components:**
+
+1. **Machine Learning**
+   - ⚠️ **TensorFlow/PyTorch**: CPU-only on most MacBooks
+   - ⚠️ **GPU Acceleration**: Limited to M1/M2 Macs with Metal support
+   - ⚠️ **CUDA**: Not available on macOS (NVIDIA GPUs only)
+
+2. **Local LLM**
+   - ⚠️ **Ollama**: Works but slower on Intel Macs
+   - ⚠️ **Large Models**: Memory constraints on 8GB MacBooks
+
+3. **Performance Components**
+   - ⚠️ **High-frequency trading**: Limited by macOS networking
+   - ⚠️ **Real-time processing**: Sub-optimal compared to Linux
+
+#### 28.1.2 MacBook Hardware Requirements
+
+**Minimum Requirements (Intel MacBook):**
+```yaml
+hardware_requirements:
+  processor: "Intel i5 or better"
+  memory: "16GB RAM (8GB minimum)"
+  storage: "50GB free space"
+  network: "Stable internet connection"
+  os: "macOS 12.0+ (Monterey+)"
+```
+
+**Recommended Requirements (Apple Silicon):**
+```yaml
+hardware_requirements:
+  processor: "Apple M1/M2/M3 (any variant)"
+  memory: "16GB RAM or more"
+  storage: "100GB free space (SSD)"
+  network: "Stable internet connection"
+  os: "macOS 13.0+ (Ventura+)"
+```
+
+**Optimal Requirements (Professional Use):**
+```yaml
+hardware_requirements:
+  processor: "Apple M2 Pro/M3 Pro or better"
+  memory: "32GB RAM"
+  storage: "500GB+ SSD"
+  network: "High-speed internet (100Mbps+)"
+  os: "macOS 14.0+ (Sonoma+)"
+```
+
+### 28.2 MacBook-Specific Optimizations
+
+#### 28.2.1 Docker Configuration for MacBook
+
+```yaml
+# docker-compose.macbook.yml - Optimized for MacBook
+version: '3.8'
+services:
+  # Database - Optimized for macOS
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: trading_system
+      POSTGRES_USER: trader
+      POSTGRES_PASSWORD: local_password
+      # macOS-specific optimizations
+      POSTGRES_SHARED_BUFFERS: 256MB
+      POSTGRES_EFFECTIVE_CACHE_SIZE: 1GB
+      POSTGRES_WORK_MEM: 4MB
+      POSTGRES_MAINTENANCE_WORK_MEM: 64MB
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    # macOS-specific settings
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+        reservations:
+          memory: 512M
+
+  # Redis - Optimized for macOS
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    command: redis-server --maxmemory 512mb --maxmemory-policy allkeys-lru
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 256M
+
+  # Local LLM - Optimized for MacBook
+  ollama:
+    image: ollama/ollama:latest
+    ports:
+      - "11434:11434"
+    volumes:
+      - ./models:/root/.ollama
+    environment:
+      - OLLAMA_HOST=0.0.0.0
+      # macOS-specific optimizations
+      - OLLAMA_NUM_PARALLEL=2
+      - OLLAMA_GPU_LAYERS=0  # CPU-only for compatibility
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+        reservations:
+          memory: 2G
+
+  # Vector Database - Optimized for macOS
+  chroma:
+    image: chromadb/chroma:latest
+    environment:
+      - CHROMA_SERVER_HOST=0.0.0.0
+      - CHROMA_SERVER_HTTP_PORT=8000
+      # macOS-specific settings
+      - CHROMA_SERVER_CORS_ALLOW_ORIGINS=["*"]
+    ports:
+      - "8001:8000"
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+        reservations:
+          memory: 512M
+
+  # ML Service - CPU-optimized for MacBook
+  ml_service:
+    image: tensorflow/tensorflow:latest-cpu  # CPU-only for compatibility
+    ports:
+      - "8002:8002"
+    environment:
+      - MODEL_PATH=/app/models
+      - DATA_PATH=/app/data
+      - TF_CPP_MIN_LOG_LEVEL=2
+      - TF_FORCE_GPU_ALLOW_GROWTH=true
+    volumes:
+      - ./ml_models:/app/models
+      - ./ml_data:/app/data
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 1G
+
+  # Trading Backend - MacBook optimized
+  trading_backend:
+    build: ./backend
+    environment:
+      # Database
+      - DATABASE_URL=postgresql://trader:local_password@postgres:5432/trading_system
+      - REDIS_URL=redis://redis:6379
+      
+      # AI/ML Services
+      - OLLAMA_URL=http://ollama:11434
+      - CHROMA_URL=http://chroma:8000
+      - ML_SERVICE_URL=http://ml_service:8002
+      
+      # Trading Configuration
+      - ALPACA_API_KEY=${ALPACA_API_KEY}
+      - ALPACA_SECRET_KEY=${ALPACA_SECRET_KEY}
+      - ALPACA_BASE_URL=https://paper-api.alpaca.markets
+      - TRADING_MODE=paper
+      
+      # MacBook-specific optimizations
+      - SINGLE_USER_MODE=true
+      - USER_ID=1
+      - DEBUG=true
+      - LOG_LEVEL=DEBUG
+      
+      # Performance settings for MacBook
+      - MAX_WORKERS=2  # Reduced for MacBook
+      - WORKER_TIMEOUT=60
+      - ENABLE_GPU_ACCELERATION=false
+      
+      # Feature Flags (MacBook-optimized)
+      - ENABLE_AI_TRADING=true
+      - ENABLE_ML_PREDICTIONS=true
+      - ENABLE_BACKTESTING=true
+      - ENABLE_RISK_MANAGEMENT=true
+      - ENABLE_ANALYST_RATINGS=true
+      - ENABLE_REAL_TIME_DATA=true
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./logs:/app/logs
+      - ./data:/app/data
+      - ./config:/app/config
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 1G
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      ollama:
+        condition: service_healthy
+      chroma:
+        condition: service_healthy
+      ml_service:
+        condition: service_healthy
+
+  # Trading Frontend - MacBook optimized
+  trading_frontend:
+    build: ./frontend
+    environment:
+      - NEXT_PUBLIC_API_URL=http://localhost:8000
+      - NEXT_PUBLIC_WS_URL=ws://localhost:8000/ws
+      - SINGLE_USER_MODE=true
+      - DEBUG=true
+      
+      # MacBook-specific optimizations
+      - NEXT_PUBLIC_ENABLE_REAL_TIME=true
+      - NEXT_PUBLIC_ENABLE_AI_FEATURES=true
+      - NEXT_PUBLIC_ENABLE_BACKTESTING=true
+      - NEXT_PUBLIC_ENABLE_RISK_MANAGEMENT=true
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+        reservations:
+          memory: 512M
+    depends_on:
+      - trading_backend
+
+volumes:
+  postgres_data:
+```
+
+#### 28.2.2 MacBook Performance Optimizations
+
+```python
+# macbook_optimizations.py
+import os
+import platform
+import psutil
+
+class MacBookOptimizer:
+    """MacBook-specific performance optimizations"""
+    
+    def __init__(self):
+        self.is_macbook = platform.system() == 'Darwin'
+        self.is_apple_silicon = self.check_apple_silicon()
+        self.memory_gb = psutil.virtual_memory().total / (1024**3)
+        
+    def check_apple_silicon(self) -> bool:
+        """Check if running on Apple Silicon"""
+        if not self.is_macbook:
+            return False
+        
+        try:
+            # Check for Apple Silicon
+            result = os.popen('sysctl -n machdep.cpu.brand_string').read().strip()
+            return 'Apple' in result
+        except:
+            return False
+    
+    def get_optimal_settings(self) -> dict:
+        """Get optimal settings for MacBook"""
+        settings = {
+            'max_workers': 2,  # Conservative for MacBook
+            'worker_timeout': 60,
+            'enable_gpu_acceleration': False,
+            'memory_limit_gb': min(4, self.memory_gb * 0.5),
+            'batch_size': 32,
+            'cache_size_mb': 512,
+            'log_level': 'INFO'
+        }
+        
+        # Apple Silicon optimizations
+        if self.is_apple_silicon:
+            settings.update({
+                'max_workers': 4,  # More cores available
+                'enable_gpu_acceleration': True,
+                'memory_limit_gb': min(8, self.memory_gb * 0.7),
+                'batch_size': 64,
+                'cache_size_mb': 1024
+            })
+        
+        # Memory-based optimizations
+        if self.memory_gb >= 32:
+            settings.update({
+                'max_workers': 6,
+                'memory_limit_gb': 16,
+                'cache_size_mb': 2048
+            })
+        elif self.memory_gb >= 16:
+            settings.update({
+                'max_workers': 4,
+                'memory_limit_gb': 8,
+                'cache_size_mb': 1024
+            })
+        else:  # 8GB or less
+            settings.update({
+                'max_workers': 2,
+                'memory_limit_gb': 4,
+                'cache_size_mb': 512,
+                'batch_size': 16
+            })
+        
+        return settings
+    
+    def apply_optimizations(self):
+        """Apply MacBook-specific optimizations"""
+        settings = self.get_optimal_settings()
+        
+        # Set environment variables
+        os.environ['MAX_WORKERS'] = str(settings['max_workers'])
+        os.environ['WORKER_TIMEOUT'] = str(settings['worker_timeout'])
+        os.environ['ENABLE_GPU_ACCELERATION'] = str(settings['enable_gpu_acceleration'])
+        os.environ['BATCH_SIZE'] = str(settings['batch_size'])
+        os.environ['CACHE_SIZE_MB'] = str(settings['cache_size_mb'])
+        os.environ['LOG_LEVEL'] = settings['log_level']
+        
+        return settings
+```
+
+### 28.3 MacBook Setup Guide
+
+#### 28.3.1 Prerequisites for MacBook
+
+```bash
+# 1. Install Homebrew (if not already installed)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# 2. Install Docker Desktop for Mac
+brew install --cask docker
+
+# 3. Install Git (if not already installed)
+brew install git
+
+# 4. Install Python 3.9+ (if not already installed)
+brew install python@3.11
+
+# 5. Install Node.js (for frontend development)
+brew install node
+
+# 6. Install additional tools
+brew install postgresql redis
+
+# 7. Verify installations
+docker --version
+git --version
+python3 --version
+node --version
+```
+
+#### 28.3.2 MacBook-Specific Setup Steps
+
+```bash
+# 1. Clone repository
+git clone https://github.com/dsdjung/algo.git
+cd algo
+
+# 2. Create environment file
+cp .env.example .env
+
+# 3. Edit environment file for MacBook
+cat > .env << EOF
+# Alpaca API Configuration
+ALPACA_API_KEY=your_paper_api_key_here
+ALPACA_SECRET_KEY=your_paper_secret_key_here
+ALPACA_BASE_URL=https://paper-api.alpaca.markets
+
+# MacBook-specific settings
+SINGLE_USER_MODE=true
+USER_ID=1
+DEBUG=true
+LOG_LEVEL=INFO
+
+# Performance settings for MacBook
+MAX_WORKERS=2
+WORKER_TIMEOUT=60
+ENABLE_GPU_ACCELERATION=false
+BATCH_SIZE=32
+CACHE_SIZE_MB=512
+
+# Feature flags
+ENABLE_AI_TRADING=true
+ENABLE_ML_PREDICTIONS=true
+ENABLE_BACKTESTING=true
+ENABLE_RISK_MANAGEMENT=true
+ENABLE_ANALYST_RATINGS=true
+ENABLE_REAL_TIME_DATA=true
+EOF
+
+# 4. Create required directories
+mkdir -p logs data config models ml_models ml_data monitoring/grafana/dashboards monitoring/grafana/datasources
+
+# 5. Set up Docker Desktop
+# Open Docker Desktop and ensure it's running
+# Allocate at least 4GB RAM and 2 CPUs in Docker Desktop settings
+
+# 6. Start the system with MacBook optimizations
+docker-compose -f docker-compose.macbook.yml up -d
+
+# 7. Initialize database
+docker-compose -f docker-compose.macbook.yml exec trading_backend python -m trading.db.init_db
+
+# 8. Verify all services are running
+docker-compose -f docker-compose.macbook.yml ps
+```
+
+#### 28.3.3 MacBook Performance Monitoring
+
+```bash
+# Monitor system resources
+docker stats
+
+# Check service logs
+docker-compose -f docker-compose.macbook.yml logs -f trading_backend
+
+# Monitor memory usage
+docker-compose -f docker-compose.macbook.yml exec trading_backend python -c "
+import psutil
+import os
+print(f'Memory usage: {psutil.virtual_memory().percent}%')
+print(f'CPU usage: {psutil.cpu_percent()}%')
+print(f'Disk usage: {psutil.disk_usage(\"/\").percent}%')
+"
+
+# Check service health
+curl http://localhost:8000/health
+curl http://localhost:3000
+```
+
+### 28.4 MacBook Limitations and Workarounds
+
+#### 28.4.1 Known Limitations
+
+```yaml
+macbook_limitations:
+  performance:
+    - "Sub-optimal for high-frequency trading"
+    - "Limited GPU acceleration (CPU-only ML)"
+    - "Memory constraints on 8GB models"
+    - "Slower disk I/O compared to NVMe"
+  
+  compatibility:
+    - "No CUDA support (NVIDIA GPUs only)"
+    - "Limited Docker performance on Intel Macs"
+    - "Some ML libraries not optimized for macOS"
+    - "Network latency higher than Linux"
+  
+  development:
+    - "Different file system performance"
+    - "Limited parallel processing"
+    - "Memory pressure with multiple services"
+    - "Battery drain during intensive operations"
+```
+
+#### 28.4.2 Workarounds and Solutions
+
+```yaml
+macbook_workarounds:
+  performance_optimizations:
+    - "Use CPU-only ML models"
+    - "Reduce batch sizes and worker counts"
+    - "Implement aggressive caching"
+    - "Use lighter LLM models (7B instead of 13B)"
+  
+  memory_management:
+    - "Limit Docker memory allocation"
+    - "Use Alpine-based images"
+    - "Implement memory-efficient data structures"
+    - "Enable garbage collection"
+  
+  development_improvements:
+    - "Use Docker Desktop with more resources"
+    - "Implement service health checks"
+    - "Add graceful degradation"
+    - "Use development mode for faster iteration"
+```
+
+### 28.5 MacBook Testing and Validation
+
+#### 28.5.1 MacBook-Specific Tests
+
+```python
+# tests/macbook/test_macbook_compatibility.py
+import pytest
+import platform
+import psutil
+import os
+
+class TestMacBookCompatibility:
+    """Tests for MacBook compatibility"""
+    
+    def test_macbook_environment(self):
+        """Test MacBook environment detection"""
+        assert platform.system() == 'Darwin'
+        assert os.path.exists('/Applications')
+    
+    def test_memory_requirements(self):
+        """Test memory requirements"""
+        memory_gb = psutil.virtual_memory().total / (1024**3)
+        assert memory_gb >= 8, f"Insufficient memory: {memory_gb}GB (minimum 8GB)"
+    
+    def test_docker_availability(self):
+        """Test Docker availability"""
+        import subprocess
+        try:
+            result = subprocess.run(['docker', '--version'], 
+                                  capture_output=True, text=True)
+            assert result.returncode == 0
+        except FileNotFoundError:
+            pytest.skip("Docker not installed")
+    
+    def test_python_compatibility(self):
+        """Test Python compatibility"""
+        import sys
+        assert sys.version_info >= (3, 9), "Python 3.9+ required"
+    
+    def test_dependencies_installation(self):
+        """Test key dependencies"""
+        try:
+            import pandas
+            import numpy
+            import fastapi
+            import redis
+            import psycopg2
+        except ImportError as e:
+            pytest.fail(f"Missing dependency: {e}")
+```
+
+#### 28.5.2 Performance Benchmarks for MacBook
+
+```python
+# benchmarks/macbook_performance.py
+import time
+import psutil
+import asyncio
+
+class MacBookPerformanceBenchmark:
+    """Performance benchmarks for MacBook"""
+    
+    def __init__(self):
+        self.start_time = time.time()
+        self.memory_start = psutil.virtual_memory().used
+    
+    async def benchmark_market_data_processing(self):
+        """Benchmark market data processing on MacBook"""
+        start_time = time.time()
+        
+        # Simulate market data processing
+        for i in range(1000):
+            # Simulate data processing
+            await asyncio.sleep(0.001)
+        
+        end_time = time.time()
+        duration = end_time - start_time
+        
+        # MacBook-specific performance targets
+        assert duration < 5.0, f"Market data processing too slow: {duration:.2f}s"
+        
+        return {
+            'duration': duration,
+            'throughput': 1000 / duration,
+            'memory_usage': psutil.virtual_memory().used - self.memory_start
+        }
+    
+    async def benchmark_ml_inference(self):
+        """Benchmark ML inference on MacBook"""
+        start_time = time.time()
+        
+        # Simulate ML inference
+        for i in range(100):
+            # Simulate inference
+            await asyncio.sleep(0.01)
+        
+        end_time = time.time()
+        duration = end_time - start_time
+        
+        # MacBook-specific performance targets
+        assert duration < 10.0, f"ML inference too slow: {duration:.2f}s"
+        
+        return {
+            'duration': duration,
+            'throughput': 100 / duration,
+            'memory_usage': psutil.virtual_memory().used - self.memory_start
+        }
+```
+
+### 28.6 MacBook Deployment Recommendations
+
+#### 28.6.1 Recommended MacBook Configurations
+
+```yaml
+macbook_recommendations:
+  development:
+    model: "MacBook Air M2 (8GB RAM)"
+    use_case: "Development and testing"
+    limitations: "Limited ML capabilities, slower processing"
+    recommendations:
+      - "Use paper trading only"
+      - "Focus on strategy development"
+      - "Use smaller ML models"
+      - "Implement aggressive caching"
+  
+  production_ready:
+    model: "MacBook Pro M2 Pro (16GB RAM)"
+    use_case: "Production trading with limitations"
+    capabilities: "Good performance for most use cases"
+    recommendations:
+      - "Suitable for live trading"
+      - "Good ML model performance"
+      - "Handle multiple strategies"
+      - "Real-time data processing"
+  
+  optimal:
+    model: "MacBook Pro M3 Pro/Max (32GB+ RAM)"
+    use_case: "Professional trading system"
+    capabilities: "Excellent performance, near-production"
+    recommendations:
+      - "Full production capabilities"
+      - "Advanced ML models"
+      - "Multiple concurrent strategies"
+      - "High-frequency trading (limited)"
+```
+
+#### 28.6.2 MacBook vs Production Environment
+
+```yaml
+comparison:
+  macbook_advantages:
+    - "Easy setup and development"
+    - "Integrated development environment"
+    - "Good for prototyping and testing"
+    - "Cost-effective for development"
+    - "Portable and convenient"
+  
+  macbook_limitations:
+    - "Sub-optimal performance for high-frequency trading"
+    - "Limited scalability"
+    - "Memory constraints"
+    - "No GPU acceleration for ML"
+    - "Network latency issues"
+  
+  production_advantages:
+    - "Optimized for high-performance trading"
+    - "Unlimited scalability"
+    - "GPU acceleration"
+    - "Low-latency networking"
+    - "Professional monitoring and alerting"
+  
+  migration_path:
+    - "Start with MacBook for development"
+    - "Test strategies and algorithms"
+    - "Validate system architecture"
+    - "Migrate to cloud for production"
+    - "Maintain MacBook for development"
+```
+
+**Summary**: The technology stack is **fully compatible** with MacBook for development and testing purposes. While there are some performance limitations compared to production environments, the system can run effectively on MacBook with the provided optimizations. The key is to use the MacBook-specific Docker configuration and performance settings outlined above.
